@@ -1,11 +1,14 @@
+
 <!-- RP: Start Blue Space -->
-<div style="background-color:  #2298C6; min-height:300px; text-color:#ffffff" >
+<div style="background-color:  #2298C6; min-height:500px; text-color:#ffffff" >
 <div class="container" >
 <div class="row">
-<div class="span12" style="min-height:300px; padding-top:20px;">
+<div class="span12" style="min-height:5	0px; padding-top:20px;">
 
-<div class="lead" style="color:#fff;"> The water on your country: </div>
-
+<h1 style="color:#fff;"> The water on your country: </h1>
+</div>
+<div class="span12" style="min-height:100px; padding-top:20px; padding-bottom:40px;">	
+<iframe width="940" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?ie=UTF8&amp;ll=-16.520366,-64.621582&amp;spn=12.720779,23.928223&amp;t=m&amp;z=7&amp;output=embed"></iframe><br />
 </div>
 
 
@@ -47,6 +50,10 @@
 <!-- RP: Ends Blue Space -->
 
 
+
+
+
+
 <!-- RP: Start White Space -->
 
 
@@ -58,21 +65,23 @@
 		<ul class="thumbnails">
   <li class="span4">
     <div class="thumbnail">
-      <img src="http://placehold.it/300x200" alt="">
+    <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 200));  ?>
       <h3>Global Impact</h3>
       <p>Thumbnail caption...</p>
     </div>
   </li>
 <li class="span4">
     <div class="thumbnail">
-      <img src="http://placehold.it/300x200" alt="">
+      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 200));  ?>
+
       <h3>Global Impact</h3>
       <p>Thumbnail caption...</p>
     </div>
   </li>
 <li class="span4">
     <div class="thumbnail">
-      <img src="http://placehold.it/300x200" alt="">
+     <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 200));  ?>
+
       <h3>Global Impact</h3>
       <p>Thumbnail caption...</p>
     </div>
@@ -88,7 +97,7 @@
 
 
 <!-- RP: Start Blue Space -->
-<div style="background-color:  #2298C6; min-height:500px; color:#ffffff" >
+<div style="background-color:  #2298C6; min-height:200px; color:#ffffff" >
 	<div class="container" >
 
 			<div class="row">

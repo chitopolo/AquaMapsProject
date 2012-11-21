@@ -43,7 +43,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     <a class="brand" href="#">AquaMaps</a>
     <ul class="nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><?php echo $this->Html->link(__('Pre-Universitario'), array('controller' => 'Pages', 'action' => 'home')); ?></li>
+      <li><?php echo $this->Html->link(__('Link'), array('controller' => 'Pages', 'action' => 'home')); ?></li>
       <li><a href="#">Link</a></li>
       <li><a href="#">Link</a></li>
     </ul>
