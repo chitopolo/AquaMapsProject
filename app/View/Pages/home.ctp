@@ -16,25 +16,24 @@
 <div class="span12">
 <ul class="thumbnails">
   <li class="span3">
-    <a href="#" class="thumbnail">
-      <img src="http://placehold.it/260x180" alt="">
+    <a href="#" class="cirlcle">
+     <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>
     </a>
   </li>
   <li class="span3">
     <a href="#" class="cirlcle">
-      <img src="http://placehold.it/260x180" alt="">
+      <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>
     </a>
   </li>
    <li class="span3">
     <a href="#" class="circle">
-      <img src="http://placehold.it/260x180" alt="">
+      <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>
     </a>
   </li>
   </li>
    <li class="span3">
     <a href="#" class="circle">
-      <img src="http://placehold.it/260x180" alt="">
-    </a>
+      <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>    </a>
   </li>
 </ul>
 </div>
