@@ -39,7 +39,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 <div class="container navbar-wrapper" >
 <div class="navbar" >
-  <div class="navbar-inner" style="min-height:100px; padding-top:40px;">
+  <div class="navbar-inner">
     <a class="brand" href="#">AquaMaps</a>
     <ul class="nav">
       <li class="active"><a href="#">Home</a></li>

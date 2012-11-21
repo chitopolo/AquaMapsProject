@@ -21,18 +21,18 @@
     </a>
   </li>
   <li class="span3">
-    <a href="#" class="thumbnail">
+    <a href="#" class="cirlcle">
       <img src="http://placehold.it/260x180" alt="">
     </a>
   </li>
    <li class="span3">
-    <a href="#" class="thumbnail">
+    <a href="#" class="circle">
       <img src="http://placehold.it/260x180" alt="">
     </a>
   </li>
   </li>
    <li class="span3">
-    <a href="#" class="thumbnail">
+    <a href="#" class="circle">
       <img src="http://placehold.it/260x180" alt="">
     </a>
   </li>
@@ -64,23 +64,23 @@
 			<div class="span12" style="min-height:500px; margin-top:200px;">
 		<ul class="thumbnails">
   <li class="span4">
-    <div class="thumbnail">
-    <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 200));  ?>
+    <div class="img-rounded">
+    <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
       <h3>Global Impact</h3>
       <p>Thumbnail caption...</p>
     </div>
   </li>
 <li class="span4">
-    <div class="thumbnail">
-      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 200));  ?>
+    <div class="img-rounded">
+      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
 
       <h3>Global Impact</h3>
       <p>Thumbnail caption...</p>
     </div>
   </li>
 <li class="span4">
-    <div class="thumbnail">
-     <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 200));  ?>
+    <div class="img-rounded">
+     <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
 
       <h3>Global Impact</h3>
       <p>Thumbnail caption...</p>
