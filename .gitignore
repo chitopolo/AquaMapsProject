@@ -1,4 +1,6 @@
-/app/Config
+*.komodoproject
+/.komodotools
+/app/Config/database.php
 /app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
