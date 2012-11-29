@@ -76,6 +76,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 $(document).ready(function () {
 	$('#provincias select:first').attr('disabled', 'disabled');
+	$('#municipios select:first').attr('disabled', 'disabled');
 	
 	queryTable(
 		"SELECT nom_dep FROM TABLE GROUP BY nom_dep",
@@ -110,6 +111,43 @@ $(document).ready(function () {
 		}	
 	});
 	
+	$('#provincias select:first').change(function() {
+		var selectedValue = $(this).find('option:selected').val();
+		
+		if (selectedValue != '') {
+			queryTable(
+				"SELECT CODIGO, nom_mun FROM TABLE WHERE nom_prov = '" + selectedValue + "'",
+				areaTableName,
+				function(data) {
+					if (populateSelect(parseJason(data), '#municipios select:first')) {
+						$('#municipios select:first').removeAttr('disabled');
+						areaLayer.setOptions({
+							query: {
+								select: 'geometry',
+								from: areaTableName,
+								where: "nom_prov = '" + selectedValue + "'"
+							}
+						});
+					}
+				}
+			);
+		}	
+	});
+	
+	$('#municipios select:first').change(function() {
+		var selectedValue = $(this).find('option:selected').val();
+		
+		if (selectedValue != '') {
+			areaLayer.setOptions({
+				query: {
+					select: 'geometry',
+					from: areaTableName,
+					where: "CODIGO = '" + selectedValue + "'"
+				}
+			});
+		}	
+	});
+	
 	$("#layer").click(function() {
 		areaLayer.setMap(($(this).is(":checked") ? map : null));
 	});
@@ -125,6 +163,10 @@ $(document).ready(function () {
 		<label for="map_provincias">Provincias:</label>
 		<select name="map_provincias"></select>
 	</div>
+	<div id="municipios">
+		<label for="map_municipios">Municipios:</label>
+		<select name="map_municipios"></select>
+	</div>
 	<button class="btn btn-large btn-primary" type="button" onclick="">Buscar</button>
 	<!--
 	<label for="map_layers">Capas:</label>
@@ -136,12 +178,40 @@ $(document).ready(function () {
 	<label for="map_heatmap">Heatmap:</label>
 	<input type="checkbox" name="map_heatmap" id="heatmap">
 	-->
-	
+	<div id="map_info" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Modal header</h3>
+		</div>
+		<div class="modal-body">
+			<p>One fine body…</p>
+			</div>
+			<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<button class="btn btn-primary">Save changes</button>
+		</div>
+	</div>
 </div>
 <div class="span8 pull-right" style="height: 100%">
-	<div id="map_canvas"></div>
+	<div id="map_container">
+		<div id="map_canvas"></div>
+	</div>
 </div>
 <script type="text/javascript">
+	
+	var mapContainer = $("#map_container");
+    
+    function adjustMap() {
+        var maxHeight = $(window).height() - mapContainer.offset().top - 16;
+		mapContainer.height(maxHeight);
+    }
+    
+    adjustMap();
+    
+    $(window).resize(function() {
+        adjustMap();
+    });
+	
 	$("#layers").change(function() {
 		switch($(this).find("option:selected").val()) {
 			case 'all': {

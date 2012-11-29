@@ -5,4 +5,5 @@ html#map { height: 100% }
 		#top_nav {  }
 		#main { height: 100%; }
 		html#map #content { height: 100%; }
-			#map_canvas { height: 100%; border: 1px solid #666; }
+			#map_container { }
+				#map_canvas { height: 100%; }
