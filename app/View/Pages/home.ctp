@@ -178,13 +178,22 @@
 	</div>
 </div>
 
+</div>
+</div>
 
+<div style=" min-height:500px; text-color:#ffffff" >
 
-	
+<div class="container-fluid" >
+<div class="row-fluid">
   <div class="span12" style="min-height:100px; padding-top:20px; padding-bottom:40px;">
-  <h1 tyle="color:#fff;">Aqui mapa</h1>
+  <h1>Aqui mapa</h1>
   <iframe width="940" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?ie=UTF8&amp;ll=-16.520366,-64.621582&amp;spn=12.720779,23.928223&amp;t=m&amp;z=7&amp;output=embed"></iframe><br />
   </div>
+</div>
+
+</div>
+
+</div>
 
 <!---
 
@@ -217,23 +226,27 @@
 
 
 
-</div>
-
-</div>
-
 
 <!-- RP: Ends Blue Space -->
 
 
+<div style="background-color:  #2298C6; min-height:300px; text-color:#ffffff" >
+	<div class="container" >
+	  <div class="row">
+		  <div class="span12"  style="min-height:200px; padding-top:20px;">
+			<h3 style="color: white;"> Ayuda de esta forma ...blabla .. link a a la aplicacion movil</h3>
+		  </div>
+	  </div>
+	</div>
+</div>
+
 <!-- RP: Start White Space -->
 
-
-
-<div style="min-height:500px; color:#13576E" >
+<div style=" min-height:500px;" >
   <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h2>El agua en el mundo</h2>
+			<h2>Datos globales:</h2>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -277,6 +290,7 @@
 	  </div>
 	</div>
 </div>
+
 
 
 
