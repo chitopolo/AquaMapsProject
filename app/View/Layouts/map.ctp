@@ -6,7 +6,7 @@
 		<?php
 			echo $this->Html->meta('icon');	
 			echo $this->Html->css(array('bootstrap.min', 'map'));
-			echo $this->Html->script(array('jquery.min', 'jquery-ui.min', 'bootstrap.min', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0&sensor=true'));		
+			echo $this->Html->script(array('jquery.min', 'jquery-ui.min', 'bootstrap.min', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0&sensor=true', 'http://www.google.com/jsapi', 'map'));		
 		?>
 	</head>
 	<body>
