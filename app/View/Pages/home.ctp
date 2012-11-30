@@ -85,7 +85,14 @@
 												 
 											function(dataurbana){
 												var options = {
-													title: ''
+													backgroundColor: '#2298C6',
+													hAxis:{textStyle: {color: 'white', fontSize: 15}},
+													vAxis:{textStyle: {color: 'white', fontSize: 18}},
+													legend:{textStyle: {color: 'white', fontSize: 15}},
+													lineWidth: 8,
+													chartArea:{left:40,top:20,width:"70%",height:"70%"},
+													colors: ['#CAFF42','#0B486B','#79BD9A','#3B8686']
+
 												};
 											
 												datajoin1 = google.visualization.data.join(data, dataregion, 'inner', [[0,0]], [1], [1]);
@@ -161,11 +168,11 @@
 </div>
 
 <div class="row-fluid">
-	<div class="span6">
-		<h3 style="color:#fff;">Cobertura agua (% de la poblaci&oacute;n)</h3>
+	<div class="span6" style="text-align: center;">
+		<h2 style="color:#fff;">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h2>
 	</div>
-	<div class="span6">
-		<h3 style="color:#fff;">Cobertura saneamiento (% de la poblaci&oacute;n)</h3>
+	<div class="span6" style="text-align: center;">
+		<h2 style="color:#fff;">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h2>
 	</div>
 </div>
 <div class="row-fluid">
@@ -178,6 +185,12 @@
 	</div>
 </div>
 
+<div class="row-fluid">
+  <div class="span12">
+	<small>Fuente: Banco Mundial</small>
+  </div>
+</div>
+
 </div>
 </div>
 
@@ -187,34 +200,6 @@
 	</div>
 </div>
 
-<!---
-
-<div class="span12">
-<ul class="thumbnails">
-  <li class="span3">
-    <a href="#" class="cirlcle">
-     <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>
-    </a>
-  </li>
-  <li class="span3">
-    <a href="#" class="cirlcle">
-      <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>
-    </a>
-  </li>
-   <li class="span3">
-    <a href="#" class="circle">
-      <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>
-    </a>
-  </li>
-  </li>
-   <li class="span3">
-    <a href="#" class="circle">
-      <?php   echo $this->Html->image('people.png', array('class' => 'media-object', 'width' => 260));  ?>    </a>
-  </li>
-</ul>
-</div>
-
---->
 
 
 
@@ -223,10 +208,21 @@
 
 
 <div style="background-color:  #2298C6; min-height:300px; text-color:#ffffff" >
-	<div class="container" >
-	  <div class="row">
+	<div class="container-fluid" >
+	  <div class="row-fluid">
 		  <div class="span12"  style="min-height:200px; padding-top:20px;">
-			<h3 style="color: white;"> Ayuda de esta forma ...blabla .. link a a la aplicacion movil</h3>
+			<h2 style="color: white;">Como puedes ayudar?</h2>
+			<h3 style="color: white;">
+			  Si eres parte de una organizaci&oacute;n que trabaja en saneamiento o una persona que quiere contribur
+			  recopilando informacion.
+			  <br>
+			  Puedes ayudar subiendo datos de tomas de agua, puntos sanitarios y precios del agua.
+			  <br>
+			  Puedes hacerlo a traves de esta pagina web. Solo debes registrarte aqui.
+			  <br>
+			  O puedes bajarte nuestra aplicacion movil aqui.
+			  
+			</h3>
 		  </div>
 	  </div>
 	</div>
@@ -267,17 +263,22 @@
 				</li>
 			  </ul>
 		</div>
-		<div class="span7" id="globe">
+		<div class="span9" id="globe">
 		</div>
+	</div>
+	<div class="row-fluid">
+	  <div class="span12">
+		<small>Fuente: Banco Mundial</small>
+	  </div>
 	</div>
   </div>
 </div>
 
 <!-- RP: Start Blue Space -->
-<div style="background-color:  #2298C6; min-height:200px; color:#ffffff" >
+<div style="background-color:  #2298C6; min-height:100px; color:#ffffff" >
 	<div class="container" >
 	  <div class="row">
-		  <div class="span12" style="min-height:300px; padding-top:20px;">
+		  <div class="span12" style="min-height:100px; padding-top:20px;">
 		  </div>
 	  </div>
 	</div>
