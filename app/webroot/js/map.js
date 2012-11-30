@@ -1,9 +1,9 @@
 
-function queryTable(query, table, responseFunction) {
+function queryTable(query, table, apiKey, responseFunction) {
 	
 	requestOptions = {
 		async: true,
-		url: queryUrl(query, table),
+		url: queryUrl(query, table, apiKey),
 	}
 	
 	if (typeof responseFunction == 'function') {
@@ -13,7 +13,7 @@ function queryTable(query, table, responseFunction) {
 	$.ajax(requestOptions);
 }
 
-function queryUrl(query, table) {
+function queryUrl(query, table, apiKey) {
 	return "https://www.googleapis.com/fusiontables/v1/query?sql=" + checkQuery(query, table) + "&key=" + apiKey;
 }
 

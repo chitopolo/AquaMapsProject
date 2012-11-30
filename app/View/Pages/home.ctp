@@ -181,18 +181,10 @@
 </div>
 </div>
 
-<div style=" min-height:500px; text-color:#ffffff" >
-
-<div class="container-fluid" >
-<div class="row-fluid">
-  <div class="span12" style="min-height:100px; padding-top:20px; padding-bottom:40px;">
-  <h1>Aqui mapa</h1>
-  <iframe width="940" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?ie=UTF8&amp;ll=-16.520366,-64.621582&amp;spn=12.720779,23.928223&amp;t=m&amp;z=7&amp;output=embed"></iframe><br />
-  </div>
-</div>
-
-</div>
-
+<div class="container-fluid" style="min-height: 500px; padding: 20px 0; box-shadow: inset 0 3px 2px rgba(0, 0, 0, 0.15);">
+	<div class="row-fluid">
+		<?php echo $this->element('main_map'); ?>
+	</div>
 </div>
 
 <!---
