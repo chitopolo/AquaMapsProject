@@ -1,3 +1,6 @@
+ <?php   echo $this->Html->image('brand.jpg', array('class' => 'media-object', 'min-width' => '100%'));  ?>
+
+
 <div class="navbar" id="top_nav">
 	<div class="navbar-inner">
 		<?php echo $this->Html->link(__('AquaMaps'), '/', array('class' => 'brand')); ?>
