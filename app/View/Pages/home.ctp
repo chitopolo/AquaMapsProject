@@ -175,7 +175,7 @@
 <div class="container-fluid" >
 <div class="row-fluid">
   <div class="span12" style="min-height:5	0px; padding-top:20px;">
-	<p class="lead span4 offset3" style="color:#fff; font-size:200%">El agua en tu pa&iacute;s: </p>
+	<p class="lead span4 offset3" style="color:#fff; font-size:200%" id="pais">El agua en tu pa&iacute;s: </p>
 	<select id="country" name="country">
 		<option value="BO">Bolivia </option>
 		<option value="BI">Burundi </option>
@@ -228,7 +228,7 @@
 		
 		
 			<div class="span12" style="min-height:500px; margin-top:100px;">
-			<h2 style="color:white;">Como puedes ayudar?</h2>
+			<h2 id="ayudar" style="color:white;">Como puedes ayudar?</h2>
 		<ul class="thumbnails">
   <li class="span3">
     <div class="img-rounded">
@@ -281,7 +281,7 @@
   <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h2>Datos globales:</h2>
+			<h2 id="mundo">Datos globales:</h2>
 		</div>
 	</div>
 	<div class="row-fluid">
