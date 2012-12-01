@@ -175,24 +175,20 @@
 <div class="container-fluid" >
 <div class="row-fluid">
   <div class="span12" style="min-height:5	0px; padding-top:20px;">
-	<h1 style="color:#fff;">El agua en tu pa&iacute;s: </h1>
-	<select id="country" class="inline" name="country" id="country">
-		<!--<option value="BO">Bolivia </option>
+	<p class="lead" style="color:#fff; font-size:200%">El agua en tu pa&iacute;s: </p>
+	<select id="country" name="country">
+		<option value="BO">Bolivia </option>
 		<option value="BI">Burundi </option>
-	
-		-->
 	</select>
   </div>
 </div>
 
 <div class="row-fluid">
 	<div class="span6" style="text-align: center;">
-		<h2 style="color:#fff;">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h2>
-		<small>Improved water source</small>
+		<h3 style="color:#fff; ">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
 	</div>
 	<div class="span6" style="text-align: center;">
-		<h2 style="color:#fff;">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h2>
-		<small>Improved sanitation facilities</small>
+		<h3 style="color:#fff; font-size:200%">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
 	</div>
 </div>
 <div class="row-fluid">
@@ -228,18 +224,23 @@
 <div style="background-color:  #2298C6; min-height:300px; text-color:#ffffff" >
 	<div class="container-fluid" >
 	  <div class="row-fluid">
-		  <div class="span12"  style="min-height:200px; padding-top:20px;">
+		  <div class="span12"  style="min-height:500px; padding-top:20px;">
 			<h2 style="color: white;">Como puedes ayudar?</h2>
-			<h3 style="color: white;">
+			<p style="color: white;" class="lead">
+			 <br>
 			  Si eres parte de una organizaci&oacute;n que trabaja en saneamiento o una persona que quiere contribur
 			  recopilando informacion.
 			  <br>
+			  <br>
 			  Puedes ayudar subiendo datos de tomas de agua, puntos sanitarios y precios del agua.
+			  <br>
 			  <br>
 			  Puedes hacerlo a traves de esta pagina web. Solo debes registrarte aqui.
 			  <br>
+			  <br>s
 			  O puedes bajarte nuestra aplicacion movil aqui.
-			</h3>
+			  
+			</p>
 		  </div>
 	  </div>
 	</div>

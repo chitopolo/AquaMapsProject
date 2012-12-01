@@ -5,7 +5,7 @@
 <div class="row">
 <div class="span12" style="min-height:5	0px; padding-top:20px;">
 
-<h1 style="color:#fff;"> The water on your country: </h1>
+<p class="lead" style="color:#fff; font-size:20px;"> The water on your country: </p>
 </div>
 <div class="span12" style="min-height:100px; padding-top:20px; padding-bottom:40px;">	
 <iframe width="940" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?ie=UTF8&amp;ll=-16.520366,-64.621582&amp;spn=12.720779,23.928223&amp;t=m&amp;z=7&amp;output=embed"></iframe><br />
