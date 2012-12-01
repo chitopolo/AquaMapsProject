@@ -133,16 +133,32 @@
 	  }
 	  
 	  $(document).ready(function(){
+		$.getJSON("http://api.worldbank.org/countries?per_page=250&format=jsonp&prefix=?&callback=?",
+		
+		function (jsondata){
+		  $.each(jsondata[1], function(i,item){
+			
+			if(item.region.value!="Aggregates"){
+			  
+			  if(item.iso2Code=='BO')
+				selected = 'selected';
+			  else
+				selected = '';
+			  var itemval= '<option value="'+item.iso2Code+'" '+selected+' >'+item.name+'</option>';
+			  $("#country").append(itemval);
+			}            
+		  });
+	
+		});
+	
 		drawCharts('BO','Bolivia');
 		drawGlobe('SH.H2O.SAFE.RU.ZS','2010');
 		$("#country").change(function() 
 		{
-		
 			countrycode = $('#country').attr('value');
 			countryname = $('#country option[value='+$('#country').attr('value')+']').text();
 			//drawChart($('#country').attr('value'),$('#yearmap').attr('value'));
 			drawCharts(countrycode,countryname);
-
 		});
 		
 		$('a[data-toggle="pill"]').on('shown', function (e) {
@@ -160,9 +176,11 @@
 <div class="row-fluid">
   <div class="span12" style="min-height:5	0px; padding-top:20px;">
 	<h1 style="color:#fff;">El agua en tu pa&iacute;s: </h1>
-	<select id="country" name="country">
-		<option value="BO">Bolivia </option>
+	<select id="country" class="inline" name="country" id="country">
+		<!--<option value="BO">Bolivia </option>
 		<option value="BI">Burundi </option>
+	
+		-->
 	</select>
   </div>
 </div>
@@ -170,9 +188,11 @@
 <div class="row-fluid">
 	<div class="span6" style="text-align: center;">
 		<h2 style="color:#fff;">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h2>
+		<small>Improved water source</small>
 	</div>
 	<div class="span6" style="text-align: center;">
 		<h2 style="color:#fff;">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h2>
+		<small>Improved sanitation facilities</small>
 	</div>
 </div>
 <div class="row-fluid">
@@ -190,10 +210,8 @@
 	<small>Fuente: Banco Mundial</small>
   </div>
 </div>
-
 </div>
 </div>
-
 <div class="container-fluid" style="min-height: 500px; padding: 20px 0; box-shadow: inset 0 3px 2px rgba(0, 0, 0, 0.15);">
 	<div class="row-fluid">
 		<?php echo $this->element('main_map'); ?>
@@ -221,15 +239,12 @@
 			  Puedes hacerlo a traves de esta pagina web. Solo debes registrarte aqui.
 			  <br>
 			  O puedes bajarte nuestra aplicacion movil aqui.
-			  
 			</h3>
 		  </div>
 	  </div>
 	</div>
 </div>
-
 <!-- RP: Start White Space -->
-
 <div style=" min-height:500px;" >
   <div class="container-fluid">
 	<div class="row-fluid">

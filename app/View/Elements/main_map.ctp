@@ -3,7 +3,7 @@
 </style>
 <script type="text/javascript">
 var map;
-var dotsTableName = '1fi7TpPzqakAfgrWWe-OWAOKZE_WLe1eIVl87q2o';
+var dotsTableName = '1CBwJa2c74oTqV_IST8Viim0CFZofe9qAwZCDsT8';
 var areaTableName = '1IW43AblTgBE6OGz79hqMjq3yv_saG88OuE4pBJk';
 //var areaTableName = '1ZT5rrWyUSAmJBJim-FaMBxwrG6CpcmI5TYAsm3Y';
 var apiKey = 'AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0';
@@ -285,7 +285,9 @@ $(document).ready(function () {
 }); //MT: end $(document).ready()
 </script>
 <div class="span3">
-	
+	<div class="alert alert-info">
+	Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos. <strong>Pronto se tendran nuevos paises.</strong>
+	</div>
 	<fieldset>
 		<legend>Capas</legend>
 		<label for="map_layer">Municipios: <input type="checkbox" id="area_layer" checked="checked"></label>
