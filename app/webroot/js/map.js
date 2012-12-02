@@ -29,7 +29,7 @@ function checkQuery(query, table) {
 }
 
 function parseJason(data) {
-	if(typeof data != 'object') {	
+	if (typeof data != 'object') {	
 		if (data != "") {
 			try {
 				return $.parseJSON(data);
@@ -48,11 +48,16 @@ function parseJason(data) {
  * si la fila tiene más de 2 columnas, usar la 1ra y 2da como valor y nombre respectivamente
  * si la fila tiene una columna, se usa como valor y nombre
  * */
-function populateSelect(data, elementSelector) {
+function populateSelect(data, elementSelector, emptyOption) {
 	result = false;
 	if (data != '') {
 		$(elementSelector).empty();
-		$(elementSelector).append('<option></option>');
+		
+		if (typeof emptyOption == "undefined") {
+			emptyOption = "";
+		}
+		
+		$(elementSelector).append('<option value="">' + emptyOption + '</option>');
 		result = true;
 	}
 	
@@ -69,4 +74,12 @@ function populateSelect(data, elementSelector) {
 	}
 	
 	return result;
+}
+
+function editAnchor(event, element) {		
+	event.preventDefault();
+	var selectedHash = element.hash;
+	var topDistance = 56;
+	
+	$("html,body").animate({scrollTop:$(selectedHash).offset().top - topDistance}, 1500);
 }

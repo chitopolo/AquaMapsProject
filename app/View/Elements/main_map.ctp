@@ -58,7 +58,7 @@ $(document).ready(function () {
 		areaTableName,
 		apiKey,
 		function(data) {
-			if (populateSelect(parseJason(data), '#departamentos')) {
+			if (populateSelect(parseJason(data), '#departamentos', '--- Todos ---')) {
 				$('#departamentos').trigger('change');
 			}
 		}
@@ -82,7 +82,14 @@ $(document).ready(function () {
 					});
 				}
 			);
-		}	
+		} else {
+			areaLayer.setOptions({
+				query: {
+					select: 'geometry',
+					from: areaTableName,
+				}
+			});
+		}
 	});
 	
 	$('#provincias select:first').change(function() {
@@ -143,16 +150,11 @@ $(document).ready(function () {
 	
 }); //MT: end $(document).ready()
 </script>
-<div class="span3">
-	<div class="alert alert-info">
-	Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos. <strong>Pronto se tendrán nuevos paises.</strong>
-	</div>
-	<fieldset>
+<div class="row-fluid">
+	<div class="span4">
+		<h2 id="el_mapa">Busca en el mapa</h2>
 		<label><input type="checkbox" id="dots_layer" checked="checked"> Proyectos del Banco Mundial</label>
-	</fieldset>
-	
 		<label><input type="checkbox" id="area_layer" checked="checked"> Municipios del país</label>
-	<fieldset>
 		<h5>Índices</h5>
 		
 		<label for="map_departamentos">Departamentos:</label>
@@ -177,11 +179,16 @@ $(document).ready(function () {
 			<select name="map_municipios"></select>
 		</div>
 		-->
-	</fieldset>
-</div>
-<div class="span8 pull-right" style="height: 100%">
-	<div id="map_container" style="margin-right: 20px;">
-		<div id="map_canvas"></div>
+		
+		<div class="alert alert-info">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+		Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos. <strong>Pronto se tendrán nuevos paises.</strong>
+		</div>
+	</div>
+	<div class="span8 pull-right" style="height: 100%">
+		<div id="map_container" style="margin-right: 20px;">
+			<div id="map_canvas"></div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">

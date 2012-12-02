@@ -13,13 +13,8 @@
 	<body>
 		<div class="container-fluid navbar-wrapper">
 			<?php echo $this->element('top_nav'); ?>
-		</div>
-		
-		<div id="container">
-			<div id="content">
-				<?php echo $this->Session->flash(); ?>
-				<?php echo $this->fetch('content'); ?>
-			</div>
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->fetch('content'); ?>
 			<div id="footer">
 			</div>
 		</div>
