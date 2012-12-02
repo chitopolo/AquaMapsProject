@@ -175,7 +175,7 @@
 <div class="container-fluid" >
 <div class="row-fluid">
   <div class="span12" style="min-height:5	0px; padding-top:20px;">
-	<p class="lead" style="color:#fff; font-size:200%">El agua en tu pa&iacute;s: </p>
+	<p class="lead span4 offset3" style="color:#fff; font-size:200%" id="pais">El agua en tu pa&iacute;s: </p>
 	<select id="country" name="country">
 		<option value="BO">Bolivia </option>
 		<option value="BI">Burundi </option>
@@ -221,36 +221,67 @@
 <!-- RP: Ends Blue Space -->
 
 
-<div style="background-color:  #2298C6; min-height:300px; text-color:#ffffff" >
-	<div class="container-fluid" >
-	  <div class="row-fluid">
-		  <div class="span12"  style="min-height:500px; padding-top:20px;">
-			<h2 style="color: white;">Como puedes ayudar?</h2>
-			<p style="color: white;" class="lead">
-			 <br>
-			  Si eres parte de una organizaci&oacute;n que trabaja en saneamiento o una persona que quiere contribur
-			  recopilando informacion.
-			  <br>
-			  <br>
-			  Puedes ayudar subiendo datos de tomas de agua, puntos sanitarios y precios del agua.
-			  <br>
-			  <br>
-			  Puedes hacerlo a traves de esta pagina web. Solo debes registrarte aqui.
-			  <br>
-			  <br>s
-			  O puedes bajarte nuestra aplicacion movil aqui.
-			  
-			</p>
-		  </div>
-	  </div>
+
+<div style="background-color:  #2298C6; text-color:#ffffff" >
+	<div class="container" >
+		<div class="row">
+		
+		
+			<div class="span12" style="min-height:500px; margin-top:100px;">
+			<h2 id="ayudar" style="color:white;">Como puedes ayudar?</h2>
+		<ul class="thumbnails">
+  <li class="span3">
+    <div class="img-rounded">
+    <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
+      <h3  style="color:white;">Recopila informacion</h3>
+      <p  style="color:white;"> Si eres parte de una organizaci&oacute;n que trabaja en saneamiento o una persona que quiere contribur
+			  recopilando informacion.</p>
+    </div>
+  </li>
+<li class="span3">
+    <div class="img-rounded">
+      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
+
+      <h3  style="color:white;">Comparte</h3>
+      <p  style="color:white;">Puedes ayudar subiendo datos de tomas de agua, puntos sanitarios y precios del agua.</p>
+    </div>
+  </li>
+<li class="span3">
+    <div class="img-rounded">
+     <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
+
+      <h3  style="color:white;">Registrate</h3>
+      <p  style="color:white;"> Puedes hacerlo a traves de esta pagina web. Solo debes registrarte aqui.
+</p>
+    </div>
+  </li>
+
+<li class="span3">
+    <div class="img-rounded">
+     <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
+
+      <h3  style="color:white;">Bajate nuestra App</h3>
+      <p  style="color:white;">  O puedes bajarte nuestra aplicacion movil aqui.
+</p>
+    </div>
+  </li>
+
+</ul>
+			</div>
+		</div>
 	</div>
 </div>
+
+
+
+
+
 <!-- RP: Start White Space -->
 <div style=" min-height:500px;" >
   <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h2>Datos globales:</h2>
+			<h2 id="mundo">Datos globales:</h2>
 		</div>
 	</div>
 	<div class="row-fluid">
