@@ -183,7 +183,6 @@
 		<p class="lead span4 offset3" style="color:#fff; font-size:200%" id="pais">El agua en tu pa&iacute;s: </p>
 		<select id="country" name="country">
 			<option value="BO">Bolivia </option>
-			<option value="BI">Burundi </option>
 		</select>
 	  </div>
 	</div>
@@ -191,9 +190,12 @@
 	<div class="row-fluid">
 		<div class="span6" style="text-align: center;">
 			<h3 style="color:#fff; ">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
+			<small>Improved water source (% of population with access)</small>
 		</div>
 		<div class="span6" style="text-align: center;">
 			<h3 style="color:#fff; font-size:200%">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
+			<small>Improved sanitation facilities (% of population with access)</small>
+
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -226,8 +228,8 @@
 
 
 <div style="background-color:  #2298C6; text-color:#ffffff" >
-	<div class="container" >
-		<div class="row">
+	<div class="container-fluid" >
+		<div class="row-fluid">
 		
 		
 			<div class="span12" style="min-height:500px; margin-top:100px;">
@@ -254,7 +256,7 @@
      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
 
       <h3  style="color:white;">Registrate</h3>
-      <p  style="color:white;"> Puedes hacerlo a traves de esta pagina web. Solo debes registrarte aqui.
+      <p  style="color:white;"> Puedes hacerlo a traves de esta pagina web. (muy pronto).
 </p>
     </div>
   </li>
@@ -264,7 +266,10 @@
      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
 
       <h3  style="color:white;">Bajate nuestra App</h3>
-      <p  style="color:white;">  O puedes bajarte nuestra aplicacion movil aqui.
+      <p  style="color:white;">  O puedes bajarte nuestra aplicacion movil. (Muy pronto)
+	  <a href="http://aquamaps.cochavalley/files/presentacion_ AquaMaps.pptx" target="_blank" style="color: white;">
+	  <strong> Ve mas aqui</strong>
+	  </a>
 </p>
     </div>
   </li>
@@ -284,7 +289,7 @@
   <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h2 id="mundo">Datos globales:</h2>
+			<h3 id="mundo">Datos globales:</h3>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -310,7 +315,7 @@
 	</div>
 	<div class="row-fluid">
 	  <div class="span12">
-		<small>Fuente: Banco Mundial</small>
+		<small>Fuente: Banco Mundial. 2010</small>
 	  </div>
 	</div>
   </div>

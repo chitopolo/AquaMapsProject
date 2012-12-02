@@ -11,6 +11,7 @@ var apiKey = 'AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0';
 
 var dotsLayer = null;
 var areaLayer = null;
+var flowLayer = null;
 
 
 function initialize() {
@@ -31,6 +32,30 @@ function initialize() {
 	areaLayer.setMap(map);
 	
 	//applyStyle(map, areaLayer, $('#municipios_params select:first').find('option:selected').val());
+	flowLayer = new google.maps.FusionTablesLayer({	
+        query: {
+            select: 'latitude',
+            from: '1dUSqdHV-nAFpmMaIP9-4ekKAePvwWdEehPcHQyk'
+        }
+		/*,
+        styles: [{
+            where: "markType = 'WATER_POINT'",
+            markerOptions: {
+                iconName: 'ltblu_blank'
+            }},
+            {
+            where: "markType = 'PUBLIC_INSTITUTION'",
+            markerOptions: {
+                iconName: 'museum'
+            }},
+            {
+            where: "markType = 'SCHOOL'",
+            markerOptions: {
+                iconName: 'schools'
+            }}]
+        */
+	});
+	flowLayer.setMap(map);
 	
 	dotsLayer = new google.maps.FusionTablesLayer({	
 		query: {
@@ -40,29 +65,15 @@ function initialize() {
 			//where: 'latitude != "" AND longitude !=""',
 			//where: "mjsector_1 = 'Water, sanitation and flood protection'"
 			//where: "mjsector_1 = 'Water, sanitation and flood protection' AND latitude != '' AND longitude != ''"
-		},
-		style: {
-			iconName: 'blu_blank'
 		}
+		/*,
+		styles: [{
+			markerOptions: {
+				iconName: 'blu_blank'
+			}}
+		]*/
 	});
 	dotsLayer.setMap(map);
-	
-	
-	flowLayer = new google.maps.FusionTablesLayer({	
-		query: {
-			select: 'longitude, latitude',
-			from: flowTableName,
-		},
-		styles: [{
-            markerOptions: {
-				iconStyler: {
-					kind: "fromColumn",
-					columnName: "icon"
-				}
-			}
-		}]	
-	});
-	flowLayer.setMap(map);
 	
 }
 
@@ -167,15 +178,26 @@ $(document).ready(function () {
 		dotsLayer.setMap(($(this).is(":checked") ? map : null));
 	});
 	
+	$("#flow_layer").click(function() {
+		flowLayer.setMap(($(this).is(":checked") ? map : null));
+	});
+	
 }); //MT: end $(document).ready()
 </script>
 <div class="row-fluid">
 	<div class="span4">
-		<h2 id="el_mapa">Busca en el mapa</h2>
-		<label><input type="checkbox" id="dots_layer" checked="checked"> Proyectos del Banco Mundial</label>
-		<label><input type="checkbox" id="area_layer" checked="checked"> Municipios del país</label>
-		<h5>Índices</h5>
+		<h3 id="el_mapa">Busca en el mapa</h3>
+		<label><input type="checkbox" id="dots_layer" checked="checked">
+		<!--<img src="http://www.gsshealth.com/communities/2/004/008/922/932/images/4544352476_35x35.png" width=24>-->
+		Proyectos del Banco Mundial</label>
+		<label><input type="checkbox" id="flow_layer" checked="checked">
+		Datos WaterForPeople.org</label>
+		<br>
+		<label><input type="checkbox" id="area_layer" checked="checked">Indices agua y saneamiento de Municipios</label>
+		<small>Fuente: <a href="http://www.mmaya.gob.bo/" target="_blank">http://www.mmaya.gob.bo/</a></fuente>
+
 		
+		<h5>Índices agua y saneamiento</h5>
 		<label for="map_departamentos">Departamentos:</label>
 		<select name="map_departamentos" id="departamentos"></select>
 		<div id="municipios_params">
@@ -184,6 +206,8 @@ $(document).ready(function () {
 				<option value="poblacion" selected="selected">Población</option>
 				<option value="cob_ap">Cobertura agua potable</option>
 				<option value="cob_san">Cobertura saneamiento</option>
+				<option value="calc_iaris">Calculo IARIS</option>
+				<option value="categ_iaris">categoria IARIS</option>
 			</select>
 		</div>
 		
@@ -201,7 +225,8 @@ $(document).ready(function () {
 		
 		<div class="alert alert-info">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
-		Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos. <strong>Pronto se tendrán nuevos paises.</strong>
+			Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos.
+			<strong>Pronto se tendrán nuevos paises. <small>Por ejemplo <a href="http://siasar.org/">(siasar)</a></small></strong>
 		</div>
 	</div>
 	<div class="span8 pull-right" style="height: 100%">
@@ -294,6 +319,60 @@ $(document).ready(function () {
 				'min': 80,
 				'max': 100,
 				'color': '#00CC00'
+			}
+		],
+		'calc_iaris': [
+			{
+				'min': 0.1,
+				'max': 0.3,
+				'color': '#CCEAFF'
+			},
+			{
+				'min': 0.3,
+				'max': 0.5,
+				'color': '#99D6FF'
+			},
+			{
+				'min': 0.5,
+				'max': 0.7,
+				'color': '#66C1FF'
+			},
+			{
+				'min': 0.7,
+				'max': 0.9,
+				'color': '#33ADFF'
+			},
+			{
+				'min': 0.9,
+				'max': 1,
+				'color': '#0099FF'
+			}
+		],
+		'categ_iaris': [
+			{
+				'min': 0,
+				'max': 1,
+				'color': '#CCEAFF'
+			},
+			{
+				'min': 1,
+				'max': 2,
+				'color': '#99D6FF'
+			},
+			{
+				'min': 2,
+				'max': 3,
+				'color': '#66C1FF'
+			},
+			{
+				'min': 3,
+				'max': 4,
+				'color': '#33ADFF'
+			},
+			{
+				'min': 4,
+				'max': 5,
+				'color': '#0099FF'
 			}
 		],
 	}
