@@ -226,7 +226,7 @@ $(document).ready(function () {
 		<div class="alert alert-info">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
 			Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos.
-			<strong>Pronto se tendrán nuevos paises. <small>Por ejemplo <a href="http://siasar.org/">(siasar)</a></small></strong>
+			<strong>Pronto se tendrán nuevos paises, otras organizaciones y proyectos como fuentes de datos.</strong>
 		</div>
 	</div>
 	<div class="span8 pull-right" style="height: 100%">
