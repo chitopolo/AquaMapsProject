@@ -288,32 +288,24 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span3">
+		<div class="span4">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="nav-header">
 				  Saneamiento
 				</li>
-				<li class="active"><a href="" name="SH.H2O.SAFE.RU.ZS" data-toggle="pill">Improved water source, rural (% of rural population with access)</a></li>
-				<li><a href="" name="SH.H2O.SAFE.UR.ZS" data-toggle="pill">Improved water source, urban (% of urban population with access)</a></li>
-				<li><a href="" name="SH.H2O.SAFE.ZS" data-toggle="pill">Improved water source (% of population with access)</a></li>
-				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Improved sanitation facilities, rural (% of rural population with access)</a></li>
-				<li><a href="" name="SH.STA.ACSN.UR" data-toggle="pill">Improved sanitation facilities, urban (% of urban population with access)</a></li>
-				<li><a href="" name="SH.STA.ACSN" data-toggle="pill">Improved sanitation facilities (% of population with access)</a></li>
-				<li class="nav-header">
-				  Indicadores SocioEconomicos
-				</li>
-				<li>
-				  <a href="" name="SP.POP.TOTL" data-toggle="pill">Total Population</a>
-				</li>
-				<li>
-				  <a href="" name="SP.URB.TOTL" data-toggle="pill">Urban population</a>
-				</li>
-				<li>
-				  <a href="" name="SP.URB.TOTL.IN.ZS" data-toggle="pill">Urban population (% of total)</a>
-				</li>
+				<li class="active"><a href="" name="SH.H2O.SAFE.RU.ZS" data-toggle="pill">Fuente de agua mejorada, RURAL</a></li>
+				<li><a href="" name="SH.H2O.SAFE.UR.ZS" data-toggle="pill">Fuente de agua mejorada, URBANA</a></li>
+				<li><a href="" name="SH.H2O.SAFE.ZS" data-toggle="pill">Fuente de agua mejorada, TOTAL</a></li>
+				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Instalaciones de sanidad mejoradas, RURAL</a></li>
+				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Instalaciones de sanidad mejoradas, URBANA</a></li>
+				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Instalaciones de sanidad mejoradas, TOTAL</a></li>
+				<li class="nav-header">Indicadores SocioEconomicos</li>
+				<li><a href="" name="SP.POP.TOTL" data-toggle="pill">Población rural</a></li>
+				<li><a href="" name="SP.POP.TOTL" data-toggle="pill">Población urbana</a></li>
+				<li><a href="" name="SP.POP.TOTL" data-toggle="pill">Población total</a></li>
 			  </ul>
 		</div>
-		<div class="span9" id="globe">
+		<div class="span8" id="globe">
 		</div>
 	</div>
 	<div class="row-fluid">

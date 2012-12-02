@@ -28,7 +28,7 @@ function initialize() {
 	});
 	areaLayer.setMap(map);
 	
-	applyStyle(map, areaLayer, $('#municipios_params select:first').find('option:selected').val());
+	//applyStyle(map, areaLayer, $('#municipios_params select:first').find('option:selected').val());
 	
 	dotsLayer = new google.maps.FusionTablesLayer({	
 		query: {
