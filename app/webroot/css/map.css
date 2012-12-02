@@ -7,3 +7,9 @@ html#map { height: 100% }
 		html#map #content { height: 100%; }
 			#map_container { }
 				#map_canvas { height: 100%; }
+
+ul.noStyle { margin-left: 0; padding-left: 0; list-style: none; }
+
+.mapLegend { margin: 0; }
+	.legendTitle { margin-bottom: 16px; font-weight: bold; }
+	.legendColor { display: inline-block; width: 10px; height: 10px; }

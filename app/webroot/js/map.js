@@ -29,14 +29,18 @@ function checkQuery(query, table) {
 }
 
 function parseJason(data) {
-	if (data != "") {
-		try {
-			return $.parseJSON(data);
-		} catch (e) {
+	if(typeof data != 'object') {	
+		if (data != "") {
+			try {
+				return $.parseJSON(data);
+			} catch (e) {
+				return false;
+			}
+		} else {
 			return false;
-		}
+		}	
 	} else {
-		return false;
+		return data
 	}
 }
 
@@ -52,15 +56,17 @@ function populateSelect(data, elementSelector) {
 		result = true;
 	}
 	
-	$.each(data.rows, function(i, row) {
-		if (row != '') {
-			if (row.length > 1) {
-				$(elementSelector).append('<option value="' + row[0] + '">' + row[1] + '</option>');				
-			} else {
-				$(elementSelector).append('<option value="' + row + '">' + row + '</option>');				
-			}
-		}		
-	});
+	if (data != null) {		
+		$.each(data.rows, function(i, row) {
+			if (row != '') {
+				if (row.length > 1) {
+					$(elementSelector).append('<option value="' + row[0] + '">' + row[1] + '</option>');				
+				} else {
+					$(elementSelector).append('<option value="' + row + '">' + row + '</option>');				
+				}
+			}		
+		});
+	}
 	
 	return result;
 }

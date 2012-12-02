@@ -11,116 +11,6 @@ var apiKey = 'AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0';
 var dotsLayer = null;
 var areaLayer = null;
 
-var layerStyles = {
-	'poblacion': [
-		{
-			'min': 0,
-			'max': 1000,
-			'color': '#FFD699'
-		},
-		{
-			'min': 1000,
-			'max': 10000,
-			'color': '#FFC166'
-		},
-		{
-			'min': 10000,
-			'max': 500000,
-			'color': '#FFAD33'
-		},
-		{
-			'min': 500000,
-			'max': 1000000,
-			'color': '#FF9900'
-		}
-	],
-	'cob_ap': [
-		{
-			'min': 0,
-			'max': 20,
-			'color': '#CCEAFF'
-		},
-		{
-			'min': 20,
-			'max': 40,
-			'color': '#99D6FF'
-		},
-		{
-			'min': 40,
-			'max': 60,
-			'color': '#66C1FF'
-		},
-		{
-			'min': 60,
-			'max': 80,
-			'color': '#33ADFF'
-		},
-		{
-			'min': 80,
-			'max': 100,
-			'color': '#0099FF'
-		}
-	],
-	'cob_san': [
-		{
-			'min': 0,
-			'max': 20,
-			'color': '#99EA99'
-		},
-		{
-			'min': 20,
-			'max': 40,
-			'color': '#99EA99'
-		},
-		{
-			'min': 40,
-			'max': 60,
-			'color': '#66E066'
-		},
-		{
-			'min': 60,
-			'max': 80,
-			'color': '#33D633'
-		},
-		{
-			'min': 80,
-			'max': 100,
-			'color': '#00CC00'
-		}
-	],
-}
-
-function applyStyle(map, layer, column) {
-	var columnStyle = layerStyles[column];
-	var styles = [];
-	
-	for (var i in columnStyle) {
-		var style = columnStyle[i];
-		styles.push({
-			where: generateWhere(column, style.min, style.max),
-			polygonOptions: {
-				fillColor: style.color,
-				fillOpacity: style.opacity ? style.opacity : 0.8
-			}
-		});
-	}
-	
-	layer.set('styles', styles);
-}
-
-function generateWhere(columnName, low, high) {
-	var whereClause = [];
-	whereClause.push("'");
-	whereClause.push(columnName);
-	whereClause.push("' >= ");
-	whereClause.push(low);
-	whereClause.push(" AND '");
-	whereClause.push(columnName);
-	whereClause.push("' < ");
-	whereClause.push(high);
-	return whereClause.join('');
-}
-
 function initialize() {
 	var mapOptions = {
 		zoom: 6,
@@ -128,25 +18,7 @@ function initialize() {
 	};
 	map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 	
-	// Try HTML5 geolocation
-	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-		var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		
-		/*var infowindow = new google.maps.InfoWindow({
-		map: map,
-		position: pos,
-		content: 'Location found using HTML5.'
-		});*/
-		
-		map.setCenter(pos);
-		}, function() {
-		handleNoGeolocation(true);
-		});
-	} else {
-		// Browser doesn't support Geolocation
-		handleNoGeolocation(false);
-	}
+	map.setCenter(new google.maps.LatLng(-17.8, -63.16667));
 	
 	areaLayer = new google.maps.FusionTablesLayer({
 		query: {
@@ -167,24 +39,12 @@ function initialize() {
 			//where: "mjsector_1 = 'Water, sanitation and flood protection'"
 			//where: "mjsector_1 = 'Water, sanitation and flood protection' AND latitude != '' AND longitude != ''"
 		},
+		style: {
+			iconName: 'blu_blank'
+		}
 	});
 	dotsLayer.setMap(map);
 	
-}
-
-function handleNoGeolocation(errorFlag) {
-	if (errorFlag) {
-		var content = 'Error: The Geolocation service failed.';
-	} else {
-		var content = 'Error: Your browser doesn\'t support geolocation.';
-	}
-	var options = {
-		map: map,
-		position: new google.maps.LatLng(60, 105),
-		content: content
-	};
-	var infowindow = new google.maps.InfoWindow(options);
-	map.setCenter(options.position);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -213,16 +73,13 @@ $(document).ready(function () {
 				areaTableName,
 				apiKey,
 				function(data) {
-					if (populateSelect(parseJason(data), '#provincias select:first')) {
-						$('#provincias select:first').removeAttr('disabled');
-						areaLayer.setOptions({
-							query: {
-								select: 'geometry',
-								from: areaTableName,
-								where: "nom_dep = '" + selectedValue + "'"
-							}
-						});
-					}
+					areaLayer.setOptions({
+						query: {
+							select: 'geometry',
+							from: areaTableName,
+							where: "nom_dep = '" + selectedValue + "'"
+						}
+					});
 				}
 			);
 		}	
@@ -271,6 +128,8 @@ $(document).ready(function () {
 		
 		if (selectedValue != '') {
 			applyStyle(map, areaLayer, selectedValue);
+			$(".mapLegend").hide();
+			$("#legend_" + selectedValue).show();
 		}	
 	});
 	
@@ -286,30 +145,29 @@ $(document).ready(function () {
 </script>
 <div class="span3">
 	<div class="alert alert-info">
-	Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos. <strong>Pronto se tendran nuevos paises.</strong>
+	Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos. <strong>Pronto se tendrán nuevos paises.</strong>
 	</div>
 	<fieldset>
-		<legend>Capas</legend>
-		<label for="map_layer">Municipios: <input type="checkbox" id="area_layer" checked="checked"></label>
-		<label for="map_layer">Puntos: <input type="checkbox" id="dots_layer" checked="checked"></label>
+		<label><input type="checkbox" id="dots_layer" checked="checked"> Proyectos del Banco Mundial</label>
 	</fieldset>
 	
+		<label><input type="checkbox" id="area_layer" checked="checked"> Municipios del país</label>
 	<fieldset>
-		<legend>Parámetros</legend>
-		<div id="municipios_params">
-			<label for="map_municipios_params">Municipios:</label>
-			<select name="map_municipios_params">
-				<option value="poblacion" selected="selected">Población</option>
-				<option value="cob_ap">cobertura agua potable</option>
-				<option value="cob_san">cobertura saneamiento</option>
-			</select>
-		</div>
-	</fieldset>
-	
-	<fieldset>
-		<legend>Divisiones políticas</legend>
+		<h5>Índices</h5>
+		
 		<label for="map_departamentos">Departamentos:</label>
 		<select name="map_departamentos" id="departamentos"></select>
+		<div id="municipios_params">
+			<label for="map_municipios_params">Índices:</label>
+			<select name="map_municipios_params">
+				<option value="poblacion" selected="selected">Población</option>
+				<option value="cob_ap">Cobertura agua potable</option>
+				<option value="cob_san">Cobertura saneamiento</option>
+			</select>
+		</div>
+		
+		<div id="municipios_legends" class="mapLegendContainer well"></div>
+		<!--
 		<div id="provincias">
 			<label for="map_provincias">Provincias:</label>
 			<select name="map_provincias"></select>
@@ -318,30 +176,8 @@ $(document).ready(function () {
 			<label for="map_municipios">Municipios:</label>
 			<select name="map_municipios"></select>
 		</div>
+		-->
 	</fieldset>
-	<!--
-	<label for="map_layers">Capas:</label>
-	<select name="map_layers" id="layers">
-		<option value="all">Todas</option>
-		<option value="dots">Puntos</option>
-		<option value="area">Área</option>
-	</select>
-	<label for="map_heatmap">Heatmap:</label>
-	<input type="checkbox" name="map_heatmap" id="heatmap">
-	-->
-	<div id="map_info" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Modal header</h3>
-		</div>
-		<div class="modal-body">
-			<p>One fine body…</p>
-			</div>
-			<div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			<button class="btn btn-primary">Save changes</button>
-		</div>
-	</div>
 </div>
 <div class="span8 pull-right" style="height: 100%">
 	<div id="map_container" style="margin-right: 20px;">
@@ -356,6 +192,129 @@ $(document).ready(function () {
         var maxHeight = $(window).height() - mapContainer.offset().top - 16;
 		mapContainer.height(maxHeight);
     }
+	
+	var layerStyles = {
+		'poblacion': [
+			{
+				'min': 0,
+				'max': 1000,
+				'color': '#FFD699'
+			},
+			{
+				'min': 1000,
+				'max': 10000,
+				'color': '#FFC166'
+			},
+			{
+				'min': 10000,
+				'max': 500000,
+				'color': '#FFAD33'
+			},
+			{
+				'min': 500000,
+				'max': 1000000,
+				'color': '#FF9900'
+			}
+		],
+		'cob_ap': [
+			{
+				'min': 0,
+				'max': 20,
+				'color': '#CCEAFF'
+			},
+			{
+				'min': 20,
+				'max': 40,
+				'color': '#99D6FF'
+			},
+			{
+				'min': 40,
+				'max': 60,
+				'color': '#66C1FF'
+			},
+			{
+				'min': 60,
+				'max': 80,
+				'color': '#33ADFF'
+			},
+			{
+				'min': 80,
+				'max': 100,
+				'color': '#0099FF'
+			}
+		],
+		'cob_san': [
+			{
+				'min': 0,
+				'max': 20,
+				'color': '#99EA99'
+			},
+			{
+				'min': 20,
+				'max': 40,
+				'color': '#99EA99'
+			},
+			{
+				'min': 40,
+				'max': 60,
+				'color': '#66E066'
+			},
+			{
+				'min': 60,
+				'max': 80,
+				'color': '#33D633'
+			},
+			{
+				'min': 80,
+				'max': 100,
+				'color': '#00CC00'
+			}
+		],
+	}
+	
+	for (var i in layerStyles) {
+		var listItems = '<ul id="legend_' + i + '" class="mapLegend noStyle">';
+		listItems += '<li class="legendTitle">' + i + '</li>';
+		for(var style in layerStyles[i]) {
+			listItems += '<li><span class="legendColor" style="background-color: ' + layerStyles[i][style].color + ';"></span> ' + layerStyles[i][style].min + ' - ' + layerStyles[i][style].max + '</li>';
+		}
+		listItems += '</ul>';
+		$("#municipios_legends").append(listItems);
+	}
+	
+	$(".mapLegend").hide();
+	$("#legend_" + $('#municipios_params select:first').find('option:selected').val()).show();
+	
+	function applyStyle(map, layer, column) {
+		var columnStyle = layerStyles[column];
+		var styles = [];
+		
+		for (var i in columnStyle) {
+			var style = columnStyle[i];
+			styles.push({
+				where: generateWhere(column, style.min, style.max),
+				polygonOptions: {
+					fillColor: style.color,
+					fillOpacity: style.opacity ? style.opacity : 0.8
+				}
+			});
+		}
+		
+		layer.set('styles', styles);
+	}
+	
+	function generateWhere(columnName, low, high) {
+		var whereClause = [];
+		whereClause.push("'");
+		whereClause.push(columnName);
+		whereClause.push("' >= ");
+		whereClause.push(low);
+		whereClause.push(" AND '");
+		whereClause.push(columnName);
+		whereClause.push("' < ");
+		whereClause.push(high);
+		return whereClause.join('');
+	}
     
     //adjustMap();
     //
