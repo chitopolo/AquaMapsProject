@@ -267,7 +267,7 @@
 
       <h3  style="color:white;">Bajate nuestra App</h3>
       <p  style="color:white;">  O puedes bajarte nuestra aplicacion movil. (Muy pronto)
-	  <a href="http://aquamaps.cochavalley/files/presentacion_ AquaMaps.pptx" target="_blank" style="color: white;">
+	  <a href="http://aquamaps.cochavalley.com/files/presentacion_%20AquaMaps.pptx" target="_blank" style="color: white;">
 	  <strong> Ve mas aqui</strong>
 	  </a>
 </p>
