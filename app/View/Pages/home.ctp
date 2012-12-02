@@ -132,7 +132,12 @@
 
 	  }
 	  
-	  $(document).ready(function(){
+	  $(document).ready(function() {
+		
+		$("#main_nav a").click(function(event) {
+			editAnchor(event, this);
+		});	
+		
 		$.getJSON("http://api.worldbank.org/countries?per_page=250&format=jsonp&prefix=?&callback=?",
 		
 		function (jsondata){
@@ -171,47 +176,45 @@
     </script>
 
 <!-- RP: Start Blue Space -->
-<div style="background-color:  #2298C6; min-height:500px; text-color:#ffffff" >
-<div class="container-fluid" >
-<div class="row-fluid">
-  <div class="span12" style="min-height:5	0px; padding-top:20px;">
-	<p class="lead span4 offset3" style="color:#fff; font-size:200%" id="pais">El agua en tu pa&iacute;s: </p>
-	<select id="country" name="country">
-		<option value="BO">Bolivia </option>
-		<option value="BI">Burundi </option>
-	</select>
-  </div>
-</div>
-
-<div class="row-fluid">
-	<div class="span6" style="text-align: center;">
-		<h3 style="color:#fff; ">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
+<div style="background-color:  #2298C6; min-height:500px; text-color:#ffffff; box-shadow: 0 3px 2px rgba(0, 0, 0, 0.15);" >
+	<div class="container-fluid" >
+	<div class="row-fluid">
+	  <div class="span12" style="min-height:5	0px; padding-top:20px;">
+		<p class="lead span4 offset3" style="color:#fff; font-size:200%" id="pais">El agua en tu pa&iacute;s: </p>
+		<select id="country" name="country">
+			<option value="BO">Bolivia </option>
+			<option value="BI">Burundi </option>
+		</select>
+	  </div>
 	</div>
-	<div class="span6" style="text-align: center;">
-		<h3 style="color:#fff; font-size:200%">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
-	</div>
-</div>
-<div class="row-fluid">
-	<div class="span6">
-		<div id="SH.H2O.SAFE.ZS" style="height: 400px;" >
+	
+	<div class="row-fluid">
+		<div class="span6" style="text-align: center;">
+			<h3 style="color:#fff; ">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
+		</div>
+		<div class="span6" style="text-align: center;">
+			<h3 style="color:#fff; font-size:200%">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
 		</div>
 	</div>
-	<div class="span6">
-		<div id="SH.STA.ACSN" style="height: 400px;" ></div>
-	</div>
-</div>
-
-<div class="row-fluid">
-  <div class="span12">
-	<small>Fuente: Banco Mundial</small>
-  </div>
-</div>
-</div>
-</div>
-<div class="container-fluid" style="min-height: 500px; padding: 20px 0; box-shadow: inset 0 3px 2px rgba(0, 0, 0, 0.15);">
 	<div class="row-fluid">
-		<?php echo $this->element('main_map'); ?>
+		<div class="span6">
+			<div id="SH.H2O.SAFE.ZS" style="height: 400px;" >
+			</div>
+		</div>
+		<div class="span6">
+			<div id="SH.STA.ACSN" style="height: 400px;" ></div>
+		</div>
 	</div>
+	
+	<div class="row-fluid">
+	  <div class="span12">
+		<small>Fuente: Banco Mundial</small>
+	  </div>
+	</div>
+	</div>
+</div>
+<div style="min-height: 500px; padding: 20px 0;">
+	<?php echo $this->element('main_map'); ?>
 </div>
 
 
@@ -228,7 +231,7 @@
 		
 		
 			<div class="span12" style="min-height:500px; margin-top:100px;">
-			<h2 id="ayudar" style="color:white;">Como puedes ayudar?</h2>
+			<h2 id="ayudar" style="color:white;">Cómo puedes ayudar?</h2>
 		<ul class="thumbnails">
   <li class="span3">
     <div class="img-rounded">
@@ -285,32 +288,24 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span3">
+		<div class="span4">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="nav-header">
 				  Saneamiento
 				</li>
-				<li class="active"><a href="" name="SH.H2O.SAFE.RU.ZS" data-toggle="pill">Improved water source, rural (% of rural population with access)</a></li>
-				<li><a href="" name="SH.H2O.SAFE.UR.ZS" data-toggle="pill">Improved water source, urban (% of urban population with access)</a></li>
-				<li><a href="" name="SH.H2O.SAFE.ZS" data-toggle="pill">Improved water source (% of population with access)</a></li>
-				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Improved sanitation facilities, rural (% of rural population with access)</a></li>
-				<li><a href="" name="SH.STA.ACSN.UR" data-toggle="pill">Improved sanitation facilities, urban (% of urban population with access)</a></li>
-				<li><a href="" name="SH.STA.ACSN" data-toggle="pill">Improved sanitation facilities (% of population with access)</a></li>
-				<li class="nav-header">
-				  Indicadores SocioEconomicos
-				</li>
-				<li>
-				  <a href="" name="SP.POP.TOTL" data-toggle="pill">Total Population</a>
-				</li>
-				<li>
-				  <a href="" name="SP.URB.TOTL" data-toggle="pill">Urban population</a>
-				</li>
-				<li>
-				  <a href="" name="SP.URB.TOTL.IN.ZS" data-toggle="pill">Urban population (% of total)</a>
-				</li>
+				<li class="active"><a href="" name="SH.H2O.SAFE.RU.ZS" data-toggle="pill">Fuente de agua mejorada, RURAL</a></li>
+				<li><a href="" name="SH.H2O.SAFE.UR.ZS" data-toggle="pill">Fuente de agua mejorada, URBANA</a></li>
+				<li><a href="" name="SH.H2O.SAFE.ZS" data-toggle="pill">Fuente de agua mejorada, TOTAL</a></li>
+				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Instalaciones de sanidad mejoradas, RURAL</a></li>
+				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Instalaciones de sanidad mejoradas, URBANA</a></li>
+				<li><a href="" name="SH.STA.ACSN.RU" data-toggle="pill">Instalaciones de sanidad mejoradas, TOTAL</a></li>
+				<li class="nav-header">Indicadores SocioEconomicos</li>
+				<li><a href="" name="SP.POP.TOTL" data-toggle="pill">Población rural</a></li>
+				<li><a href="" name="SP.POP.TOTL" data-toggle="pill">Población urbana</a></li>
+				<li><a href="" name="SP.POP.TOTL" data-toggle="pill">Población total</a></li>
 			  </ul>
 		</div>
-		<div class="span9" id="globe">
+		<div class="span8" id="globe">
 		</div>
 	</div>
 	<div class="row-fluid">
