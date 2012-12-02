@@ -5,11 +5,13 @@
 var map;
 var dotsTableName = '1CBwJa2c74oTqV_IST8Viim0CFZofe9qAwZCDsT8';
 var areaTableName = '1IW43AblTgBE6OGz79hqMjq3yv_saG88OuE4pBJk';
+var flowTableName = '1dUSqdHV-nAFpmMaIP9-4ekKAePvwWdEehPcHQyk';
 //var areaTableName = '1ZT5rrWyUSAmJBJim-FaMBxwrG6CpcmI5TYAsm3Y';
 var apiKey = 'AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0';
 
 var dotsLayer = null;
 var areaLayer = null;
+
 
 function initialize() {
 	var mapOptions = {
@@ -44,6 +46,23 @@ function initialize() {
 		}
 	});
 	dotsLayer.setMap(map);
+	
+	
+	flowLayer = new google.maps.FusionTablesLayer({	
+		query: {
+			select: 'longitude, latitude',
+			from: flowTableName,
+		},
+		styles: [{
+            markerOptions: {
+				iconStyler: {
+					kind: "fromColumn",
+					columnName: "icon"
+				}
+			}
+		}]	
+	});
+	flowLayer.setMap(map);
 	
 }
 
