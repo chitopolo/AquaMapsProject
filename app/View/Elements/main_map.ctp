@@ -222,7 +222,6 @@ $(document).ready(function () {
 			<select name="map_municipios"></select>
 		</div>
 		-->
-		
 		<div class="alert alert-info">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
 			Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos.
