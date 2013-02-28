@@ -28,4 +28,8 @@ class MapsController extends AppController {
 	public function home() {
 		$this->layout = 'map';
 	}
+	
+	public function example() {
+		
+	}
 }
