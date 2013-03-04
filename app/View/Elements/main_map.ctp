@@ -186,24 +186,24 @@ $(document).ready(function () {
 </script>
 <div class="row-fluid">
 	<div class="span4">
-		<h3 id="el_mapa">Busca en el mapa</h3>
+		<h3 id="el_mapa">Search the map</h3>
 		<label><input type="checkbox" id="dots_layer" checked="checked">
 		<!--<img src="http://www.gsshealth.com/communities/2/004/008/922/932/images/4544352476_35x35.png" width=24>-->
-		Proyectos del Banco Mundial</label>
+		World Bank Projects</label>
 		<label><input type="checkbox" id="flow_layer" checked="checked">
-		Datos WaterForPeople.org</label>
+		Data WaterForPeople.org</label>
 		<br>
-		<label><input type="checkbox" id="area_layer" checked="checked">Indices agua y saneamiento de Municipios</label>
-		<small>Fuente: <a href="http://www.mmaya.gob.bo/" target="_blank">http://www.mmaya.gob.bo/</a></fuente>
+		<label><input type="checkbox" id="area_layer" checked="checked">Water and sanitation indicators "Municipios:</label>
+		<small>Source: <a href="http://www.mmaya.gob.bo/" target="_blank">http://www.mmaya.gob.bo/</a></fuente>
 
 		
-		<h5>Índices agua y saneamiento</h5>
+		<h5>Water and sanitation indicators</h5>
 		<label for="map_departamentos">Departamentos:</label>
 		<select name="map_departamentos" id="departamentos"></select>
 		<div id="municipios_params">
-			<label for="map_municipios_params">Índices:</label>
+			<label for="map_municipios_params">Indicators:</label>
 			<select name="map_municipios_params">
-				<option value="poblacion" selected="selected">Población</option>
+				<option value="poblacion" selected="selected">Population</option>
 				<option value="cob_ap">Cobertura agua potable</option>
 				<option value="cob_san">Cobertura saneamiento</option>
 				<option value="calc_iaris">Calculo IARIS</option>
@@ -224,8 +224,8 @@ $(document).ready(function () {
 		-->
 		<div class="alert alert-info">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
-			Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos.
-			<strong>Pronto se tendrán nuevos paises, otras organizaciones y proyectos como fuentes de datos.</strong>
+			For the moment  the map only shows data for Bolivia. 
+			<strong>Soon new countries will be available.</strong>
 		</div>
 	</div>
 	<div class="span8 pull-right" style="height: 100%">
