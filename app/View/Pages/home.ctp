@@ -12,13 +12,12 @@
 			$.getJSON("http://api.worldbank.org/countries/all/indicators/"+index+"?date="+year+"&format=jsonp&per_page=250&prefix=?&callback=?", 
 			  
 			  function(jsondata){
-
 	  
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', 'Country');
 				data.addColumn('number', 'value');
 	  
-				
+
 				$.each(jsondata[1], function(i,item){
 				  //if(jQuery.inArray(item.country.id,aggregates) == -1){
 					data.addRow([item.country.value,Number(item.value)]);
@@ -46,7 +45,6 @@
 					var data = new google.visualization.DataTable();
 					data.addColumn('string', 'Year');
 					data.addColumn('number', countryname);
-					
 					$.each(jsondata[1], function(i,item){
 						data.addRow([item.date,Number(item.value)]);
 						//console.log(item.date,item.value);

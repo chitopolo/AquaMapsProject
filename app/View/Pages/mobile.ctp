@@ -32,13 +32,13 @@
 			<div id="phonescreens" class="span4" >
 				<div id="slider">
 					<ul>				
-						<li><?php   echo $this->Html->image('1.png') ?> </li>
-						<li><?php   echo $this->Html->image('2.png') ?> </li>
-						<li><?php   echo $this->Html->image('3.png') ?> </li>
-						<li><?php   echo $this->Html->image('4.png') ?> </li>
-						<li><?php   echo $this->Html->image('5.png') ?> </li>
-						<li><?php   echo $this->Html->image('6.png') ?> </li>
-						<li><?php   echo $this->Html->image('7.png') ?> </li>
+						<li><?php   echo $this->Html->image('screen1.png') ?> </li>
+						<li><?php   echo $this->Html->image('screen2.png') ?> </li>
+						<li><?php   echo $this->Html->image('screen3.png') ?> </li>
+						<li><?php   echo $this->Html->image('screen4.png') ?> </li>
+						<li><?php   echo $this->Html->image('screen5.png') ?> </li>
+						<li><?php   echo $this->Html->image('screen6.png') ?> </li>
+						<li><?php   echo $this->Html->image('screen7.png') ?> </li>
 					</ul>
 				</div>
 			</div>
