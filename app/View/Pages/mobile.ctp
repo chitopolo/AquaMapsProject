@@ -18,7 +18,7 @@
 		<br class="clear"/>
 		<div class="row-fluid" >
 			<div class="span4">
-				<h2 style="opacity: 0.5;">Soon available</h2>
+				<h2 style="opacity: 0.5;">Soon available on</h2>
 				<ul class="heading-icons">
 				<li class=""><a  target="_blank">
 				<?php   echo $this->Html->image('android-small-logo.png') ?> 
