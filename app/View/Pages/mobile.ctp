@@ -4,7 +4,7 @@
 		<div class="row-fluid" style="min-height:250px; background-color:  #2298C6; margin-top: 40px; box-shadow: 0 3px 2px rgba(0, 0, 0, 0.15);" >
 			<div id="logo" class="span8">
 				<h1>
-						<?php   echo $this->Html->image('AquaMapsBrand.png', array('class' => 'media-object', 'width' => '50%'));  ?>
+					<?php   echo $this->Html->image('AquaMapsBrand.png', array('class' => 'media-object', 'width' => '50%'));  ?>
 				</h1>
 			</div>
 			<div id="strapline" class="span4">
