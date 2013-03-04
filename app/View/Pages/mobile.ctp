@@ -47,7 +47,7 @@
 
 					<li class="BulletImage" style="opacity: 0.8">Capture water and sanitation data on the field </li>
 					<li class="BulletImage" style="opacity: 0.8">Share it with your organization and the world</li>
-					<li class="BulletImage" style="opacity: 0.8">Vizualize your data</li>
+					<li class="BulletImage" style="opacity: 0.8">Visualize your data</li>
 					<li class="BulletImage" style="opacity: 0.8">Powered by API's from The World Bank</li>
 				</ul>
 			</div>
