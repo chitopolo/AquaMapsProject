@@ -235,7 +235,7 @@
     <div class="img-rounded">
     <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
       <h3  style="color:white;">Collect informacion</h3>
-      <p  style="color:white;"> If your a person part of an organization that works with santitation and water topics. And even if your a indvidual that is traveling. You can help us by collect data with our mobile app.</p>
+      <p  style="color:white;"> If you are part of an organization that works with santitation and water projects. And even if your a indvidual that is traveling. You can help us by collect data with your mobile app.</p>
     </div>
   </li>
 <li class="span3">

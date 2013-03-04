@@ -12,6 +12,8 @@ var apiKey = 'AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0';
 var dotsLayer = null;
 var areaLayer = null;
 var flowLayer = null;
+var infowindow;
+var infowindow2;
 
 
 function initialize() {
@@ -37,7 +39,8 @@ function initialize() {
             select: 'latitude',
             from: '1dUSqdHV-nAFpmMaIP9-4ekKAePvwWdEehPcHQyk'
         }
-		/*,
+		,
+		suppressInfoWindows: true,
         styles: [{
             where: "markType = 'WATER_POINT'",
             markerOptions: {
@@ -53,10 +56,23 @@ function initialize() {
             markerOptions: {
                 iconName: 'schools'
             }}]
-        */
 	});
 	flowLayer.setMap(map);
-	
+
+		google.maps.event.addListener(flowLayer, 'click', function(e) {
+if(infowindow2) infowindow2.close();
+else infowindow2 = new google.maps.InfoWindow();
+
+    //create info window layer
+    infoWindowContent2 = infowindow2.setContent(
+        "<div class='googft-info-window' style='font-family: sans-serif'>"+
+"<b>type:</b> "+e.row['markType'].value+"<br>"+
+"</div>");
+    infowindow2.setPosition(e.latLng);
+    map.setCenter(e.latLng);
+    infowindow2.open(map);        
+});
+		
 	dotsLayer = new google.maps.FusionTablesLayer({	
 		query: {
 			select: 'geoname, longitude, latitude',
@@ -65,7 +81,8 @@ function initialize() {
 			//where: 'latitude != "" AND longitude !=""',
 			//where: "mjsector_1 = 'Water, sanitation and flood protection'"
 			//where: "mjsector_1 = 'Water, sanitation and flood protection' AND latitude != '' AND longitude != ''"
-		}
+		},
+		suppressInfoWindows: true
 		/*,
 		styles: [{
 			markerOptions: {
@@ -74,6 +91,32 @@ function initialize() {
 		]*/
 	});
 	dotsLayer.setMap(map);
+	
+	google.maps.event.addListener(dotsLayer, 'click', function(e) {
+if(infowindow) infowindow.close();
+else infowindow = new google.maps.InfoWindow();
+
+    //create info window layer
+    infoWindowContent = infowindow.setContent(
+        "<div class='googft-info-window' style='font-family: sans-serif'>"+
+"<b>project title:</b> "+e.row['project title'].value+"<br>"+
+"<b>project sector:</b> "+e.row['mjsector_1'].value+"<br>"+
+"<b>country:</b> "+e.row['country'].value+"<br>"+
+"<b>adm1:</b> "+e.row['adm1'].value+" <br>"+
+"<b>adm2:</b> "+e.row['adm2'].value+"<br>"+
+"<b>geoname:</b> "+e.row['geoname'].value+"<br>"+
+"<b>development objective:</b> "+e.row['development objective'].value+"<br>"+
+"<b>description:</b> <a href='"+e.row['notes'].value+"' target='_blank'>"+e.row['description'].value+"</a><br>"+
+"<b>notes:</b> <a href='"+e.row['project title'].value+"' target='_blank'>"+e.row['notes'].value+"</a><br>"+
+"<b>results:</b> "+e.row['results'].value+"<br>"+
+"<b>product line:</b> "+e.row['product line'].value+"<br>"+
+"<b>notes/documentation:</b> <a href='"+e.row['notes/documentation'].value+"' target='_blank'>"+e.row['notes/documentation'].value+"</a><br>"+
+"</div>");
+
+    infowindow.setPosition(e.latLng);
+    map.setCenter(e.latLng);
+    infowindow.open(map);        
+});
 	
 }
 
