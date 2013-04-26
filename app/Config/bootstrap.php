@@ -98,6 +98,20 @@
  */
 Cache::config('default', array('engine' => 'File'));
 
+Cache::config('short', array(
+    'engine' => 'File',
+    'duration' => '+1 hours',
+    'path' => CACHE . 'short' . DS,
+));
+
+// long
+Cache::config('very_long', array(
+    'engine' => 'File',
+    'duration' => '+4 week',
+    'probability' => 100,
+    'path' => CACHE . 'very_long' . DS,
+));
+
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
  *

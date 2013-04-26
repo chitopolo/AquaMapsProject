@@ -30,4 +30,20 @@ class Point extends Model {
 		'User',
 		'PointType'
 	);
+	
+	function getNearPoints($lat, $lng, $radius = 1) {
+		$distanceField = '(
+			(
+				ACOS( SIN( ' . $lat . ' * PI( ) /180 ) * SIN( lat * PI( ) /180 ) + COS( ' . $lat . ' * PI( ) /180 ) * COS( lat * PI( ) /180 ) * COS( (
+				' . $lng . ' - lng
+				) * PI( ) /180 ) ) *180 / PI( )
+			) * 111.18957696
+		)';
+		return $this->find('all', array(
+			'fields' => array('id', 'lat', 'lng', $distanceField . ' as distance'),
+			'group' => 'id HAVING distance < ' . $radius,
+			'order' => 'distance ASC',
+			'recursive' => -1
+		));
+	}
 }

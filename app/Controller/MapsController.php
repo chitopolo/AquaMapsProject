@@ -25,7 +25,11 @@ class MapsController extends AppController {
  * @param mixed What page to display
  * @return void
  */
-	public function home() {
+	public function add() {
 		$this->layout = 'map';
+		$this->set(array(
+			'response' => array(),
+			'_serialize' => array('response')
+		));
 	}
 }

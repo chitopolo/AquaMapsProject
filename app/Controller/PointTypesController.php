@@ -12,9 +12,21 @@ class PointTypesController extends AppController {
  *
  * @return void
  */
+	public function testMe() {
+		pr ($this->PointType->getThem());
+		pr ($this->PointType->getOne(12));
+		$this->render('../elements/nothing');
+	}
+
+/**
+ * index method
+ *
+ * @return void
+ */
 	public function index() {
 		$this->PointType->recursive = 0;
 		$this->set('pointTypes', $this->paginate());
+		pr ($this->PointType->getThem());
 	}
 
 /**
