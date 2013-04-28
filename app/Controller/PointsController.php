@@ -119,9 +119,24 @@ class PointsController extends AppController {
 **/
 	public function api_index() {
 		$response = array('status' => 0, 'message' => '');
-		//var_dump($this->request);
 
-		$points = $this->Point->getPoints(33.32344, 33.234556);
+		$conditions = array();
+		if (!empty($this->request->query['point_type'])) {
+			$conditions[] = 'point_type_id = ' . $this->request->query['point_type'];
+		}
+
+		if (!empty($this->request->query['point1'])) {
+			$conditions += $this->Point->findWithinConditions(
+				$this->request->query['point1'],
+				$this->request->query['point2']
+			);
+		}
+
+		$points = $this->Point->find('all', array(
+			'fields' => $this->Point->getFindFields(),
+			'conditions' => $conditions,
+			'recursive' => -1
+		));
 
 		if ($points) {
 			$response['status'] = 1;
@@ -129,6 +144,31 @@ class PointsController extends AppController {
 			$response['message'] = __('Puntos de agua encontrados!');
 		} else {
 			$response['message'] = __('No se encontraron puntos de agua.');
+		}
+
+		$this->makeItJson($response);
+	}
+
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function api_view($id = null) {
+		$response = array('status' => 0, 'message' => '');
+
+		$this->Point->id = $id;
+		if (!$this->Point->exists()) {
+			throw new NotFoundException(__('Invalid point type'));
+		}
+
+		if (($response['point'] = $this->Point->read(null, $id)) != false) {			
+			$response['status'] = 1;
+			$response['message'] = __('Punto no encontrado.');
+		} else {
+			$response['message'] = __('Punto no encontrado.');
 		}
 
 		$this->makeItJson($response);
@@ -149,7 +189,6 @@ class PointsController extends AppController {
 *
 **/
 	public function api_add() {
-		var_dump($this->request->is('rest'));
 		$response = array('status' => 0, 'message' => '');
 		if ($this->request->is('post')) {
 			if (!empty($this->request->data)) {
@@ -163,7 +202,7 @@ class PointsController extends AppController {
 					$response['report']['id'] = $this->Report->getInsertID();
 					if (!empty($this->request->data['image'])) {
 						$image = base64_decode($this->request->data['image']);
-						if (file_put_contents(WWW_ROOT . 'img' . DS . 'reports' . DS . $response['report']['id'] . '.jpg', $image)) {						
+						if (file_put_contents(WWW_ROOT . 'img' . DS . 'points' . DS . $response['report']['id'] . '.jpg', $image)) {
 							$response['report']['image'] = 1;
 							$this->Report->id = $response['report']['id'];
 							$this->Report->saveField('image', 1);
