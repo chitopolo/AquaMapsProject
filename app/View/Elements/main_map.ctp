@@ -11,6 +11,9 @@ var apiKey = 'AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0';
 
 var dotsLayer = null;
 var areaLayer = null;
+var flowLayer = null;
+var infowindow;
+var infowindow2;
 
 
 function initialize() {
@@ -31,7 +34,45 @@ function initialize() {
 	areaLayer.setMap(map);
 	
 	//applyStyle(map, areaLayer, $('#municipios_params select:first').find('option:selected').val());
-	
+	flowLayer = new google.maps.FusionTablesLayer({	
+        query: {
+            select: 'latitude',
+            from: '1dUSqdHV-nAFpmMaIP9-4ekKAePvwWdEehPcHQyk'
+        }
+		,
+		suppressInfoWindows: true,
+        styles: [{
+            where: "markType = 'WATER_POINT'",
+            markerOptions: {
+                iconName: 'ltblu_blank'
+            }},
+            {
+            where: "markType = 'PUBLIC_INSTITUTION'",
+            markerOptions: {
+                iconName: 'museum'
+            }},
+            {
+            where: "markType = 'SCHOOL'",
+            markerOptions: {
+                iconName: 'schools'
+            }}]
+	});
+	flowLayer.setMap(map);
+
+		google.maps.event.addListener(flowLayer, 'click', function(e) {
+if(infowindow2) infowindow2.close();
+else infowindow2 = new google.maps.InfoWindow();
+
+    //create info window layer
+    infoWindowContent2 = infowindow2.setContent(
+        "<div class='googft-info-window' style='font-family: sans-serif'>"+
+"<b>type:</b> "+e.row['markType'].value+"<br>"+
+"</div>");
+    infowindow2.setPosition(e.latLng);
+    map.setCenter(e.latLng);
+    infowindow2.open(map);        
+});
+		
 	dotsLayer = new google.maps.FusionTablesLayer({	
 		query: {
 			select: 'geoname, longitude, latitude',
@@ -41,28 +82,41 @@ function initialize() {
 			//where: "mjsector_1 = 'Water, sanitation and flood protection'"
 			//where: "mjsector_1 = 'Water, sanitation and flood protection' AND latitude != '' AND longitude != ''"
 		},
-		style: {
-			iconName: 'blu_blank'
-		}
+		suppressInfoWindows: true
+		/*,
+		styles: [{
+			markerOptions: {
+				iconName: 'blu_blank'
+			}}
+		]*/
 	});
 	dotsLayer.setMap(map);
 	
-	
-	flowLayer = new google.maps.FusionTablesLayer({	
-		query: {
-			select: 'longitude, latitude',
-			from: flowTableName,
-		},
-		styles: [{
-            markerOptions: {
-				iconStyler: {
-					kind: "fromColumn",
-					columnName: "icon"
-				}
-			}
-		}]	
-	});
-	flowLayer.setMap(map);
+	google.maps.event.addListener(dotsLayer, 'click', function(e) {
+if(infowindow) infowindow.close();
+else infowindow = new google.maps.InfoWindow();
+
+    //create info window layer
+    infoWindowContent = infowindow.setContent(
+        "<div class='googft-info-window' style='font-family: sans-serif'>"+
+"<b>project title:</b> "+e.row['project title'].value+"<br>"+
+"<b>project sector:</b> "+e.row['mjsector_1'].value+"<br>"+
+"<b>country:</b> "+e.row['country'].value+"<br>"+
+"<b>adm1:</b> "+e.row['adm1'].value+" <br>"+
+"<b>adm2:</b> "+e.row['adm2'].value+"<br>"+
+"<b>geoname:</b> "+e.row['geoname'].value+"<br>"+
+"<b>development objective:</b> "+e.row['development objective'].value+"<br>"+
+"<b>description:</b> <a href='"+e.row['notes'].value+"' target='_blank'>"+e.row['description'].value+"</a><br>"+
+"<b>notes:</b> <a href='"+e.row['project title'].value+"' target='_blank'>"+e.row['notes'].value+"</a><br>"+
+"<b>results:</b> "+e.row['results'].value+"<br>"+
+"<b>product line:</b> "+e.row['product line'].value+"<br>"+
+"<b>notes/documentation:</b> <a href='"+e.row['notes/documentation'].value+"' target='_blank'>"+e.row['notes/documentation'].value+"</a><br>"+
+"</div>");
+
+    infowindow.setPosition(e.latLng);
+    map.setCenter(e.latLng);
+    infowindow.open(map);        
+});
 	
 }
 
@@ -167,23 +221,36 @@ $(document).ready(function () {
 		dotsLayer.setMap(($(this).is(":checked") ? map : null));
 	});
 	
+	$("#flow_layer").click(function() {
+		flowLayer.setMap(($(this).is(":checked") ? map : null));
+	});
+	
 }); //MT: end $(document).ready()
 </script>
 <div class="row-fluid">
 	<div class="span4">
-		<h2 id="el_mapa">Busca en el mapa</h2>
-		<label><input type="checkbox" id="dots_layer" checked="checked"> Proyectos del Banco Mundial</label>
-		<label><input type="checkbox" id="area_layer" checked="checked"> Municipios del país</label>
-		<h5>Índices</h5>
+		<h3 id="el_mapa">Search the map</h3>
+		<label><input type="checkbox" id="dots_layer" checked="checked">
+		<!--<img src="http://www.gsshealth.com/communities/2/004/008/922/932/images/4544352476_35x35.png" width=24>-->
+		World Bank Projects</label>
+		<label><input type="checkbox" id="flow_layer" checked="checked">
+		Data WaterForPeople.org</label>
+		<br>
+		<label><input type="checkbox" id="area_layer" checked="checked">Water and sanitation indicators "Municipios:</label>
+		<small>Source: <a href="http://www.mmaya.gob.bo/" target="_blank">http://www.mmaya.gob.bo/</a></fuente>
+
 		
+		<h5>Water and sanitation indicators</h5>
 		<label for="map_departamentos">Departamentos:</label>
 		<select name="map_departamentos" id="departamentos"></select>
 		<div id="municipios_params">
-			<label for="map_municipios_params">Índices:</label>
+			<label for="map_municipios_params">Indicators:</label>
 			<select name="map_municipios_params">
-				<option value="poblacion" selected="selected">Población</option>
+				<option value="poblacion" selected="selected">Population</option>
 				<option value="cob_ap">Cobertura agua potable</option>
 				<option value="cob_san">Cobertura saneamiento</option>
+				<option value="calc_iaris">Calculo IARIS</option>
+				<option value="categ_iaris">categoria IARIS</option>
 			</select>
 		</div>
 		
@@ -198,10 +265,10 @@ $(document).ready(function () {
 			<select name="map_municipios"></select>
 		</div>
 		-->
-		
 		<div class="alert alert-info">
 			<a class="close" data-dismiss="alert" href="#">&times;</a>
-		Actualmente el mapa solo se despliega para Bolivia. Esto para demostrar el concepto y disponibilidad de los datos. <strong>Pronto se tendrán nuevos paises.</strong>
+			For the moment  the map only shows data for Bolivia. 
+			<strong>Soon new countries will be available.</strong>
 		</div>
 	</div>
 	<div class="span8 pull-right" style="height: 100%">
@@ -294,6 +361,60 @@ $(document).ready(function () {
 				'min': 80,
 				'max': 100,
 				'color': '#00CC00'
+			}
+		],
+		'calc_iaris': [
+			{
+				'min': 0.1,
+				'max': 0.3,
+				'color': '#CCEAFF'
+			},
+			{
+				'min': 0.3,
+				'max': 0.5,
+				'color': '#99D6FF'
+			},
+			{
+				'min': 0.5,
+				'max': 0.7,
+				'color': '#66C1FF'
+			},
+			{
+				'min': 0.7,
+				'max': 0.9,
+				'color': '#33ADFF'
+			},
+			{
+				'min': 0.9,
+				'max': 1,
+				'color': '#0099FF'
+			}
+		],
+		'categ_iaris': [
+			{
+				'min': 0,
+				'max': 1,
+				'color': '#CCEAFF'
+			},
+			{
+				'min': 1,
+				'max': 2,
+				'color': '#99D6FF'
+			},
+			{
+				'min': 2,
+				'max': 3,
+				'color': '#66C1FF'
+			},
+			{
+				'min': 3,
+				'max': 4,
+				'color': '#33ADFF'
+			},
+			{
+				'min': 4,
+				'max': 5,
+				'color': '#0099FF'
 			}
 		],
 	}

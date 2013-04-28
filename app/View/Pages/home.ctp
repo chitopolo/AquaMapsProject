@@ -12,13 +12,12 @@
 			$.getJSON("http://api.worldbank.org/countries/all/indicators/"+index+"?date="+year+"&format=jsonp&per_page=250&prefix=?&callback=?", 
 			  
 			  function(jsondata){
-
 	  
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', 'Country');
 				data.addColumn('number', 'value');
 	  
-				
+
 				$.each(jsondata[1], function(i,item){
 				  //if(jQuery.inArray(item.country.id,aggregates) == -1){
 					data.addRow([item.country.value,Number(item.value)]);
@@ -46,7 +45,6 @@
 					var data = new google.visualization.DataTable();
 					data.addColumn('string', 'Year');
 					data.addColumn('number', countryname);
-					
 					$.each(jsondata[1], function(i,item){
 						data.addRow([item.date,Number(item.value)]);
 						//console.log(item.date,item.value);
@@ -134,7 +132,7 @@
 	  
 	  $(document).ready(function() {
 		
-		$("#main_nav a").click(function(event) {
+		$(".hash").click(function(event) {
 			editAnchor(event, this);
 		});	
 		
@@ -180,20 +178,20 @@
 	<div class="container-fluid" >
 	<div class="row-fluid">
 	  <div class="span12" style="min-height:5	0px; padding-top:20px;">
-		<p class="lead span4 offset3" style="color:#fff; font-size:200%" id="pais">El agua en tu pa&iacute;s: </p>
+		<p class="lead span4 offset3" style="color:#fff; font-size:200%" id="pais">Water in your country </p>
 		<select id="country" name="country">
 			<option value="BO">Bolivia </option>
-			<option value="BI">Burundi </option>
 		</select>
 	  </div>
 	</div>
 	
 	<div class="row-fluid">
 		<div class="span6" style="text-align: center;">
-			<h3 style="color:#fff; ">Cobertura agua <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
+			<h3 style="color:#fff; "> Improved water source <small> (% of population with access)</small></h3>
 		</div>
 		<div class="span6" style="text-align: center;">
-			<h3 style="color:#fff; font-size:200%">Cobertura saneamiento <small style="color:#fff;">(% de la poblaci&oacute;n)</small></h3>
+			<h3 style="color:#fff; font-size:200%">Improved sanitation facilities <small> (% of population with access)</small></h3>
+
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -208,7 +206,7 @@
 	
 	<div class="row-fluid">
 	  <div class="span12">
-		<small>Fuente: Banco Mundial</small>
+		<small>Source: World Bank</small>
 	  </div>
 	</div>
 	</div>
@@ -226,35 +224,34 @@
 
 
 <div style="background-color:  #2298C6; text-color:#ffffff" >
-	<div class="container" >
-		<div class="row">
+	<div class="container-fluid" >
+		<div class="row-fluid">
 		
 		
 			<div class="span12" style="min-height:500px; margin-top:100px;">
-			<h2 id="ayudar" style="color:white;">Cómo puedes ayudar?</h2>
+			<h2 id="ayudar" style="color:white;">How can you help?</h2>
 		<ul class="thumbnails">
   <li class="span3">
     <div class="img-rounded">
     <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
-      <h3  style="color:white;">Recopila informacion</h3>
-      <p  style="color:white;"> Si eres parte de una organizaci&oacute;n que trabaja en saneamiento o una persona que quiere contribur
-			  recopilando informacion.</p>
+      <h3  style="color:white;">Collect informacion</h3>
+      <p  style="color:white;"> If you are part of an organization that works with santitation and water projects. And even if your a indvidual that is traveling. You can help us by collect data with your mobile app.</p>
     </div>
   </li>
 <li class="span3">
     <div class="img-rounded">
       <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
 
-      <h3  style="color:white;">Comparte</h3>
-      <p  style="color:white;">Puedes ayudar subiendo datos de tomas de agua, puntos sanitarios y precios del agua.</p>
+      <h3  style="color:white;">Share</h3>
+      <p  style="color:white;">You can share this informatin with world</p>
     </div>
   </li>
 <li class="span3">
     <div class="img-rounded">
      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
 
-      <h3  style="color:white;">Registrate</h3>
-      <p  style="color:white;"> Puedes hacerlo a traves de esta pagina web. Solo debes registrarte aqui.
+      <h3  style="color:white;">Register</h3>
+      <p  style="color:white;"> You can register here. (son it will be open).
 </p>
     </div>
   </li>
@@ -263,12 +260,20 @@
     <div class="img-rounded">
      <?php   echo $this->Html->image('person.png', array('class' => 'media-object', 'width' => 300));  ?>
 
-      <h3  style="color:white;">Bajate nuestra App</h3>
-      <p  style="color:white;">  O puedes bajarte nuestra aplicacion movil aqui.
+      <h3  style="color:white;">Download our app </h3>
+      <p  style="color:white;">  <?php echo $this->Html->link(__('Mobile application'), '/Pages/mobile', array('style'=>'color:white;') ); ?>
+
+	  <!--
+	  <a href="http://aquamaps.cochavalley.com/files/presentacion_%20AquaMaps.pptx" target="_blank" style="color: white;">
+	  
+	  <strong> Ve mas aqui</strong>
+
+	  </a>
+	  	  	  -->
+
 </p>
     </div>
   </li>
-
 </ul>
 			</div>
 		</div>
@@ -284,14 +289,14 @@
   <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h2 id="mundo">Datos globales:</h2>
+			<h3 id="mundo">Global Data:</h3>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span4">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="nav-header">
-				  Saneamiento
+				  Sanitation
 				</li>
 				<li class="active"><a href="" name="SH.H2O.SAFE.RU.ZS" data-toggle="pill">Fuente de agua mejorada, RURAL</a></li>
 				<li><a href="" name="SH.H2O.SAFE.UR.ZS" data-toggle="pill">Fuente de agua mejorada, URBANA</a></li>
@@ -310,7 +315,7 @@
 	</div>
 	<div class="row-fluid">
 	  <div class="span12">
-		<small>Fuente: Banco Mundial</small>
+		<small>Source: World Bank. 2010</small>
 	  </div>
 	</div>
   </div>

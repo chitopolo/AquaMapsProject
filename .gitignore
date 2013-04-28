@@ -5,7 +5,5 @@
 /app/tmp
 /app/webroot/img/items
 /app/webroot/img/tmp
-/app/webroot/img/galery
-/app/webroot/history
 /.komodotools
 *.komodoproject

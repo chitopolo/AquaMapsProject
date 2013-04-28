@@ -32,4 +32,8 @@ class MapsController extends AppController {
 			'_serialize' => array('response')
 		));
 	}
+	
+	public function example() {
+		
+	}
 }
