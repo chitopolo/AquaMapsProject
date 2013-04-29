@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /**
  * Routes configuration
@@ -40,12 +39,14 @@
 	//Router::connect('/api/:controller/:action/*', array('prefix' => 'api', 'api' => true));
 	
 	Router::mapResources('points');
+	Router::mapResources('pointTypes');
 	Router::parseExtensions('json');
+	
 	Router::connect('/api/:controller/:id', array('prefix' => 'api', 'action' => 'view', '[method]' => 'GET'), array('id' => '[0-9]+', 'pass' => array('id')));
+	
 	Router::connect('/api/:controller', array('prefix' => 'api', 'action' => 'index', '[method]' => 'GET'));
-	//Router::connect('/api/:controller/:id', array('action' => 'edit', '[method]' => 'PUT'), array('id' => '[0-9]+'));
 	
-	
+	Router::connect('/api/:controller', array('prefix' => 'api', 'action' => 'add', '[method]' => 'POST'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 

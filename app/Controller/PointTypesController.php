@@ -110,4 +110,64 @@ class PointTypesController extends AppController {
 		$this->Session->setFlash(__('Point type was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+	
+/**
+* Agrega un punto de agua.
+*  
+* @author Mauro Trigo
+*
+* @access public 
+*
+* @param int $itemCode. Recibido como parametro de ingreso
+*
+* @return int 'itemCode'. Enviado a la vista mediante ->set
+* @return bool ownerUser
+* @return Array 'itemImages'
+*
+**/
+	public function api_index() {
+		$response = array('status' => 0, 'message' => '');
+
+		$conditions = array();
+		if (!empty($this->request->query['point_type'])) {
+			$conditions[] = 'point_type_id = ' . $this->request->query['point_type'];
+		}
+
+		$pointTypes = $this->PointType->getThem();
+
+		if ($pointTypes) {
+			$response['status'] = 1;
+			$response['points'] = $pointTypes;
+			$response['message'] = __('Puntos de agua encontrados!');
+		} else {
+			$response['message'] = __('No se encontraron puntos de agua.');
+		}
+
+		$this->makeItJson($response);
+	}
+
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function api_view($id = null) {
+		$response = array('status' => 0, 'message' => '');
+
+		$this->PointType->id = $id;
+		if (!$this->PointType->exists()) {
+			throw new NotFoundException(__('Tipo de punto inexistente.'));
+		}
+
+		if (($response['pointTypes'] = $this->PointType->getOne($id)) != false) {			
+			$response['status'] = 1;
+			$response['message'] = __('Tipo de punto encontrado.');
+		} else {
+			$response['message'] = __('Tipo de punto no encontrado.');
+		}
+
+		$this->makeItJson($response);
+	}
 }

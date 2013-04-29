@@ -7,7 +7,6 @@
 			echo $this->Html->meta('icon');
 	
 			echo $this->Html->css(array('bootstrap.min', 'aq'));
-			echo $this->Html->script(array('https://www.google.com/jsapi', 'jquery.min', 'jquery-ui.min', 'bootstrap.min', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0&sensor=true', 'map'));
 		?>
 	</head>
 	<body>
@@ -16,27 +15,63 @@
 			<a id="header_logo" href="<?php echo $this->Html->url('/'); ?>"><?php echo $this->Html->image('logo_aquamaps.png', array('width' => 276, 'height' => 53, 'alt' => __('Aquamaps'))); ?></a>
 
 			<ul id="main_menu">
-				<li class="active"><?php echo $this->Html->link(__('Inicio'), '/'); ?></li>
-				<li><?php echo $this->Html->link(__('Mapa'), '/reports'); ?></li>
-				<li><?php echo $this->Html->link(__('Agua en tu país'), '/tribes'); ?></li>
-				<li><?php echo $this->Html->link(__('App móvil'), '/tribes'); ?></li>
-				<li><?php echo $this->Html->link(__('Mi Cuenta'), '#loginModal', array('role' => 'button', 'data-toggle' => 'modal')); ?></li>
+				<li<?php echo $this->params['controller'] == 'pages' && $this->params['pass'][0] == 'home' ? ' class="active"' : ''; ?>><?php echo $this->Html->link(__('Inicio'), '/'); ?></li>
+				<li<?php echo $this->params['controller'] == 'challenges' ? ' class="active"' : ''; ?>><?php echo $this->Html->link(__('Retos'), '/challenges'); ?></li>
+				<li<?php echo $this->params['controller'] == 'pages' && $this->params['pass'][0] == 'explore' ? ' class="active"' : ''; ?>><?php echo $this->Html->link(__('Explora datos'), '/pages/explore'); ?></li>
+				<li<?php echo $this->params['controller'] == 'pages' && $this->params['pass'][0] == 'mobile' ? ' class="active"' : ''; ?>><?php echo $this->Html->link(__('Bajar la App'), '/pages/mobile'); ?></li>
+				<li<?php echo $this->params['controller'] == 'users' ? ' class="active"' : ''; ?>><i class="icon-user icon-white"></i> <?php echo $this->Html->link(__('Mi Cuenta'), '/users/hello'); ?></li>
 			</ul>
 		</header>
 	</div>
-	<div class="band band-header">
-		<div class="container">
+	<div class="band band-content">
+		<div id="content" class="container">
 			<?php //echo $this->element('top_nav'); ?>
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->fetch('content'); ?>
-			<div id="footer">
+		</div>
+	</div>
+	<div class="band band-lblue">
+		<div id="footer" class="container">
+			<div class="row">
+				<div class="span4">
+					<h4><?php echo __('Cómo puedes ayudar?'); ?></h4>
+					<ul>
+						<li><?php echo $this->Html->link(__('Participa en un reto'), '/challenges'); ?></li>
+							<li><?php echo $this->Html->link(__('Inicia un reto'), '/challenges'); ?></li>
+						<li><?php echo $this->Html->link(__('Sube puntos de agua'), '/challenges'); ?></li>
+					</ul>
+				</div>
+				<div class="span4">
+					<h4><?php echo __('Recursos'); ?></h4>
+					<ul>
+						<li><?php echo $this->Html->link(__('Bajar la App'), '/pages/mobile'); ?></li>
+							<li><?php echo $this->Html->link(__('Fuentes de datos'), '/pages/data_sources'); ?></li>
+						<li><?php echo $this->Html->link(__('Nuesta API'), '/pages/api'); ?></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="band band-blue">
-		<div id="footer" class="container">
+		<div id="bottom" class="container">
+			<a id="bottom_logo" href="<?php echo $this->Html->url('/'); ?>"><?php echo $this->Html->image('logo_aquamaps.png', array('width' => 147, 'height' => 28, 'alt' => __('Aquamaps'))); ?></a>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>		
+
+	<?php echo $this->Html->script(array('https://www.google.com/jsapi', 'jquery.min', 'jquery-ui.min', 'bootstrap.min', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0&sensor=true', 'map')); ?>
+
+	<script>
+	$(document).ready(function() {
+		$("#flashMessage")
+			.addClass("alert")
+			.addClass("alert-info")
+			.append('<button type="button" class="close" data-dismiss="alert">&times;</button>')
+		;
+	});
+	</script>
+	<?php echo $this->Js->writeBuffer(); ?>
+
+	<?php echo $this->element('sql_dump'); ?>
+
 	</body>
 </html>

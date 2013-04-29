@@ -166,7 +166,7 @@ class PointsController extends AppController {
 
 		if (($response['point'] = $this->Point->read(null, $id)) != false) {			
 			$response['status'] = 1;
-			$response['message'] = __('Punto no encontrado.');
+			$response['message'] = __('Punto encontrado.');
 		} else {
 			$response['message'] = __('Punto no encontrado.');
 		}
@@ -190,48 +190,33 @@ class PointsController extends AppController {
 **/
 	public function api_add() {
 		$response = array('status' => 0, 'message' => '');
-		if ($this->request->is('post')) {
-			if (!empty($this->request->data)) {
-				$this->Report->set($this->request->data);
-				
-				$this->Report->create();
-				if ($this->Report->save($this->request->data)) {
-					$response['status'] = 1;
-					$response['message'] = __('Reporte guardado.');
-					$response['report'] = $this->request->data;
-					$response['report']['id'] = $this->Report->getInsertID();
-					if (!empty($this->request->data['image'])) {
-						$image = base64_decode($this->request->data['image']);
-						if (file_put_contents(WWW_ROOT . 'img' . DS . 'points' . DS . $response['report']['id'] . '.jpg', $image)) {
-							$response['report']['image'] = 1;
-							$this->Report->id = $response['report']['id'];
-							$this->Report->saveField('image', 1);
-						} else {
-							$response['message'] = __('Reporte guardado. Problemas con el guardado de la imagen.');
-							$response['report']['image'] = 0;
-						}
+		if ($this->request->is('post') && !empty($this->request->data)) {
+			$this->Report->set($this->request->data);
+			
+			$this->Report->create();
+			if ($this->Report->save($this->request->data)) {
+				$response['status'] = 1;
+				$response['message'] = __('Punto guardado.');
+				$response['point'] = $this->request->data;
+				$response['point']['id'] = $this->Report->getInsertID();
+				if (!empty($this->request->data['image'])) {
+					//$image = base64_decode($this->request->data['image']);
+					if (file_put_contents(WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg', $image)) {
+						$response['point']['image'] = 1;
+						$this->Report->id = $response['point']['id'];
+						$this->Report->saveField('image', 1);
+					} else {
+						$response['message'] = __('Punto guardado. Problemas con el guardado de la imagen.');
+						$response['point']['image'] = 0;
 					}
-				} else {
-					$response['errors'] = $this->Report->validationErrors;
-					//$this->Session->setFlash(__('Ocurrió un problema al guardar los datos.'));
 				}
 			} else {
-				$response['message'] = __('No hay datos enviados.');
+				$response['errors'] = $this->Report->validationErrors;
 			}
 		} else {
 			$response['message'] = __('No hay datos enviados.');
 		}
 		
 		$this->makeItJson($response);
-	}
-
-	private function makeItJson($response) {
-		$this->set(array(
-			'response' => $response,
-			'_serialize' => array('response')
-		));
-		$this->layout = null;
-		$this->render('../elements/json');
-		$this->response->type('application/json');
 	}
 }
