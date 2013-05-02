@@ -45,8 +45,10 @@ class User extends AppModel {
 	*/
 	public function beforeSave($options = array()) {
 		//MT: antes de guardar un password, este se codifica con el método configurado en el componente Auth (por defecto MD5)
-		if (!empty($this->data['User']['password'])) {
-			$this->data[$this->name]['password'] = AuthComponent::password($this->data[$this->name]['password']);
+		if (!empty($this->data[$this->name]['password'])) {
+			$this->data[$this->name]['password'] = AuthComponent::password($this->data[$this->name]['password']);			
+		} elseif (!empty($this->data[$this->name]['password_new'])) {
+			$this->data[$this->name]['password'] = AuthComponent::password($this->data[$this->name]['password_new']);
 		}
         return true;
     }
@@ -69,21 +71,10 @@ class User extends AppModel {
 
 	public function currentPassword($check) {
 		$this->recursive = -1;
-		$user = $this->read(array('password'));
+		$user = $this->find('first', array('conditions' => $this->name . '.id = ' . $this->id, 'fields' => array('password')));
+
 		foreach($check as $key => $value) {
 			if (AuthComponent::password($value) == $user[$this->name]['password']) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public function validateas($field, $compareField) {
-		$user = $this->read(array('pasword'));
-		foreach($field as $key => $value ) {
-			if ($value == AuthComponent::password($this->data[$this->name][$compareField])) {
 				return true;
 			} else {
 				return false;

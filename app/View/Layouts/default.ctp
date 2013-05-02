@@ -25,7 +25,7 @@
 	</div>
 	<div class="band band-content">
 		<div id="content" class="container">
-			<?php //echo $this->element('top_nav'); ?>
+			<?php echo $this->Session->flash('auth'); ?>
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
@@ -61,12 +61,20 @@
 	<?php echo $this->Html->script(array('https://www.google.com/jsapi', 'jquery.min', 'jquery-ui.min', 'bootstrap.min', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1EjUV_8Lmq6YkAQ04jwRttfGft94bXX0&sensor=true', 'map')); ?>
 
 	<script>
-	$(document).ready(function() {
-		$("#flashMessage")
-			.addClass("alert")
-			.addClass("alert-info")
-			.append('<button type="button" class="close" data-dismiss="alert">&times;</button>')
-		;
+	$(document).ready(function() {		
+		convertFlashMessage($("#flashMessage"));		
+		convertFlashMessage($("#authMessage"), "alert-error");
+
+		function convertFlashMessage(messageBox, alertClass) {
+			if (typeof alertClass == "undefined") {
+				alertClass = "alert-info";
+			}
+			messageBox
+				.addClass("alert")
+				.addClass(alertClass)
+				.append('<button type="button" class="close" data-dismiss="alert">&times;</button>')
+			;
+		}
 	});
 	</script>
 	<?php echo $this->Js->writeBuffer(); ?>

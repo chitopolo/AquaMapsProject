@@ -2,4 +2,5 @@
 
 <ul class="lead">
 	<li><?php echo $this->Html->link(__('Edita tu cuenta'), '/users/edit'); ?></li>
+	<li><?php echo $this->Html->link(__('Cerrar sesión'), '/users/logout'); ?></li>
 </ul>

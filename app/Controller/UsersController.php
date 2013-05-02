@@ -41,51 +41,12 @@ class UsersController extends AppController {
 	*/
 	public function edit() {
 		$this->User->id = $this->current['User']['id'];
-		$user = $this->User->read(null, $this->current['User']['id']);
 	
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-	
-		//$this->User->validate['password_current'] = array(
-		//	'length' => array(
-		//		'rule' => array('between', 4, 15),
-		//		'message' => 'Las contraseñas deben tener entre 4 y 15 caracteres.',
-		//		'allowEmpty' => true
-		//	),
-		//	'currentPassword' => array(
-		//		'rule' => array('currentPassword'),
-		//		'message' => 'Por favor, ingresa tu contraseña actual.'
-		//	)
-		//);
-		//$this->User->validate['password_new'] = array(
-		//	'length' => array(
-		//		'rule' => array('between', 4, 15),
-		//		'message' => 'Las contraseñas deben tener entre 4 y 15 caracteres.',
-		//		'allowEmpty' => true
-		//	),
-		//	'copyPassword' => array(
-		//		'rule' => array('copyPassword'),
-		//		'message' => 'Por favor, ingresa tu contraseña actual.'
-		//	)
-		//);
 
 		if ($this->request->is('post') || $this->request->is('put')) {
-			//if (!empty($this->request->data['User']['password_current'])) {	
-			//	echo 'yehs';
-			//	if ($this->Auth->password($this->request->data['User']['password_current']) == $user['User']['password']) {
-			//		if (!empty($this->request->data['User']['password_new'])) {
-			//			//$this->request->data['User']['password'] = $this->request->data['User']['password_current'];
-			//		} else {
-			//			echo 'nah';
-			//			$this->User->invalidate('password_new');
-			//		}
-			//	} else {
-			//		echo 'nah';
-			//		$this->User->invalidate('password_current', 'uno');
-			//	}
-			//}
-
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('Cambios guardados'));
 				$this->redirect(array('action' => 'hello'));
@@ -93,7 +54,42 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Los cambios no pudieron ser guardados, por favor corrige los errores.'));
 			}
 		} else {
-			$this->request->data = $user;
+			$this->request->data = $this->User->read(null, $this->User->id);
+		}
+	}
+
+	public function editPassword() {
+		$this->User->id = $this->current['User']['id'];
+
+		if (!$this->User->exists()) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+
+		$this->User->validate['password_current'] = array(
+			'currentPassword' => array(
+				'rule' => array('currentPassword'),
+				'message' => 'Por favor, ingresa tu contraseña actual.',
+				'allowEmpty' => false
+			)
+		);
+
+		$this->User->validate['password_new'] = array(
+			'length' => array(
+				'rule' => array('between', 4, 15),
+				'message' => 'Las contraseñas deben tener entre 4 y 15 caracteres.',
+				'allowEmpty' => false
+			)
+		);
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('Contraseña guardada.'));
+				$this->redirect(array('action' => 'hello'));
+			} else {
+				$this->Session->setFlash(__('Los cambios no pudieron ser guardados, por favor corrige los errores.'));
+			}
+		} else {
+			$this->request->data = $this->User->read(null, $this->current['User']['id']);
 		}
 	}
 
