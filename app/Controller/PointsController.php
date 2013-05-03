@@ -199,10 +199,14 @@ class PointsController extends AppController {
 				$response['message'] = __('Punto guardado.');
 				$response['point'] = $this->request->data;
 				$response['point']['id'] = $this->Report->getInsertID();
-				if (!empty($this->request->data['image'])) {
-					//$image = base64_decode($this->request->data['image']);
-					if (file_put_contents(WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg', $image)) {
-						$response['point']['image'] = 1;
+
+				if (!empty($_FILES['image_field'])) {
+					$this->request->data['image_field'] = $_FILES['image_field'];
+				}
+
+				if (!empty($this->request->data['image_field'])) {
+					if (move_uploaded_file($this->request->data['image_field']['tmp_name'], WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg')) {
+						$response['point']['image'] = Router::url('/img/points/' . $response['point']['id'] . '.jpg');
 						$this->Report->id = $response['point']['id'];
 						$this->Report->saveField('image', 1);
 					} else {
