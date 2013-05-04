@@ -15,7 +15,6 @@ class ChallengesController extends AppController {
 	public function index() {
 		$this->Challenge->recursive = 0;
 		$this->set('challenges', $this->paginate());
-		pr ($this->Challenge->getThem());
 	}
 
 /**
@@ -28,9 +27,9 @@ class ChallengesController extends AppController {
 	public function view($id = null) {
 		$this->Challenge->id = $id;
 		if (!$this->Challenge->exists()) {
-			throw new NotFoundException(__('Invalid point type'));
+			throw new NotFoundException(__('Invalid challenge'));
 		}
-		$this->set('pointType', $this->Challenge->read(null, $id));
+		$this->set('challenge', $this->Challenge->read(null, $id));
 	}
 
 /**
@@ -42,13 +41,17 @@ class ChallengesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Challenge->create();
 			if ($this->Challenge->save($this->request->data)) {
-				$this->Session->setFlash(__('The point type has been saved'));
+				$this->Session->setFlash(__('The challenge has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The point type could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The challenge could not be saved. Please, try again.'));
 			}
 		}
-		$this->set('parents', $this->Challenge->Parent->find('list', array('recursive' => -1)));
+		$cities = $this->Challenge->City->find('list');
+		$countries = $this->Challenge->Country->find('list');
+		$regions = $this->Challenge->Region->find('list');
+		$users = $this->Challenge->User->find('list');
+		$this->set(compact('cities', 'countries', 'regions', 'users'));
 	}
 
 /**
@@ -61,19 +64,23 @@ class ChallengesController extends AppController {
 	public function edit($id = null) {
 		$this->Challenge->id = $id;
 		if (!$this->Challenge->exists()) {
-			throw new NotFoundException(__('Invalid point type'));
+			throw new NotFoundException(__('Invalid challenge'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Challenge->save($this->request->data)) {
-				$this->Session->setFlash(__('The point type has been saved'));
+				$this->Session->setFlash(__('The challenge has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The point type could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The challenge could not be saved. Please, try again.'));
 			}
 		} else {
 			$this->request->data = $this->Challenge->read(null, $id);
 		}
-		$this->set('parents', $this->Challenge->Parent->find('list', array('recursive' => -1)));
+		$cities = $this->Challenge->City->find('list');
+		$countries = $this->Challenge->Country->find('list');
+		$regions = $this->Challenge->Region->find('list');
+		$users = $this->Challenge->User->find('list');
+		$this->set(compact('cities', 'countries', 'regions', 'users'));
 	}
 
 /**
@@ -90,13 +97,13 @@ class ChallengesController extends AppController {
 		}
 		$this->Challenge->id = $id;
 		if (!$this->Challenge->exists()) {
-			throw new NotFoundException(__('Invalid point type'));
+			throw new NotFoundException(__('Invalid challenge'));
 		}
 		if ($this->Challenge->delete()) {
-			$this->Session->setFlash(__('Point type deleted'));
+			$this->Session->setFlash(__('Challenge deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Point type was not deleted'));
+		$this->Session->setFlash(__('Challenge was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

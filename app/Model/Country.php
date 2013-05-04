@@ -1,15 +1,13 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Challenge Model
+ * Country Model
  *
- * @property City $City
- * @property Country $Country
  * @property Region $Region
- * @property User $User
- * @property Survey $Survey
+ * @property Challenge $Challenge
+ * @property City $City
  */
-class Challenge extends AppModel {
+class Country extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -20,30 +18,9 @@ class Challenge extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'City' => array(
-			'className' => 'City',
-			'foreignKey' => 'city_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Country' => array(
-			'className' => 'Country',
-			'foreignKey' => 'country_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Region' => array(
 			'className' => 'Region',
 			'foreignKey' => 'region_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -56,9 +33,22 @@ class Challenge extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Survey' => array(
-			'className' => 'Survey',
-			'foreignKey' => 'challenge_id',
+		'Challenge' => array(
+			'className' => 'Challenge',
+			'foreignKey' => 'country_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'City' => array(
+			'className' => 'City',
+			'foreignKey' => 'country_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

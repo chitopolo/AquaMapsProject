@@ -8,6 +8,7 @@
 	
 			echo $this->Html->css(array('bootstrap.min', 'aq'));
 		?>
+
 	</head>
 	<body>
 	<div class="band band-blue">
@@ -78,8 +79,6 @@
 	});
 	</script>
 	<?php echo $this->Js->writeBuffer(); ?>
-
 	<?php echo $this->element('sql_dump'); ?>
-
 	</body>
 </html>

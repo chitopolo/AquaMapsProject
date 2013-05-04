@@ -7,3 +7,5 @@
 /app/webroot/img/tmp
 /.komodotools
 *.komodoproject
+.DS_Store
+/lib/Cake/Console/cake
