@@ -1,7 +1,7 @@
 <div class="challenges form">
 <?php echo $this->Form->create('Challenge'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Challenge'); ?></legend>
+		<legend><?php echo __('Reto'); ?></legend>
 	<?php
 		echo $this->Form->input('city_id');
 		echo $this->Form->input('country_id');
@@ -12,13 +12,18 @@
 		echo $this->Form->input('description');
 		echo $this->Form->input('image');
 	?>
+	<legend><?php echo __('Datos'); ?></legend>
+	<?php
+		echo $this->Form->input('Survey.0.name', array('label' => 'Nombre cuestionario:'));
+		echo $this->Form->input('Survey.0.Question.0.name', array('label' => 'Pregunta:'));
+		echo $this->Form->input('Survey.0.Question.0.unit_id', array('label' => 'Unidad:'));
+	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-
 		<li><?php echo $this->Html->link(__('List Challenges'), array('action' => 'index')); ?></li>
 		<li><?php echo $this->Html->link(__('List Cities'), array('controller' => 'cities', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New City'), array('controller' => 'cities', 'action' => 'add')); ?> </li>

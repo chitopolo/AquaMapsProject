@@ -1,13 +1,14 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * DataSource Model
+ * DataSet Model
  *
- * @property DataSource $ParentDataSource
+ * @property DataSet $ParentDataSet
  * @property Challenge $Challenge
- * @property DataSource $ChildDataSource
+ * @property DataSetType $DataSetType
+ * @property DataSet $ChildDataSet
  */
-class DataSource extends AppModel {
+class DataSet extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -18,8 +19,8 @@ class DataSource extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'ParentDataSource' => array(
-			'className' => 'DataSource',
+		'ParentDataSet' => array(
+			'className' => 'DataSet',
 			'foreignKey' => 'parent_id',
 			'conditions' => '',
 			'fields' => '',
@@ -31,10 +32,10 @@ class DataSource extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-		'DataSourceType' => array(
-			'className' => 'DataSourceType',
-			'foreignKey' => 'data_source_type_id',
+		),
+		'DataSetType' => array(
+			'className' => 'DataSetType',
+			'foreignKey' => 'data_set_type_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -47,8 +48,8 @@ class DataSource extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'ChildDataSource' => array(
-			'className' => 'DataSource',
+		'ChildDataSet' => array(
+			'className' => 'DataSet',
 			'foreignKey' => 'parent_id',
 			'dependent' => false,
 			'conditions' => '',

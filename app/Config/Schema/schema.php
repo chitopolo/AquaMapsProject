@@ -1,4 +1,6 @@
 <?php 
+App::uses('Region', 'Model');
+
 class AppSchema extends CakeSchema {
 
 	public function before($event = array()) {
@@ -6,6 +8,32 @@ class AppSchema extends CakeSchema {
 	}
 
 	public function after($event = array()) {
+
+	    if (isset($event['create'])) {
+	        switch ($event['create']) {
+	            case 'regions':
+	                App::uses('ClassRegistry', 'Utility');
+	                $region = ClassRegistry::init('Region');
+	                $region->create();
+	                $region->save(
+	                    array('Region' =>
+	                        array('name' => 'Latin America')
+	                    )
+	                );
+	                break;
+	            case 'countries':
+	                App::uses('ClassRegistry', 'Utility');
+	                $region = ClassRegistry::init('Country');
+	                $region->create();
+	                $region->save(
+	                    array('Region' =>
+	                        array('name' => 'Latin America'
+	                        	  '')
+	                    )
+	                );
+	                break;
+			}
+    	}
 	}
 
 	public $challenges = array(
@@ -42,8 +70,19 @@ class AppSchema extends CakeSchema {
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
-	public $data_source_types = array(
+	public $data_set_types = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
+		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'indexes' => array(
+			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+		),
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
+	);
+	public $data_sets = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
+		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+		'challenge_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+		'data_set_type_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
 		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
@@ -106,6 +145,7 @@ class AppSchema extends CakeSchema {
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
 		'survey_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
 		'unit_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+		'question_type_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
 		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)

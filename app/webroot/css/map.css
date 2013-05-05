@@ -17,7 +17,6 @@ ul.noStyle { margin-left: 0; padding-left: 0; list-style: none; }
 #phonescreens {
     background: transparent url(../img/phone_frame.png) no-repeat;
     height: 700px;
-    margin-top: -280px;
 }
 #phonescreens #slider {
         margin: 56px 50px;

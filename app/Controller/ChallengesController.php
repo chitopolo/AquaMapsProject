@@ -16,6 +16,11 @@ class ChallengesController extends AppController {
 		$this->Challenge->recursive = 0;
 		$this->set('challenges', $this->paginate());
 	}
+	
+	public function admin() {
+		$this->Challenge->recursive = 0;
+		$this->set('challenges', $this->paginate());
+	}
 
 /**
  * view method
@@ -39,8 +44,10 @@ class ChallengesController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+			unset($this->Challenge->Survey->validate['challenge_id']);
+			var_dump($this->request->data);
 			$this->Challenge->create();
-			if ($this->Challenge->save($this->request->data)) {
+			if ($this->Challenge->saveAssociated($this->request->data, array('deep'=>true))) {
 				$this->Session->setFlash(__('The challenge has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {

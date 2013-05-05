@@ -12,6 +12,7 @@
 		?>
 	</head>
 	<body>
+		ssss
 		<div class="container-fluid navbar-wrapper">
 			<?php echo $this->element('top_nav'); ?>
 			<?php echo $this->Session->flash(); ?>

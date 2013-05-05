@@ -78,7 +78,5 @@ class PagesController extends AppController {
 	}
 	
 	
-	public function mobile(){
-		$this->layout = 'default_mobile';
-	}
+
 }

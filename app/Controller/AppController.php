@@ -43,7 +43,7 @@ class AppController extends Controller {
 			}
 		} else {
 			$this->current['User'] = null;
-		}
+		} 
 	}	
 	/**
 	* MT:
@@ -52,7 +52,7 @@ class AppController extends Controller {
 	*/
 	public function beforeRender() {
 		//MT: hacemos que $current esté disponible en las vistas.
-		$this->set('current', $this->current);
+		//$this->set('current', $this->current);
 	}
 
 	protected function makeItJson($response) {
