@@ -8,7 +8,7 @@ class AppSchema extends CakeSchema {
 	}
 
 	public function after($event = array()) {
-
+		/*
 	    if (isset($event['create'])) {
 	        switch ($event['create']) {
 	            case 'regions':
@@ -33,7 +33,7 @@ class AppSchema extends CakeSchema {
 	                );
 	                break;
 			}
-    	}
+    	} */
 	}
 
 	public $challenges = array(
