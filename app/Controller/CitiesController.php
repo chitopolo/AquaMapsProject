@@ -8,6 +8,35 @@ App::uses('AppController', 'Controller');
 class CitiesController extends AppController {
 
 /**
+ * api index method
+ *
+ * @return void
+ */
+	public function api_index() {
+		$response = array('status' => 0, 'message' => '');
+
+		$conditions = array();
+		if (!empty($this->request->query['country_id'])) {
+			$conditions[] = 'country_id = ' . $this->request->query['country_id'];
+		}
+
+		$cities = $this->City->find('list', array(
+			'conditions' => $conditions,
+			'recursive' => -1
+		));
+
+		if ($cities) {
+			$response['status'] = 1;
+			$response['cities'] = $cities;
+			$response['message'] = __('Ciudades encontradas!');
+		} else {
+			$response['message'] = __('No se encontraron ciudades.');
+		}
+
+		$this->makeItJson($response);
+	}
+
+/**
  * index method
  *
  * @return void

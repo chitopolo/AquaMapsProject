@@ -8,6 +8,16 @@ App::uses('AppController', 'Controller');
 class ChallengesController extends AppController {
 
 /**
+ * before filter callback method
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->deny('add', 'edit');
+	}
+
+/**
  * index method
  *
  * @return void
@@ -54,9 +64,13 @@ class ChallengesController extends AppController {
 				$this->Session->setFlash(__('The challenge could not be saved. Please, try again.'));
 			}
 		}
-		$cities = $this->Challenge->City->find('list');
+		
+		if (!empty($this->data['Challenge']['country_id'])) {
+			$cities = $this->Challenge->City->find('list', array('conditions' => 'country_id = ' . $this->data['Challenge']['country_id']));
+		}
+		
 		$countries = $this->Challenge->Country->find('list');
-		$regions = $this->Challenge->Region->find('list');
+		//$regions = $this->Challenge->Region->find('list');
 		$users = $this->Challenge->User->find('list');
 		$this->set(compact('cities', 'countries', 'regions', 'users'));
 	}

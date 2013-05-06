@@ -11,10 +11,6 @@ class Point extends Model {
 	
 	var $validate = array(
 		'lat' => array(
-			'rule' => 'numeric',
-			'message' => 'Debe especificarse un costo válido.',
-		),
-		'lat' => array(
 			'rule' => 'decimal',
 			'message' => 'Debe especificarse una latitud.',
 			'allowEmpty' => false

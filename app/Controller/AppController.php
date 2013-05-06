@@ -52,16 +52,67 @@ class AppController extends Controller {
 	*/
 	public function beforeRender() {
 		//MT: hacemos que $current esté disponible en las vistas.
-		//$this->set('current', $this->current);
+		$this->set('current', $this->current);
 	}
 
 	protected function makeItJson($response) {
-		$this->set(array(
-			'response' => $response,
-			'_serialize' => array('response')
-		));
+		$this->set('response', $response);
 		$this->layout = null;
 		$this->render('../elements/json');
 		$this->response->type('application/json');
+	}
+	
+	public function mobileSimulator() {
+		if (!empty($this->params['named']['test'])) {
+			$test = $this->params['named']['test'];
+		} else {
+			$test = 'index';
+		}
+
+		if (!empty($this->params['named']['param'])) {
+			$param = $this->params['named']['param'];
+		} else {
+			$param = null;
+		}		
+		
+		if (!empty($this->data)) {
+			$values = $this->data;
+		} else {
+			$values = array(
+				'name' => 'hey vos, ' . rand(0, 3244),
+			);
+		}
+
+		$this->layout = 'test';
+		switch($test) {
+			case 'add': {
+			}
+			case 'edit': {
+				$postFields = $values;
+				break;
+			}
+		}
+
+		$requestUrl =  Router::url('/api/' . lcfirst($this->name) . ($param ? '/' . $param : '') . '.json', true);
+
+		$request = curl_init($requestUrl); // initiate curl object
+		curl_setopt($request, CURLOPT_HEADER, 0); // set to 0 to eliminate header info from response
+		curl_setopt($request, CURLOPT_RETURNTRANSFER, true); // Returns response data instead of TRUE(1)		
+		curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
+
+		if (!empty($postFields)) {
+			curl_setopt($request, CURLOPT_POST, 1);
+			curl_setopt($request, CURLOPT_POSTFIELDS, $postFields); // use HTTP POST to send form data
+		} else {
+			curl_setopt($request, CURLOPT_POST, 0);
+		}
+
+		$response = curl_exec($request); // execute curl post and store results in $post_response
+		curl_close ($request); // close curl object
+		
+		$this->set('requestUrl', $requestUrl);
+		$this->set('mobileOutput', $response);
+		pr($response);
+		$this->render('../elements/nothing');
 	}
 }

@@ -1,17 +1,62 @@
+<?php echo $this->Html->css(array('chosen')); ?>
+<?php echo $this->Html->script(array('chosen.jquery.min')); ?>
 <div class="challenges form">
 <?php echo $this->Form->create('Challenge'); ?>
 	<fieldset>
 		<legend><?php echo __('Reto'); ?></legend>
 	<?php
-		echo $this->Form->input('city_id');
-		echo $this->Form->input('country_id');
+		echo $this->Form->input('country_id', array('id' => 'countries', 'class' => 'chosen'));
+		if (!empty($cities)) {
+			$citiesStyle = '';
+		} else {
+			$citiesStyle = '';
+		}
+		
+		echo $this->Form->input('city_id', array('id' => 'cities', 'class' => 'chosen', 'style' => $citiesStyle));
+		
 		echo $this->Form->input('region_id');
-		echo $this->Form->input('user_id');
+		echo $this->Form->hidden('user_id', array('value' => $current['User']['id']));
 		echo $this->Form->input('title');
 		echo $this->Form->input('invitation');
 		echo $this->Form->input('description');
 		echo $this->Form->input('image');
 	?>
+	<script>
+		$("#countries").change(function(event) {			
+			$.ajax({
+				async: true,
+				beforeSend: function (XMLHttpRequest) {
+					//$("#cities").;
+				},
+				complete: function (XMLHttpRequest) {
+					//$(event.target).find("input").removeAttr('disabled');
+				},
+				buffer: false,
+				//data: $(event.target).closest("form").serialize(),
+				inline: true,
+				success: function (data, textStatus) {
+					if (data != "") {
+						try {
+							var isJSON = true;
+						} catch (e) {
+							var isJSON = false;
+						}
+	
+						if (isJSON && data.status == 1) {
+							$("#cities option").remove();
+							$.each(data.cities, function(index, value) {
+								$("#cities").append('<option value="' + index + '">' + value + '</option>');
+							});
+							$("#cities").trigger("liszt:updated").show();
+						}
+					}
+				},
+				url: "<?php echo $this->Html->url('/api/cities.json'); ?>?country_id=" + $(event.target).val()
+			});
+		});
+
+		$(".chosen").chosen();
+	</script>
 	<legend><?php echo __('Datos'); ?></legend>
 	<?php
 		echo $this->Form->input('Survey.0.name', array('label' => 'Nombre cuestionario:'));

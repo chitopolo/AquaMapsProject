@@ -197,8 +197,8 @@ class PointsController extends AppController {
 			if ($this->Report->save($this->request->data)) {
 				$response['status'] = 1;
 				$response['message'] = __('Punto guardado.');
-				$response['point'] = $this->request->data;
 				$response['point']['id'] = $this->Report->getInsertID();
+				$response['point'] += $this->request->data;
 
 				if (!empty($_FILES['image_field'])) {
 					$this->request->data['image_field'] = $_FILES['image_field'];
