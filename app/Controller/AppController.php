@@ -1,6 +1,8 @@
 <?php
 App::uses('Controller', 'Controller');
 
+App::uses('Sanitize', 'Utility');
+
 class AppController extends Controller {
 	public $components = array(
 		'Auth' => array(
@@ -61,6 +63,41 @@ class AppController extends Controller {
 	//	$this->render('../elements/json');
 	//	$this->response->type('application/json');
 	//}
+	
+/**
+ * api index method
+ *
+ * @return void
+ */
+	public function api_index() {
+		$response = array('status' => 0, 'message' => '');
+
+		$conditions = array();
+		
+		
+		if (!empty($this->request->query)) {
+			foreach ($this->request->query as $key => $value) {
+				$key = Sanitize::paranoid($key, array('_'));
+				$value = Sanitize::paranoid($value, array('_'));
+				$conditions[] = $key . '=' . $value;
+			}			
+		}
+
+		$results = $this->{$this->modelClass}->find('list', array(
+			'conditions' => $conditions,
+			'recursive' => -1
+		));
+
+		if ($results) {
+			$response['status'] = 1;
+			$response[strtolower($this->name)] = $results;
+			$response['message'] = __('Resultados encontrados!');
+		} else {
+			$response['message'] = __('No se encontraron resultados.');
+		}
+
+		$this->makeItJson($response);
+	}
 	
 	protected function makeItJson($response = array('status' => 0, 'message' => 'No data')) {
 		$this->set('response', $response);

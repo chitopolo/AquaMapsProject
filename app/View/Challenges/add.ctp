@@ -15,28 +15,44 @@
 	<fieldset>
 		<legend><?php echo __('Alcance del reto'); ?></legend>
 		<div class="row">
-			<div class="span">
+			<div class="span4">
 				<?php
 					echo $this->Form->input('country_id', array('id' => 'countries', 'class' => 'chosen', 'emtpy' => true));
 				?>
 			</div>
-			<div class="span">
+			<div class="span4">
 				<?php
 					echo $this->Form->input('region_id', array('id' => 'regions', 'class' => 'chosen', 'emtpy' => true));
 				?>
 			</div>
-			<div class="span">
+			<div class="span4">
 				<?php
 					echo $this->Form->input('city_id', array('id' => 'cities', 'class' => 'chosen', 'emtpy' => true));
 				?>
 			</div>
 		</div>
+	</fieldset>
 	<script>
 		$("#countries").change(function() {
-			fillSelect("#countries", "#cities", "api/cities.json?country_id=");
+			fillSelect({
+				parentSelector: "#countries",
+				childSelector: "#regions",
+				requestUrl: "api/regions.json?country_id=",
+				responseCollection: "regions"
+			});
 		});
-		function fillSelect(parentSelector, childSelector, requestUrl) {
-			var child = $(childSelector);		
+
+		$("#regions").change(function() {
+			fillSelect({
+				parentSelector: "#regions",
+				childSelector: "#cities",
+				requestUrl: "api/cities.json?region_id=",
+				responseCollection: "cities"
+			});
+		});
+
+		function fillSelect(options) {
+			var child = $(options.childSelector);
 			$.ajax({
 				async: true,
 				beforeSend: function (XMLHttpRequest) {
@@ -59,27 +75,30 @@
 						if (isJSON && data.status == 1) {
 							child.find("option").remove();
 							child.append('<option value=""></option>');
-							$.each(data.cities, function(index, value) {
+							var collection = data[options.responseCollection];
+							$.each(collection, function(index, value) {
 								child.append('<option value="' + index + '">' + value + '</option>');
 							});
 							child.trigger("liszt:updated");
 						}
 					}
 				},
-				url: "<?php echo $this->Html->url('/'); ?>" + requestUrl + "" + $(parentSelector).val()
+				url: "<?php echo $this->Html->url('/'); ?>" + options.requestUrl + "" + $(options.parentSelector).val()
 			});
 		}
 
 		$(".chosen").chosen();
 	</script>
-	<legend><?php echo __('Datos'); ?></legend>
+	<!--<fieldset>
+	<legend><?php echo __('Cuestionario'); ?></legend>
 	<?php
 		echo $this->Form->input('Survey.0.name', array('label' => 'Nombre cuestionario:'));
 		echo $this->Form->input('Survey.0.Question.0.name', array('label' => 'Pregunta:'));
 		echo $this->Form->input('Survey.0.Question.0.unit_id', array('label' => 'Unidad:'));
 	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+	</fieldset>-->
+<?php echo $this->Form->submit(__('Crear reto!'), array('class' => 'btn btn-large btn-primary')); ?>
+<?php echo $this->Form->end(); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

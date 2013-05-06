@@ -140,7 +140,7 @@ class PointsController extends AppController {
 
 		if ($points) {
 			$response['status'] = 1;
-			$response['points'] = $points;
+			$response['points'] = Set::extract('{n}.Point', $points);;
 			$response['message'] = __('Puntos de agua encontrados!');
 		} else {
 			$response['message'] = __('No se encontraron puntos de agua.');
