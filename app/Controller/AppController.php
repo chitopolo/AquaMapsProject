@@ -83,7 +83,7 @@ class AppController extends Controller {
 			);
 		}
 
-		$this->layout = 'test';
+		//$this->layout = 'test';
 		switch($test) {
 			case 'add': {
 			}

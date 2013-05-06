@@ -191,13 +191,18 @@ class PointsController extends AppController {
 	public function api_add() {
 		$response = array('status' => 0, 'message' => '');
 		if ($this->request->is('post') && !empty($this->request->data)) {
-			$this->Report->set($this->request->data);
-			
-			$this->Report->create();
-			if ($this->Report->save($this->request->data)) {
+			$this->Point->set($this->request->data);
+			//echo '-----POST';
+			//var_dump($_POST);
+			//echo '-----$this->request->data';
+			//var_dump($this->request->data);
+			//echo '-----FILES';
+			//var_dump($_FILES);
+			$this->Point->create();
+			if ($this->Point->save($this->request->data)) {
 				$response['status'] = 1;
 				$response['message'] = __('Punto guardado.');
-				$response['point']['id'] = $this->Report->getInsertID();
+				$response['point']['id'] = $this->Point->getInsertID();
 				$response['point'] += $this->request->data;
 
 				if (!empty($_FILES['image_field'])) {
@@ -207,20 +212,32 @@ class PointsController extends AppController {
 				if (!empty($this->request->data['image_field'])) {
 					if (move_uploaded_file($this->request->data['image_field']['tmp_name'], WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg')) {
 						$response['point']['image'] = Router::url('/img/points/' . $response['point']['id'] . '.jpg');
-						$this->Report->id = $response['point']['id'];
-						$this->Report->saveField('image', 1);
+						$this->Point->id = $response['point']['id'];
+						$this->Point->saveField('image', 1);
 					} else {
 						$response['message'] = __('Punto guardado. Problemas con el guardado de la imagen.');
 						$response['point']['image'] = 0;
 					}
 				}
 			} else {
-				$response['errors'] = $this->Report->validationErrors;
+				$response['errors'] = $this->Point->validationErrors;
 			}
 		} else {
 			$response['message'] = __('No hay datos enviados.');
 		}
 		
 		$this->makeItJson($response);
+	}
+	
+	public function mobileSimulator() {
+		$this->data = array(
+			'user_id' => rand(1, 4),
+			'point_type_id' => rand(1, 4),
+			'lat' => '-33.' . rand(391034, 434594),
+			'lng' => '-70.' . rand(587141, 753996),
+			'price' => rand(587141, 753996),
+			//'image_file' => '@' . WWW_ROOT . 'img' . DS . 'reports' . DS . 'base' . DS . rand(1, 5) . '.jpg;type=image/jpeg',
+		);
+		parent::mobileSimulator();
 	}
 }
