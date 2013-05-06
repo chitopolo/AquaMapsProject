@@ -192,12 +192,20 @@ class PointsController extends AppController {
 		$response = array('status' => 0, 'message' => '');
 		if ($this->request->is('post') && !empty($this->request->data)) {
 			$this->Point->set($this->request->data);
-			//echo '-----POST';
-			//var_dump($_POST);
-			//echo '-----$this->request->data';
-			//var_dump($this->request->data);
-			//echo '-----FILES';
-			//var_dump($_FILES);
+			echo '-----POST';
+			var_dump($_POST);
+			echo '-----$this->request->data';
+			var_dump($this->request->data);
+			echo '-----FILES';
+			var_dump($_FILES);
+			
+			echo '-----HEADERS';
+			pr(apache_request_headers());
+			
+			//echo '-----REQUEST BODY';
+			//pr(http_get_request_body());
+			
+			
 			$this->Point->create();
 			if ($this->Point->save($this->request->data)) {
 				$response['status'] = 1;

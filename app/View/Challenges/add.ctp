@@ -1,28 +1,42 @@
 <?php echo $this->Html->css(array('chosen')); ?>
 <?php echo $this->Html->script(array('chosen.jquery.min')); ?>
 <div class="challenges form">
-<?php echo $this->Form->create('Challenge'); ?>
+<?php echo $this->Form->create('Challenge', array('type' => 'file')); ?>
 	<fieldset>
-		<legend><?php echo __('Reto'); ?></legend>
+		<legend><?php echo __('Nuevo reto'); ?></legend>
 	<?php
-		echo $this->Form->input('country_id', array('id' => 'countries', 'class' => 'chosen'));
-		if (!empty($cities)) {
-			$citiesStyle = '';
-		} else {
-			$citiesStyle = '';
-		}
-		
-		echo $this->Form->input('city_id', array('id' => 'cities', 'class' => 'chosen', 'style' => $citiesStyle));
-		
-		echo $this->Form->input('region_id');
 		echo $this->Form->hidden('user_id', array('value' => $current['User']['id']));
-		echo $this->Form->input('title');
-		echo $this->Form->input('invitation');
-		echo $this->Form->input('description');
-		echo $this->Form->input('image');
+		echo $this->Form->input('title', array('label' => __('Título'), 'class' => 'input-xlarge'));
+		echo $this->Form->input('invitation', array('label' => __('Descripción corta'), 'type' => 'textarea', 'class' => 'input-xlarge'));
+		echo $this->Form->input('description', array('label' => __('Descripción larga'), 'type' => 'textarea', 'class' => 'input-xlarge'));
+		echo $this->Form->input('image', array('label' => __('Imagen'), 'type' => 'file'));
 	?>
+	</fieldset>
+	<fieldset>
+		<legend><?php echo __('Alcance del reto'); ?></legend>
+		<div class="row">
+			<div class="span">
+				<?php
+					echo $this->Form->input('country_id', array('id' => 'countries', 'class' => 'chosen', 'emtpy' => true));
+				?>
+			</div>
+			<div class="span">
+				<?php
+					echo $this->Form->input('region_id', array('id' => 'regions', 'class' => 'chosen', 'emtpy' => true));
+				?>
+			</div>
+			<div class="span">
+				<?php
+					echo $this->Form->input('city_id', array('id' => 'cities', 'class' => 'chosen', 'emtpy' => true));
+				?>
+			</div>
+		</div>
 	<script>
-		$("#countries").change(function(event) {			
+		$("#countries").change(function() {
+			fillSelect("#countries", "#cities", "api/cities.json?country_id=");
+		});
+		function fillSelect(parentSelector, childSelector, requestUrl) {
+			var child = $(childSelector);		
 			$.ajax({
 				async: true,
 				beforeSend: function (XMLHttpRequest) {
@@ -43,17 +57,18 @@
 						}
 	
 						if (isJSON && data.status == 1) {
-							$("#cities option").remove();
+							child.find("option").remove();
+							child.append('<option value=""></option>');
 							$.each(data.cities, function(index, value) {
-								$("#cities").append('<option value="' + index + '">' + value + '</option>');
+								child.append('<option value="' + index + '">' + value + '</option>');
 							});
-							$("#cities").trigger("liszt:updated").show();
+							child.trigger("liszt:updated");
 						}
 					}
 				},
-				url: "<?php echo $this->Html->url('/api/cities.json'); ?>?country_id=" + $(event.target).val()
+				url: "<?php echo $this->Html->url('/'); ?>" + requestUrl + "" + $(parentSelector).val()
 			});
-		});
+		}
 
 		$(".chosen").chosen();
 	</script>

@@ -55,11 +55,19 @@ class AppController extends Controller {
 		$this->set('current', $this->current);
 	}
 
-	protected function makeItJson($response) {
+	//protected function goJson($response) {
+	//	$this->set('response', $response);
+	//	$this->layout = null;
+	//	$this->render('../elements/json');
+	//	$this->response->type('application/json');
+	//}
+	
+	protected function makeItJson($response = array('status' => 0, 'message' => 'No data')) {
 		$this->set('response', $response);
 		$this->layout = null;
-		$this->render('../elements/json');
+		echo json_encode($response);
 		$this->response->type('application/json');
+		$this->render(false);
 	}
 	
 	public function mobileSimulator() {
