@@ -3,6 +3,7 @@
 	<fieldset>
 		<legend><?php echo __('Add Question Type'); ?></legend>
 	<?php
+		echo $this->Form->input('code');
 		echo $this->Form->input('name');
 	?>
 	</fieldset>
@@ -13,5 +14,7 @@
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Question Types'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

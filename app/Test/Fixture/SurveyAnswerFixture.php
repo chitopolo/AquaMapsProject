@@ -1,9 +1,9 @@
 <?php
 /**
- * QuestionFixture
+ * SurveyAnswerFixture
  *
  */
-class QuestionFixture extends CakeTestFixture {
+class SurveyAnswerFixture extends CakeTestFixture {
 
 /**
  * Fields
@@ -13,9 +13,9 @@ class QuestionFixture extends CakeTestFixture {
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
 		'survey_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
-		'unit_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
-		'question_type_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'user_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+		'point_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 10),
+		'image' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
@@ -31,9 +31,9 @@ class QuestionFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'survey_id' => 1,
-			'unit_id' => 1,
-			'question_type_id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet'
+			'user_id' => 1,
+			'point_id' => 1,
+			'image' => 'Lorem ipsum dolor sit amet'
 		),
 	);
 

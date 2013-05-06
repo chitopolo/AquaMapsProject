@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property Challenge $Challenge
  * @property Question $Question
+ * @property SurveyAnswer $SurveyAnswer
  */
 class Survey extends AppModel {
 
@@ -34,6 +35,19 @@ class Survey extends AppModel {
 	public $hasMany = array(
 		'Question' => array(
 			'className' => 'Question',
+			'foreignKey' => 'survey_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'SurveyAnswer' => array(
+			'className' => 'SurveyAnswer',
 			'foreignKey' => 'survey_id',
 			'dependent' => false,
 			'conditions' => '',

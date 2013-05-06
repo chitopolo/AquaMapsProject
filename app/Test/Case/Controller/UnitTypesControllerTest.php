@@ -24,6 +24,9 @@ class UnitTypesControllerTest extends ControllerTestCase {
 		'app.user',
 		'app.point',
 		'app.point_type',
+		'app.survey_answer',
+		'app.question_answer',
+		'app.question_type',
 		'app.question_option',
 		'app.type'
 	);

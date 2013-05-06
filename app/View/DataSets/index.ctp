@@ -7,6 +7,10 @@
 			<th><?php echo $this->Paginator->sort('challenge_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('data_set_type_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('mappable'); ?></th>
+			<th><?php echo $this->Paginator->sort('public'); ?></th>
+			<th><?php echo $this->Paginator->sort('source_link'); ?></th>
+			<th><?php echo $this->Paginator->sort('source_table'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
@@ -23,6 +27,10 @@
 			<?php echo $this->Html->link($dataSet['DataSetType']['name'], array('controller' => 'data_set_types', 'action' => 'view', $dataSet['DataSetType']['id'])); ?>
 		</td>
 		<td><?php echo h($dataSet['DataSet']['name']); ?>&nbsp;</td>
+		<td><?php echo h($dataSet['DataSet']['mappable']); ?>&nbsp;</td>
+		<td><?php echo h($dataSet['DataSet']['public']); ?>&nbsp;</td>
+		<td><?php echo h($dataSet['DataSet']['source_link']); ?>&nbsp;</td>
+		<td><?php echo h($dataSet['DataSet']['source_table']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $dataSet['DataSet']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $dataSet['DataSet']['id'])); ?>

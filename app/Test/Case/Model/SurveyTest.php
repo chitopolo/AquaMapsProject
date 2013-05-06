@@ -23,7 +23,11 @@ class SurveyTest extends CakeTestCase {
 		'app.point_type',
 		'app.question',
 		'app.unit',
-		'app.question_option'
+		'app.unit_type',
+		'app.type',
+		'app.question_option',
+		'app.survey_answer',
+		'app.question_answer'
 	);
 
 /**
