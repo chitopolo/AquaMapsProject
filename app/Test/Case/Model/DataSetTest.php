@@ -26,6 +26,9 @@ class DataSetTest extends CakeTestCase {
 		'app.unit',
 		'app.unit_type',
 		'app.type',
+		'app.question_type',
+		'app.question_answer',
+		'app.survey_answer',
 		'app.question_option',
 		'app.data_set_type'
 	);

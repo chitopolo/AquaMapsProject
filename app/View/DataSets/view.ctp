@@ -26,6 +26,26 @@
 			<?php echo h($dataSet['DataSet']['name']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Mappable'); ?></dt>
+		<dd>
+			<?php echo h($dataSet['DataSet']['mappable']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Public'); ?></dt>
+		<dd>
+			<?php echo h($dataSet['DataSet']['public']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Source Link'); ?></dt>
+		<dd>
+			<?php echo h($dataSet['DataSet']['source_link']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Source Table'); ?></dt>
+		<dd>
+			<?php echo h($dataSet['DataSet']['source_table']); ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">
@@ -53,6 +73,10 @@
 		<th><?php echo __('Challenge Id'); ?></th>
 		<th><?php echo __('Data Set Type Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
+		<th><?php echo __('Mappable'); ?></th>
+		<th><?php echo __('Public'); ?></th>
+		<th><?php echo __('Source Link'); ?></th>
+		<th><?php echo __('Source Table'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
@@ -64,6 +88,10 @@
 			<td><?php echo $childDataSet['challenge_id']; ?></td>
 			<td><?php echo $childDataSet['data_set_type_id']; ?></td>
 			<td><?php echo $childDataSet['name']; ?></td>
+			<td><?php echo $childDataSet['mappable']; ?></td>
+			<td><?php echo $childDataSet['public']; ?></td>
+			<td><?php echo $childDataSet['source_link']; ?></td>
+			<td><?php echo $childDataSet['source_table']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'data_sets', 'action' => 'view', $childDataSet['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'data_sets', 'action' => 'edit', $childDataSet['id'])); ?>

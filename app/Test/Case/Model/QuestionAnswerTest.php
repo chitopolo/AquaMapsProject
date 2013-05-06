@@ -1,11 +1,11 @@
 <?php
-App::uses('UnitType', 'Model');
+App::uses('QuestionAnswer', 'Model');
 
 /**
- * UnitType Test Case
+ * QuestionAnswer Test Case
  *
  */
-class UnitTypeTest extends CakeTestCase {
+class QuestionAnswerTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,8 +13,7 @@ class UnitTypeTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.unit_type',
-		'app.unit',
+		'app.question_answer',
 		'app.question',
 		'app.survey',
 		'app.challenge',
@@ -24,11 +23,11 @@ class UnitTypeTest extends CakeTestCase {
 		'app.user',
 		'app.point',
 		'app.point_type',
-		'app.survey_answer',
-		'app.question_answer',
-		'app.question_type',
+		'app.unit',
+		'app.unit_type',
+		'app.type',
 		'app.question_option',
-		'app.type'
+		'app.survey_answer'
 	);
 
 /**
@@ -38,7 +37,7 @@ class UnitTypeTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->UnitType = ClassRegistry::init('UnitType');
+		$this->QuestionAnswer = ClassRegistry::init('QuestionAnswer');
 	}
 
 /**
@@ -47,7 +46,7 @@ class UnitTypeTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->UnitType);
+		unset($this->QuestionAnswer);
 
 		parent::tearDown();
 	}

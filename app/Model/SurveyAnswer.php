@@ -1,15 +1,14 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Question Model
+ * SurveyAnswer Model
  *
  * @property Survey $Survey
- * @property Unit $Unit
- * @property QuestionType $QuestionType
+ * @property User $User
+ * @property Point $Point
  * @property QuestionAnswer $QuestionAnswer
- * @property QuestionOption $QuestionOption
  */
-class Question extends AppModel {
+class SurveyAnswer extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -27,16 +26,16 @@ class Question extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Unit' => array(
-			'className' => 'Unit',
-			'foreignKey' => 'unit_id',
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'QuestionType' => array(
-			'className' => 'QuestionType',
-			'foreignKey' => 'question_type_id',
+		'Point' => array(
+			'className' => 'Point',
+			'foreignKey' => 'point_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -51,20 +50,7 @@ class Question extends AppModel {
 	public $hasMany = array(
 		'QuestionAnswer' => array(
 			'className' => 'QuestionAnswer',
-			'foreignKey' => 'question_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'QuestionOption' => array(
-			'className' => 'QuestionOption',
-			'foreignKey' => 'question_id',
+			'foreignKey' => 'survey_answer_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

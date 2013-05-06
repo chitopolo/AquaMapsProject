@@ -3,6 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
+			<th><?php echo $this->Paginator->sort('code'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -10,6 +11,7 @@
 	foreach ($questionTypes as $questionType): ?>
 	<tr>
 		<td><?php echo h($questionType['QuestionType']['id']); ?>&nbsp;</td>
+		<td><?php echo h($questionType['QuestionType']['code']); ?>&nbsp;</td>
 		<td><?php echo h($questionType['QuestionType']['name']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $questionType['QuestionType']['id'])); ?>
@@ -38,5 +40,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Question Type'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

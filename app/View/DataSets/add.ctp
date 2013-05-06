@@ -7,6 +7,10 @@
 		echo $this->Form->input('challenge_id');
 		echo $this->Form->input('data_set_type_id');
 		echo $this->Form->input('name');
+		echo $this->Form->input('mappable');
+		echo $this->Form->input('public');
+		echo $this->Form->input('source_link');
+		echo $this->Form->input('source_table');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

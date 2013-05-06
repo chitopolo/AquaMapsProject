@@ -15,7 +15,19 @@ class QuestionTest extends CakeTestCase {
 	public $fixtures = array(
 		'app.question',
 		'app.survey',
+		'app.challenge',
+		'app.city',
+		'app.country',
+		'app.region',
+		'app.user',
+		'app.point',
+		'app.point_type',
+		'app.survey_answer',
+		'app.question_answer',
 		'app.unit',
+		'app.unit_type',
+		'app.type',
+		'app.question_type',
 		'app.question_option'
 	);
 
