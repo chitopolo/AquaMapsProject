@@ -8,6 +8,21 @@ App::uses('AppController', 'Controller');
 class SurveysController extends AppController {
 
 /**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function manageQuestions($id = null) {
+		$this->Survey->id = $id;
+		if (!$this->Survey->exists()) {
+			throw new NotFoundException(__('Invalid survey'));
+		}
+		$this->set('survey', $this->Survey->read(null, $id));
+	}
+
+/**
  * index method
  *
  * @return void

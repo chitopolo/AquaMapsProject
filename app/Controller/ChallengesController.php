@@ -55,11 +55,13 @@ class ChallengesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			unset($this->Challenge->Survey->validate['challenge_id']);
-			var_dump($this->request->data);
+			//var_dump($this->request->data);
+			$this->request->data['Survey'][0]['name'] = $this->request->data['Challenge']['title'];
 			$this->Challenge->create();
 			if ($this->Challenge->saveAssociated($this->request->data, array('deep'=>true))) {
 				$this->Session->setFlash(__('The challenge has been saved'));
-				$this->redirect(array('action' => 'index'));
+				//$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller' => 'surveys', 'action' => 'manageQuestions', $this->Challenge->Survey->getInsertID()));
 			} else {
 				$this->Session->setFlash(__('The challenge could not be saved. Please, try again.'));
 			}

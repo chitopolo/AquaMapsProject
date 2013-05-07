@@ -11,7 +11,22 @@ App::uses('AppModel', 'Model');
  */
 class Challenge extends AppModel {
 
-
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+	public $validate = array(
+		'title' => array(
+			'rule' => 'notempty',
+			'message' => 'Este campo es requerido.'
+		),
+		'invitation' => array(
+			'rule' => 'notempty',
+			'message' => 'Este campo es requerido.'
+		)
+	);
+ 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
@@ -70,5 +85,25 @@ class Challenge extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	public function beforeSave() {
+		if (!empty($this->data[$this->alias]['image'])) {
+			if (is_array($this->data[$this->alias]['image']) && !empty($this->data[$this->alias]['image']['name'])) {
+				$imagePrefix = rand(33, 99) . '_';
+				$newImage = $this->getImagePath() . $imagePrefix . $this->data[$this->alias]['image']['name'];
+				if (move_uploaded_file($this->data[$this->alias]['image']['tmp_name'], $newImage)) {
+					$this->data[$this->alias]['image'] = $imagePrefix . $this->data[$this->alias]['image']['name'];
+				} else {
+					unset($this->data[$this->alias]['image']);
+				}
+			} else {
+				unset($this->data[$this->alias]['image']);
+			}
+		}
+	}
+	
+	public function getImagePath() {
+		return WWW_ROOT . 'img' . DS . strtolower(Inflector::pluralize($this->alias)) . DS;
+	}
 
 }

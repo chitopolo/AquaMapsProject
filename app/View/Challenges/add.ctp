@@ -1,36 +1,37 @@
 <?php echo $this->Html->css(array('chosen')); ?>
 <?php echo $this->Html->script(array('chosen.jquery.min')); ?>
-<div class="challenges form">
+<div class="row">
+	<div class="span10 offset1">
 <?php echo $this->Form->create('Challenge', array('type' => 'file')); ?>
-	<fieldset>
-		<legend><?php echo __('Nuevo reto'); ?></legend>
-	<?php
-		echo $this->Form->hidden('user_id', array('value' => $current['User']['id']));
-		echo $this->Form->input('title', array('label' => __('Título'), 'class' => 'input-xlarge'));
-		echo $this->Form->input('invitation', array('label' => __('Descripción corta'), 'type' => 'textarea', 'class' => 'input-xlarge'));
-		echo $this->Form->input('description', array('label' => __('Descripción larga'), 'type' => 'textarea', 'class' => 'input-xlarge'));
-		echo $this->Form->input('image', array('label' => __('Imagen'), 'type' => 'file'));
-	?>
-	</fieldset>
 	<fieldset>
 		<legend><?php echo __('Alcance del reto'); ?></legend>
 		<div class="row">
-			<div class="span4">
+			<div class="span3">
 				<?php
 					echo $this->Form->input('country_id', array('id' => 'countries', 'class' => 'chosen', 'emtpy' => true));
 				?>
 			</div>
-			<div class="span4">
+			<div class="span3">
 				<?php
 					echo $this->Form->input('region_id', array('id' => 'regions', 'class' => 'chosen', 'emtpy' => true));
 				?>
 			</div>
-			<div class="span4">
+			<div class="span3">
 				<?php
 					echo $this->Form->input('city_id', array('id' => 'cities', 'class' => 'chosen', 'emtpy' => true));
 				?>
 			</div>
 		</div>
+	</fieldset>
+	<fieldset>
+		<legend><?php echo __('Nuevo reto'); ?></legend>
+	<?php
+		echo $this->Form->hidden('user_id', array('value' => $current['User']['id']));
+		echo $this->Form->input('title', array('label' => __('Título'), 'class' => 'input-xlarge'));
+		echo $this->Form->input('invitation', array('label' => __('Descripción corta'), 'class' => 'input-xlarge'));
+		echo $this->Form->input('description', array('label' => __('Descripción larga'), 'type' => 'textarea', 'class' => 'input-xlarge'));
+		echo $this->Form->input('image', array('label' => __('Imagen'), 'type' => 'file'));
+	?>
 	</fieldset>
 	<script>
 		$("#countries").change(function() {
@@ -99,6 +100,7 @@
 	</fieldset>-->
 <?php echo $this->Form->submit(__('Crear reto!'), array('class' => 'btn btn-large btn-primary')); ?>
 <?php echo $this->Form->end(); ?>
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
