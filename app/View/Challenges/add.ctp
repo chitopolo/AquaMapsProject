@@ -90,31 +90,23 @@
 
 		$(".chosen").chosen();
 	</script>
-	<!--<fieldset>
-	<legend><?php echo __('Cuestionario'); ?></legend>
-	<?php
-		echo $this->Form->input('Survey.0.name', array('label' => 'Nombre cuestionario:'));
-		echo $this->Form->input('Survey.0.Question.0.name', array('label' => 'Pregunta:'));
-		echo $this->Form->input('Survey.0.Question.0.unit_id', array('label' => 'Unidad:'));
-	?>
-	</fieldset>-->
 <?php echo $this->Form->submit(__('Crear reto!'), array('class' => 'btn btn-large btn-primary')); ?>
 <?php echo $this->Form->end(); ?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('List Challenges'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Cities'), array('controller' => 'cities', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New City'), array('controller' => 'cities', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Countries'), array('controller' => 'countries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Country'), array('controller' => 'countries', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Regions'), array('controller' => 'regions', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Region'), array('controller' => 'regions', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+<!--<div class="actions">-->
+<!--	<h3><?php echo __('Actions'); ?></h3>-->
+<!--	<ul>-->
+<!--		<li><?php echo $this->Html->link(__('List Challenges'), array('action' => 'index')); ?></li>-->
+<!--		<li><?php echo $this->Html->link(__('List Cities'), array('controller' => 'cities', 'action' => 'index')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('New City'), array('controller' => 'cities', 'action' => 'add')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('List Countries'), array('controller' => 'countries', 'action' => 'index')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('New Country'), array('controller' => 'countries', 'action' => 'add')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('List Regions'), array('controller' => 'regions', 'action' => 'index')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('New Region'), array('controller' => 'regions', 'action' => 'add')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>-->
+<!--		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>-->
+<!--	</ul>-->
+<!--</div>-->
