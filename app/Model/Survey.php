@@ -46,19 +46,19 @@ class Survey extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		//'SurveyAnswer' => array(
-		//	'className' => 'SurveyAnswer',
-		//	'foreignKey' => 'survey_id',
-		//	'dependent' => false,
-		//	'conditions' => '',
-		//	'fields' => '',
-		//	'order' => '',
-		//	'limit' => '',
-		//	'offset' => '',
-		//	'exclusive' => '',
-		//	'finderQuery' => '',
-		//	'counterQuery' => ''
-		//)
+		'SurveyAnswer' => array(
+			'className' => 'SurveyAnswer',
+			'foreignKey' => 'survey_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
 	);
 
 }

@@ -111,6 +111,17 @@ h1, h2, h3, h4, h5 { font-family: 'Ubuntu', sans-serif; }
 h1 { margin-top: 0; }
 h2 { color: #666; }
 
+
+.mt { margin-top: 20px; }
+.mr { margin-right: 20px; }
+.mb { margin-bottom: 20px; }
+.ml { margin-left: 20px; }
+
+.mmt { margin-top: 10px; }
+.mmr { margin-right: 10px; }
+.mmb { margin-bottom: 10px; }
+.mml { margin-left: 10px; }
+
 /*** FORMS ***/
 .input {
 	margin-bottom: 20px;

@@ -52,13 +52,6 @@ padding-right: 15px;
 margin-right: 15px;
 
 }
-ul, ol {
-font-size: 13px;
-}
-
-ul, ol {
-margin: 0 0 0px 0px;
-}
 
 .masthead {    
 font-size: 30px;
@@ -66,13 +59,6 @@ font-weight: 200;
 line-height: 1.25;
 color: #fff;
 margin-top: 50px;
-}
-
-ul {
-list-style: none outside;
-}
-ol, ul {
-list-style: none;
 }
 
 ul.featurelist li {
