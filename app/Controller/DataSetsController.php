@@ -1,11 +1,14 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CSVImport', 'lib');
+
 /**
  * DataSets Controller
  *
  * @property DataSet $DataSet
  */
 class DataSetsController extends AppController {
+
 
 /**
  * index method
@@ -16,6 +19,48 @@ class DataSetsController extends AppController {
 		$this->DataSet->recursive = 0;
 		$this->set('dataSets', $this->paginate());
 	}
+
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function wizard() {
+
+		if ($this->request->is('post')) {
+
+
+	  		$filename = $this->request->data['DataSet']['file']['tmp_name'];
+	  		$filePath = WWW_ROOT .'files' . DS . $this->request->data['DataSet']['file']['name'];
+			if (move_uploaded_file($filename, $filePath)){
+			  $this->Session->setFlash('Uploaded file has been moved SUCCESS.');
+			}
+			else{
+			  $this->Session->setFlash('Unable to Move file.');
+			}
+			
+			$csv = new CSVImport();
+			$csv->table_name = "ds_".date("d_m_Y_H_i_s");
+        	$csv->file_name = $filePath;
+        	$csv->create_import_table();
+        	$csv->import();
+
+        	$this->request->data['DataSet']['source_table'] = $csv->table_name;
+			$this->DataSet->create();
+
+			if ($this->DataSet->save($this->request->data)) {
+				$this->Session->setFlash(__('The data set has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The data set could not be saved. Please, try again.'));
+			}
+		}
+		$parentDataSets = $this->DataSet->find('list');
+		$dataSetTypes = $this->DataSet->DataSetType->find('list');
+		$this->set(compact('parentDataSets', 'challenges', 'dataSetTypes'));
+	}
+
 
 /**
  * view method
