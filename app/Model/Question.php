@@ -11,6 +11,17 @@ App::uses('AppModel', 'Model');
  */
 class Question extends AppModel {
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+	public $validate = array(
+		'name' => array(
+			'rule' => 'notempty',
+			'message' => 'Este campo es requerido.'
+		)
+	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

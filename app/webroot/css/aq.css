@@ -122,6 +122,8 @@ h2 { color: #666; }
 .mmb { margin-bottom: 10px; }
 .mml { margin-left: 10px; }
 
+.clickable { cursor: pointer; }
+
 /*** FORMS ***/
 .input {
 	margin-bottom: 20px;

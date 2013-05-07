@@ -41,13 +41,13 @@ class QuestionsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Question->create();
 			if ($this->Question->saveAssociated($this->request->data, array('deep'=>true))) {
-				$this->Session->setFlash(__('The question has been saved'));
+				$this->Session->setFlash(__('La pregunta fue guardada.'));
 //				$this->redirect(array('action' => 'index'));
-				$this->redirect($this->referer());
 			} else {
-				$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La pregunta no pudo ser guardad, por favor intente nuevamente.'));
 			}
 		}
+		$this->redirect($this->referer());
 		//$surveys = $this->Question->Survey->find('list');
 		//$units = $this->Question->Unit->find('list');
 		//$this->set(compact('surveys', 'units'));

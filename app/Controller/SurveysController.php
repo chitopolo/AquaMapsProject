@@ -19,7 +19,18 @@ class SurveysController extends AppController {
 		if (!$this->Survey->exists()) {
 			throw new NotFoundException(__('Invalid survey'));
 		}
-		$this->set('survey', $this->Survey->read(null, $id));		
+		
+		$this->set('survey',
+			$this->Survey->find('first', array(
+				 'conditions' => $this->Survey->alias . '.id = ' . $id,
+				 'contain' => array(
+					'Challenge',
+					 'Question' => array(
+						 'QuestionOption'
+					 )
+				 )
+			 ))
+		);		
 		$questionTypes = $this->Survey->Question->QuestionType->find('list');
 		$this->set(compact('questionTypes'));
 	}
