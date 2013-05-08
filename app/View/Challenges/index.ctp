@@ -11,7 +11,7 @@
 					if (!empty($challenge['Challenge']['image'])) {
 						$imageFile = $this->Html->url('/img/challenges/' . $challenge['Challenge']['image']);
 					} else {
-						$imageFile = $this->Html->url('/img/placeholders/ch_ph_' . rand(1, 3) . '.jpg');
+						$imageFile = $this->Html->url('/img/placeholders/ch_ph_' . rand(1, 2) . '.jpg');
 					}
 					?>
 					<img src="<?php echo $imageFile; ?>" alt="<?php echo $challenge['Challenge']['title']; ?>">

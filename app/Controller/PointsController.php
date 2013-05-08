@@ -244,7 +244,7 @@ class PointsController extends AppController {
 			'lat' => '-33.' . rand(391034, 434594),
 			'lng' => '-70.' . rand(587141, 753996),
 			'price' => rand(587141, 753996),
-			//'image_file' => '@' . WWW_ROOT . 'img' . DS . 'reports' . DS . 'base' . DS . rand(1, 5) . '.jpg;type=image/jpeg',
+			'image_file' => '@' . WWW_ROOT . 'img' . DS . 'placeholders' . DS . 'ch_ph_' . rand(1, 3) . '.jpg;type=image/jpeg',
 		);
 		parent::mobileSimulator();
 	}
