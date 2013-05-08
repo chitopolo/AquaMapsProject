@@ -29,15 +29,22 @@
 		<hr />
 		<div class="row">
 
-			<div class="span2">
-			</div>
 
-			<div class="span2">
+			<div class="span4">
+
+				<div class="btn-group">
+
+				<a class="btn btn-large btn-success" href="<?php echo $this->Html->url('/pages/mobile') ?>" type="button">Colabora</a>
+
+				<a class="btn btn-large btn-primary" href="<?php echo $this->Html->url('/DataSets/wizard') ?>" type="button">Sube datos</a>
+
 				<?php if($challenge['Challenge']['id'] == 2) { ?>
 					<a class="btn btn-large btn-warning" href="<?php echo $this->Html->url('/DataSets/view2') ?>" type="button">Data Sets</a>
 				<?php } elseif ($challenge['Challenge']['id'] == 3) { ?>
 					<a class="btn btn-large btn-warning" href="<?php echo $this->Html->url('/DataSets/view3') ?>" type="button">Data Sets</a>		
 				<?php }?>
+
+				</div>
 
 			</div>
 		</div>
