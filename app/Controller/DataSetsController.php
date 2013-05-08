@@ -58,6 +58,7 @@ class DataSetsController extends AppController {
 		}
 		$parentDataSets = $this->DataSet->find('list');
 		$dataSetTypes = $this->DataSet->DataSetType->find('list');
+		$challenges = $this->DataSet->Challenge->find('list');
 		$this->set(compact('parentDataSets', 'challenges', 'dataSetTypes'));
 	}
 
@@ -75,6 +76,18 @@ class DataSetsController extends AppController {
 			throw new NotFoundException(__('Invalid data set'));
 		}
 		$this->set('dataSet', $this->DataSet->read(null, $id));
+	}
+
+
+	public function view1() {
+
+	}
+	public function view2() {
+
+	}
+	
+	public function view3() {
+
 	}
 
 /**
