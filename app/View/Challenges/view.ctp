@@ -1,71 +1,42 @@
-<div class="challenges view">
-<h2><?php  echo __('Challenge'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($challenge['Challenge']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('City'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($challenge['City']['name'], array('controller' => 'cities', 'action' => 'view', $challenge['City']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Country'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($challenge['Country']['name'], array('controller' => 'countries', 'action' => 'view', $challenge['Country']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Region'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($challenge['Region']['name'], array('controller' => 'regions', 'action' => 'view', $challenge['Region']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('User'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($challenge['User']['id'], array('controller' => 'users', 'action' => 'view', $challenge['User']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Title'); ?></dt>
-		<dd>
-			<?php echo h($challenge['Challenge']['title']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Invitation'); ?></dt>
-		<dd>
-			<?php echo h($challenge['Challenge']['invitation']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Description'); ?></dt>
-		<dd>
-			<?php echo h($challenge['Challenge']['description']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Image'); ?></dt>
-		<dd>
-			<?php echo h($challenge['Challenge']['image']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Challenge'), array('action' => 'edit', $challenge['Challenge']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Challenge'), array('action' => 'delete', $challenge['Challenge']['id']), null, __('Are you sure you want to delete # %s?', $challenge['Challenge']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Challenges'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Challenge'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cities'), array('controller' => 'cities', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New City'), array('controller' => 'cities', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Countries'), array('controller' => 'countries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Country'), array('controller' => 'countries', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Regions'), array('controller' => 'regions', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Region'), array('controller' => 'regions', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
-	</ul>
+<h1><?php echo h($challenge['Challenge']['title']); ?></h1>
+<div class="row">
+	<?php if (!empty($challenge['Challenge']['image'])): ?>
+		<?php $descriptionSpan = 4; ?>
+		<?php $invitationContent = ''; ?>
+		<div class="span8">
+			<div class="challenge-image">
+				<img src="<?php echo $this->Html->url('/img/challenges/' . $challenge['Challenge']['image']); ?>" alt="<?php echo $challenge['Challenge']['title']; ?>">
+				<h3><?php echo h($challenge['Challenge']['invitation']); ?></h3>
+			</div>
+		</div>
+	<?php else: ?>
+		<?php $descriptionSpan = 12; ?>
+		<?php $invitationContent = $this->Html->tag('h3', $challenge['Challenge']['invitation']); ?>
+	<?php endif; ?>
+	<div class="span<?php echo $descriptionSpan; ?>">
+		<?php echo $invitationContent; ?>
+		<?php echo h($challenge['Challenge']['description']); ?>
+		<hr />
+		<div class="row">
+			<div class="span<?php echo $descriptionSpan/3; ?>">
+				<h4><?php echo __('Alcance'); ?></h4>
+				<?php
+				$scope = '';
+				$scope .= !empty($challenge['City']['name']) ? $challenge['City']['name'] . ', ' : '';
+				$scope .= !empty($challenge['Region']['name']) ? ', ' . $challenge['Region']['name'] . ', ' : '';
+				$scope .= $challenge['Country']['name'];
+				?>
+				<p class="lead"><?php echo $scope; ?></p>
+			</div>
+			<div class="span<?php echo $descriptionSpan/3; ?>">
+				<h4><?php echo __('Likes'); ?></h4>
+				
+			</div>
+			<div class="span<?php echo $descriptionSpan/3; ?>">
+				
+			</div>
+		</div>
+	</div>
 </div>
 <div class="related">
 	<h3><?php echo __('Related Surveys'); ?></h3>

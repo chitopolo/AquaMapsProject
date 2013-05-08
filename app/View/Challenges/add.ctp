@@ -1,5 +1,6 @@
 <?php echo $this->Html->css(array('chosen')); ?>
 <?php echo $this->Html->script(array('chosen.jquery.min')); ?>
+<h1><?php echo __('Crea un nuevo reto'); ?></h1>
 <div class="row">
 	<div class="span10 offset1">
 <?php echo $this->Form->create('Challenge', array('type' => 'file')); ?>
