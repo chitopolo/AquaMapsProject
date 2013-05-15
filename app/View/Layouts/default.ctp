@@ -13,7 +13,7 @@
 	<body>
 	<div class="band band-blue">
 		<header id="header" class="container">
-			<a id="header_logo" href="<?php echo $this->Html->url('/'); ?>"><?php echo $this->Html->image('logo_aquamaps.png', array('width' => 276, 'height' => 53, 'alt' => __('Aquamaps'))); ?></a>
+			<a id="header_logo" href="<?php echo $this->Html->url('/'); ?>"><?php echo $this->Html->image('logo_aquamaps.png', array('width' => 302, 'height' => 53, 'alt' => __('Aquamaps'))); ?></a>
 
 			<ul id="main_menu">
 				<li<?php echo $this->params['controller'] == 'pages' && $this->params['pass'][0] == 'home' ? ' class="active"' : ''; ?>><?php echo $this->Html->link(__('Inicio'), '/'); ?></li>
@@ -55,7 +55,7 @@
 	</div>
 	<div class="band band-blue">
 		<div id="bottom" class="container">
-			<a id="bottom_logo" href="<?php echo $this->Html->url('/'); ?>"><?php echo $this->Html->image('logo_aquamaps.png', array('width' => 147, 'height' => 28, 'alt' => __('Aquamaps'))); ?></a>
+			<a id="bottom_logo" href="<?php echo $this->Html->url('/'); ?>"><?php echo $this->Html->image('logo_aquamaps.png', array('width' => 161, 'height' => 28, 'alt' => __('Aquamaps'))); ?></a>
 		</div>
 	</div>
 
