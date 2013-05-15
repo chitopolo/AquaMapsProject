@@ -1,5 +1,6 @@
-<?php echo $this->Html->script(array('raphael.2.1.0.min', 'justgage.1.0.1.min')); ?>
+<?php echo $this->Html->script(array('jquery.knob')); ?>
 <h1><?php echo h($challenge['Challenge']['title']); ?></h1>
+
 <div class="row">
 	<?php
 	if (!empty($challenge['Challenge']['image'])) {
@@ -27,37 +28,59 @@
 		<p class="lead"><?php echo $scope; ?></p>
 		<hr />
 		<div class="row">
-			<div class="span2 text-center">
-				<div id="gauge_1"></div>
-			</div>
-			<div class="span2 text-center">
-				<div id="gauge_2"></div>
+
+
+			<div class="span4">
+
+				<div class="btn-group">
+
+				<a class="btn btn-large btn-success" href="<?php echo $this->Html->url('/pages/mobile') ?>" type="button">Colabora</a>
+
+				<a class="btn btn-large btn-primary" href="<?php echo $this->Html->url('/DataSets/wizard') ?>" type="button">Sube datos</a>
+
+				<?php if($challenge['Challenge']['id'] == 2) { ?>
+					<a class="btn btn-large btn-warning" href="<?php echo $this->Html->url('/DataSets/view2') ?>" type="button">Data Sets</a>
+				<?php } elseif ($challenge['Challenge']['id'] == 3) { ?>
+					<a class="btn btn-large btn-warning" href="<?php echo $this->Html->url('/DataSets/view3') ?>" type="button">Data Sets</a>		
+				<?php }?>
+
+				</div>
+
 			</div>
 		</div>
-		<script>
-		var g1 = new JustGage({
-			id: "gauge_1", 
-			value: 81, 
-			min: 0,
-			max: 100,
-			title: "Likes",
-			showMinMax: false,
-			levelColors: [
-				"#00CC33"
-			]  
-		});
+		<hr>
 
-		var g2 = new JustGage({
-			id: "gauge_2", 
-			value: 67, 
-			min: 0,
-			max: 100,
-			title: "Aportes",
-			showMinMax: false,
-			levelColors: [
-				"#2298C6"
-			]  
-		}); 
+		<div class="row">
+			<div class="span2 text-center">
+				<h4>Aportes</h4>
+				<input type="text" value="60" class="dial" readonly="readonly" data-readonly="true" data-width="100" data-thickness=".3" data-fgColor="#00CC33">
+			</div>
+			<div class="span2 text-center">
+				<h4>Likes</h4>
+				<input type="text" value="77" class="dial" readonly="readonly" data-readonly="true" data-width="100" data-thickness=".3" data-fgColor="#2298C6">
+			</div>
+		</div>
+
+
+		<script>
+		$(function() {
+			$(".dial").knob();
+		});
 		</script>
 	</div>
+</div>
+<legend><h4> Organizaciones </h4> </legend>
+<div class="row">
+	<div class="span2">
+		<img src="<?php echo $this->Html->url('/img/CochaValleyLogo.png') ?>" width="150px">
+	</div>
+	<?php if($challenge['Challenge']['id'] == 1 || $challenge['Challenge']['id'] == 3) { ?>
+		<div class="span2">
+			<img src="<?php echo $this->Html->url('/img/ALCALDIA COCHABAMBA.jpg') ?>" width="150px">
+		</div>
+	<?php } else { ?>
+		<div class="span2">
+			<img src="<?php echo $this->Html->url('/img/bancoMundial.jpg') ?>" width="150px">
+		</div>
+	<?php }  ?>
 </div>

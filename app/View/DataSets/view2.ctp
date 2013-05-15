@@ -15,6 +15,8 @@
 		        }
 		    },
 		});
+
+
 		var values = [19,0];
 
 		$('#sparkline2').sparkline(values, {
@@ -54,7 +56,7 @@
 		        height: '200px',
 		        barWidth: '30px',
 		        colorMap: ["red", "green", "blue","orange"],
-		    tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+		    tooltipFormat: '{{offset:offset}} ({{value.1}}%)',
 		    tooltipValueLookups: {
 		        'offset': {
 		            0: 'la tomas así nomás',
@@ -83,12 +85,33 @@
 
 
     });
+
+
+
     </script>
 
 <div class="dataSets view">
-<h2><?php  echo $dataSet['DataSet']['name']."Nombre data set" ; ?></h2>
+	<legend>
 
+<h1>Saneamiento básico área urbana Cochabamba</h1>
+</legend>
+
+<div class="row">
+	<div class="span9">
+		
+	</div>
+	<div class="span3">
+		<p>
+  <button class="btn btn-large  btn-success" type="button">Descargar Datos</button>
+  <button class="btn btn-large btn-warning" type="button">API</button>
+		</p>
+	</div>
+</div>
+<legend>
 <h3>Resultados</h3>
+</legend>
+
+
 <!-- Mapa -->
 <div class="row">
 	<div class="span8">
@@ -100,8 +123,6 @@
 	</div>
 </div>
 <!-- Mapa -->
-
-
 		<span id="sparkpie1">
       			
       	</span>
@@ -109,9 +130,9 @@
 		<ul class="thumbnails challenges">
               <li class="span4">
 
-				<a class="thumbnail" href="" style="text-align: center">
+				<a class="thumbnail" href="#" style="text-align: center">
 					<span id="sparkline1" >&nbsp;</span>
-					<div class="caption" style="margin-top: 100px;">
+					<div class="caption" style="position: relative; matgin-bottom: 50px;">
 						<h4> P1: 
 							Tienes servicio de agua potable en tu casa las 24 hrs.?
 						</h4>
@@ -120,34 +141,32 @@
 
               </li>
               <li class="span4">
-				<a class="thumbnail" href="" style="text-align: center">
+				<a class="thumbnail" href="#" style="text-align: center">
 					<span id="sparkline2">&nbsp;</span>
-					<div class="caption">
+					<div class="caption" style="position: relative;">
 						<h4> P2: 
 Tienes servicio de alcantarillado conectado a tu casa?						</h4>
 					</div>
 			    </a>
               </li>
               <li class="span4">
-
-				<a class="thumbnail" href="" style="text-align: center">
+				<a class="thumbnail" href="#" style="text-align: center">
 					<span id="sparkline3">&nbsp;</span>
-
-					<div class="caption">
+					<div class="caption" style="position: relative;">
 						<h4> P3: 
 							Tienes baño(s) con flujo de agua en tu casa?
 						</h4>
 					</div>
 			    </a>
-
               </li>
-              <li class="span4">
 
+
+              <li class="span4">
 				<a class="thumbnail" href="" style="text-align: center">
 					<span id="sparkline4">&nbsp;</span>
 
-					<div class="caption">
-						<h4> P3: 
+					<div class="caption" style="position: relative;">
+						<h4> P4: 
 							El agua que sale de la pila...
 						</h4>
 					</div>
@@ -158,7 +177,7 @@ Tienes servicio de alcantarillado conectado a tu casa?						</h4>
 				<a class="thumbnail" href="" style="text-align: center">
 					<span id="sparkline5">&nbsp;</span>
 
-					<div class="caption">
+					<div class="caption" style="position: relative;">
 						<h4> P5: 
 							Estás satisfecho con los servicios de agua potable y alcantarillado en el área urbana de Cochabamba?
 						</h4>
