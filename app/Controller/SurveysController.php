@@ -128,4 +128,14 @@ class SurveysController extends AppController {
 		$this->Session->setFlash(__('Survey was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+	
+	function api_view($id = null, $association = null) {		
+		if ($association) {
+			$this->apiSettings['findConditions'][] = 'survey_id = ' . $id;
+			$this->apiSettings['association'] = 'Question';
+			parent::api_index();
+		} else {
+			parent::api_view($id);			
+		}
+	}
 }

@@ -43,6 +43,8 @@
 	Router::parseExtensions('json');
 	
 	Router::connect('/api/:controller/:id', array('prefix' => 'api', 'action' => 'view', '[method]' => 'GET'), array('id' => '[0-9]+', 'pass' => array('id')));
+
+	Router::connect('/api/:controller/:id/:association', array('prefix' => 'api', 'action' => 'view', '[method]' => 'GET'), array('id' => '[0-9]+', 'association' => '[a-z]+', 'pass' => array('id', 'association')));
 	
 	Router::connect('/api/:controller', array('prefix' => 'api', 'action' => 'index', '[method]' => 'GET'));
 	

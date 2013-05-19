@@ -173,16 +173,24 @@ class AppController extends Controller {
 			$findOptions['recursive'] = -1;
 		}
 		
-		$results = $this->{$this->modelClass}->find('all', $findOptions);
+		if ($this->apiSettings['association']) {
+			$targetClass = $this->apiSettings['association'];
+			$targetModel = $this->{$this->modelClass}->{$targetClass};
+		} else {
+			$targetClass = $this->modelClass;
+			$targetModel = $this->{$targetClass};
+		}
+		
+		$results = $targetModel->find('all', $findOptions);
 		
 		if ($results) {
-			$response['reports'] = Set::extract('{n}.' . $this->modelClass, $results);
+			$response['data'] = Set::extract('{n}.' . $targetClass, $results);
 			$response['status'] = 1;
-			$response['message'] = Inflector::pluralize($this->modelClass) . ' ' . __('found.');
+			$response['message'] = Inflector::pluralize($targetClass) . ' ' . __('found.');
 		} else {
 			$this->response->statusCode(204);
 			$response['status'] = 1;
-			$response['message'] = sprintf(__('No %s were found.'), strtolower(Inflector::pluralize($this->modelClass)));			
+			$response['message'] = sprintf(__('No %s were found.'), strtolower(Inflector::pluralize($targetClass)));			
 		}
 		$this->logThis($response, false);
 
