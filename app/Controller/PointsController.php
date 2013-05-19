@@ -190,15 +190,15 @@ class PointsController extends AppController {
 **/
 	public function api_add() {
 		$response = array('status' => 0, 'message' => '');
-		echo '-----POST';
-		var_dump($_POST);
-		echo '-----$this->request->data';
-		var_dump($this->request->data);
-		echo '-----FILES';
-		var_dump($_FILES);
-		
-		echo '-----HEADERS';
-		pr(apache_request_headers());
+		//echo '-----POST';
+		//var_dump($_POST);
+		//echo '-----$this->request->data';
+		//var_dump($this->request->data);
+		//echo '-----FILES';
+		//var_dump($_FILES);
+		//
+		//echo '-----HEADERS';
+		//pr(apache_request_headers());
 		
 		if ($this->request->is('post') && !empty($this->request->data)) {
 			$this->Point->set($this->request->data);
