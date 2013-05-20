@@ -128,9 +128,33 @@ h2 { color: #666; }
 	padding-top: 20px;
 	padding-bottom: 20px;
 	background-color: #2298C6;
-	text-color:#ffffff;
-	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.15);
+	border-radius: 3px;
+	color: #FFF;
 }
+	.box-blue h2, .box-blue a {
+		color: #FFF;
+	}
+	
+	.box-blue .thumbnails a {
+		display: block;
+	}
+	
+	.box-blue .thumbnails a:hover {
+		text-decoration: none;
+	}
+	
+	.box-blue .thumbnails li {
+		padding: 10px 0;
+		border-radius: 3px;
+		-webkit-transition: background-color linear .5s;
+		-moz-transition: background-color linear .5s;
+		-o-transition: background-color linear .5s;
+		transition: background-color linear .5s;
+	}
+	
+	.box-blue .thumbnails li:hover {
+		background-color: rgba(255, 255, 255, .15);
+	}
 
 .home .carousel-img {
 	overflow: hidden;

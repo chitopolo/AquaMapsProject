@@ -3,6 +3,7 @@
 *.rar
 /app/Config/database.php
 /app/tmp
+/app/webroot/files/tests
 /app/webroot/img/items
 /app/webroot/img/tmp
 /.komodotools

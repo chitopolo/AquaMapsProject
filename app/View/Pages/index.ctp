@@ -16,6 +16,7 @@
 					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 					<li data-target="#myCarousel" data-slide-to="1" class=""></li>
 					<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+					<li data-target="#myCarousel" data-slide-to="3" class=""></li>
 				</ol>
 				<div class="carousel-inner">
 					<div class="item active">
@@ -103,45 +104,46 @@
 
 <!-- RP: Ends Blue Space -->
 
-<div style="background-color:  #2298C6; text-color:#ffffff" >
+<div class="box-blue">
 	<div class="container-fluid" >
 		<div class="row-fluid">
 			<div class="span12">
-			<h2 id="ayudar" style="color:white;">Como puedes ayudar?</h2>
-
-<ul class="thumbnails">
-  <li class="span3">
-    <div class="img-rounded">
-     <?php echo $this->Html->image('dwn_help.png', array('class' => 'media-object')); ?>
-      <h3  style="color:white;"> Recolecta datos</h3>
-      <p style="color:white;"> If you are part of an organization that works with santitation and water projects. And even if your a indvidual that is traveling. You can help us by collect data with your mobile app.</p>
-    </div>
-  </li>
-<li class="span3">
-    <div class="img-rounded">
-     <?php echo $this->Html->image('dwn_share.png', array('class' => 'media-object')); ?>
-      <h3  style="color:white;">Comparte</h3>
-      <p style="color:white;">Puedes compartir esta informacion con el mundo</p></div>
-  </li>
-
-<li class="span3">
-    <div class="img-rounded">
-     <?php echo $this->Html->image('dwn_app.png', array('class' => 'media-object')); ?>
-
-      <h3  style="color:white;">Baja la aplicacion </h3>
-      <p  style="color:white;"><?php echo $this->Html->link(__('Aplicación movil'), '/pages/mobile', array('style'=>'color:white;') ); ?></p>
-    </div>
-  </li>
-
-<li class="span3">
-    <div class="img-rounded">
-     <?php echo $this->Html->image('dwn_signin.png', array('class' => 'media-object')); ?>
-
-      <h3  style="color:white;">Registrate</h3>
-      <p  style="color:white;"> Puedes registrarte aqui</p>
-    </div>
-  </li>
-</ul>
+			<h2>Cómo puedes ayudar?</h2>
+			
+				<ul class="thumbnails">
+					
+					<li class="span3 text-center">
+						<a href="<?php echo $this->Html->url('/challenges/view/'); ?>">
+							<?php echo $this->Html->image('dwn_help.png'); ?>
+							<h3> Recolecta datos</h3>
+							<p> If you are part of an organization that works with santitation and water projects. And even if your a indvidual that is traveling. You can help us by collect data with your mobile app.</p>
+						</a>		
+					</li>
+					
+					<li class="span3 text-center">
+						<a href="<?php echo $this->Html->url('/challenges/view/'); ?>">
+							<?php echo $this->Html->image('dwn_share.png'); ?>
+							<h3>Comparte</h3>
+							<p>Puedes compartir esta informacion con el mundo</p>
+						</a>
+					</li>
+					
+					<li class="span3 text-center">
+						<a href="<?php echo $this->Html->url('/challenges/view/'); ?>">
+							<?php echo $this->Html->image('dwn_app.png'); ?>
+							<h3>Baja la aplicacion </h3>
+							<p><?php echo $this->Html->link(__('Aplicación movil'), '/pages/mobile', array('style'=>'color:white;') ); ?></p>
+						</a>
+					</li>
+					
+					<li class="span3 text-center">
+						<a href="<?php echo $this->Html->url('/challenges/view/'); ?>">
+							<?php echo $this->Html->image('dwn_signin.png'); ?>	
+							<h3>Registrate</h3>
+							<p> Puedes registrarte aqui</p>
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
