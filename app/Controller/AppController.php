@@ -173,7 +173,7 @@ class AppController extends Controller {
 			$findOptions['recursive'] = -1;
 		}
 		
-		if ($this->apiSettings['association']) {
+		if (!empty($this->apiSettings['association'])) {
 			$targetClass = $this->apiSettings['association'];
 			$targetModel = $this->{$this->modelClass}->{$targetClass};
 		} else {
@@ -188,7 +188,7 @@ class AppController extends Controller {
 			$response['status'] = 1;
 			$response['message'] = Inflector::pluralize($targetClass) . ' ' . __('found.');
 		} else {
-			$this->response->statusCode(204);
+			//$this->response->statusCode(204);
 			$response['status'] = 1;
 			$response['message'] = sprintf(__('No %s were found.'), strtolower(Inflector::pluralize($targetClass)));			
 		}
@@ -201,6 +201,7 @@ class AppController extends Controller {
 		$response = array('status' => 0, 'message' => '');
 		
 		if (!$id) {
+			$this->response->statusCode(404);
 			$response['error'] = array(__('Invalid ID.'));
 		} else {
 			$this->{$this->modelClass}->id = $id;
@@ -209,9 +210,17 @@ class AppController extends Controller {
 				$this->response->statusCode(404);
 			}
 
-			$fields = !empty($this->apiSettings['fields']) ? $this->apiSettings['fields'] : null;
+			if (!empty($this->{$this->modelClass}->apiSettings['virtualFields'])) {
+				$this->{$this->modelClass}->virtualFields = Hash::merge($this->{$this->modelClass}->virtualFields, $this->{$this->modelClass}->apiSettings['virtualFields']);
+			}
+			
+			$fields = !empty($this->{$this->modelClass}->apiSettings['fields']) ? $this->{$this->modelClass}->apiSettings['fields'] : null;
 
-			$result = $this->{$this->modelClass}->read($fields, $id);
+			$result = $this->{$this->modelClass}->find('first', array(
+				'conditions' => $this->modelClass . '.id = ' . $id,
+				'fields' => $fields,
+				'contain' => !empty($this->{$this->modelClass}->apiSettings['contain']) ? $this->{$this->modelClass}->apiSettings['contain'] : null
+			));
 	
 			$this->logThis($id);
 	

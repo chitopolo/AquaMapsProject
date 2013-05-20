@@ -38,13 +38,13 @@ class Question extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Unit' => array(
-			'className' => 'Unit',
-			'foreignKey' => 'unit_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
+		//'Unit' => array(
+		//	'className' => 'Unit',
+		//	'foreignKey' => 'unit_id',
+		//	'conditions' => '',
+		//	'fields' => '',
+		//	'order' => ''
+		//),
 		'QuestionType' => array(
 			'className' => 'QuestionType',
 			'foreignKey' => 'question_type_id',

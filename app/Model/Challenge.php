@@ -85,6 +85,24 @@ class Challenge extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+/**
+ * 
+ *
+ * @var array
+ */
+	public $apiSettings = array(
+		'contain' => array(
+			'Country',
+			'Region',
+			'City'
+		),
+		'virtualFields' => array(
+			'location' => 'CONCAT(City.name, ", ", Region.name, ", ", Country.name)'
+		),
+		'fields' => array('id', 'title', 'location', 'invitation', 'description', 'image'),		
+	);
+	
 	
 	public function beforeSave() {
 		if (!empty($this->data[$this->alias]['image'])) {
