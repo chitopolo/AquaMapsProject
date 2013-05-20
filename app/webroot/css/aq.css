@@ -124,6 +124,26 @@ h2 { color: #666; }
 
 .clickable { cursor: pointer; }
 
+.box-blue {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #2298C6;
+	text-color:#ffffff;
+	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.15);
+}
+
+.home .carousel-img {
+	overflow: hidden;
+	width: 100%;
+	border-radius: 3px;
+}
+
+.home .lead {
+	margin-top: 40px;
+	line-height: 175%;
+	font-size: 24px;
+	color: #666;
+}
 
 .challenges .thumbnail {
 	position: relative;

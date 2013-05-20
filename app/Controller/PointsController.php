@@ -205,6 +205,7 @@ class PointsController extends AppController {
 			//echo '-----REQUEST BODY';
 			//pr(http_get_request_body());
 			
+			$this->logThis($this->request->data);
 			
 			$this->Point->create();
 			if ($this->Point->save($this->request->data)) {
@@ -215,6 +216,7 @@ class PointsController extends AppController {
 
 				if (!empty($_FILES['image_field'])) {
 					$this->request->data['image_field'] = $_FILES['image_field'];
+					$this->logThis($_FILES, false);
 				}
 
 				if (!empty($this->request->data['image_field'])) {
@@ -233,6 +235,7 @@ class PointsController extends AppController {
 		} else {
 			$response['message'] = __('No hay datos enviados.');
 		}
+		$this->logThis($response, false);
 		
 		$this->makeItJson($response);
 	}
