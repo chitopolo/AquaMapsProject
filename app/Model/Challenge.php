@@ -106,4 +106,9 @@ class Challenge extends AppModel {
 		return WWW_ROOT . 'img' . DS . strtolower(Inflector::pluralize($this->alias)) . DS;
 	}
 
+
+	public function getPopular(){
+		return $this->find('all');
+	}
+
 }

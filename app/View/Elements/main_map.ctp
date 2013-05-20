@@ -90,6 +90,9 @@ else infowindow2 = new google.maps.InfoWindow();
 			}}
 		]*/
 	});
+
+	var mc = new MarkerClusterer(map);
+	
 	dotsLayer.setMap(map);
 	
 	google.maps.event.addListener(dotsLayer, 'click', function(e) {

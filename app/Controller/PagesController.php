@@ -77,6 +77,16 @@ class PagesController extends AppController {
 		
 	}
 	
+
+	public function index(){
+
+		Controller::loadModel('Challenge');
+		$this->Challenge->recursive = 0;
+		$challenges = $this->Challenge->getPopular();
+		$this->set('challenges', $challenges);
+		
+	}
+	
 	
 
 }

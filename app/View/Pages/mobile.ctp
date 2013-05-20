@@ -1,6 +1,6 @@
 <div class="row-fluid" >
 	<div class="span4">
-		<h2 style="opacity: 0.5;">Soon available on</h2>
+		<h2 style="opacity: 0.5;">Pronto disponible en</h2>
 		<ul class="heading-icons">
 		<li class=""><a  target="_blank">
 		<?php   echo $this->Html->image('android-small-logo.png') ?> 
@@ -24,13 +24,13 @@
 		</div>
 	</div>
 	<div id="features" class="span4">
-		<h1 style="opacity: 0.6">Features</h1>
+		<h1 style="opacity: 0.6">Caracteristicas</h1>
 		<ul class="featurelist" style="font-size: 24px;">
 
-			<li class="BulletImage" style="opacity: 0.8">Capture water and sanitation data on the field </li>
-			<li class="BulletImage" style="opacity: 0.8">Share it with your organization and the world</li>
-			<li class="BulletImage" style="opacity: 0.8">Visualize your data</li>
-			<li class="BulletImage" style="opacity: 0.8">Powered by API's from The World Bank</li>
+			<li class="BulletImage" style="opacity: 0.8">Recopila datos de saneamiento y agua. </li>
+			<li class="BulletImage" style="opacity: 0.8">Compartelo con tu organizacion y el mundo.</li>
+			<li class="BulletImage" style="opacity: 0.8">Visualiza tus datos</li>
+			<li class="BulletImage" style="opacity: 0.8">Enriquecido con Data Sets del Banco Mundial</li>
 		</ul>
 	</div>
 </div>
