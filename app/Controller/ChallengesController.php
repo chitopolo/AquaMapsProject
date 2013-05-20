@@ -129,4 +129,19 @@ class ChallengesController extends AppController {
 		$this->Session->setFlash(__('Challenge was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+	
+	function api_view($id = null, $association = null) {
+		$this->apiSettings['contain'] = array(
+			
+		);
+		
+		if ($association) {
+			$this->apiSettings['findConditions'][] = 'challenge_id = ' . $id;
+			$this->apiSettings['association'] = 'Survey';
+			parent::api_index();
+		} else {
+			//$this->Challenge->recursive = 2;
+			parent::api_view($id);			
+		}
+	}
 }
