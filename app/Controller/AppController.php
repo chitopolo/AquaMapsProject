@@ -49,7 +49,11 @@ class AppController extends Controller {
 			}
 		} else {
 			$this->current['User'] = null;
-		} 
+		}
+//pr($this->request);
+		if ($this->request->params['prefix'] == 'api' && !empty($_GET['a'])) {
+			$this->setAction('api_' . $_GET['a']);
+		}
 	}
 
 	/**
@@ -163,15 +167,8 @@ class AppController extends Controller {
 		$this->logThis($this->request->query);
 
 		$findOptions = array(
-		//	'fields' => $this->{$this->modelClass}->getFindFields(),
 			'conditions' => $conditions,
 		);
-		
-		if (!empty($this->apiSettings['contain'])) {
-			$findOptions['recursive'] = $this->apiSettings['contain'];
-		} else {
-			$findOptions['recursive'] = -1;
-		}
 		
 		if (!empty($this->apiSettings['association'])) {
 			$targetClass = $this->apiSettings['association'];
@@ -179,6 +176,23 @@ class AppController extends Controller {
 		} else {
 			$targetClass = $this->modelClass;
 			$targetModel = $this->{$targetClass};
+		}
+		
+		if (!empty($targetModel->apiSettings['virtualFields'])) {
+			$targetModel->virtualFields = Hash::merge($targetModel->virtualFields, $targetModel->apiSettings['virtualFields']);
+		}
+		
+		$findOptions['fields'] = !empty($targetModel->apiSettings['fields']) ? $targetModel->apiSettings['fields'] : null;
+		
+		$findOptions['contain'] = !empty($targetModel->apiSettings['contain']) ? $targetModel->apiSettings['contain'] : null;
+		
+		//if (!empty($findOptions['contain'])) {
+		//	$findOptions['recursive'] = $this->apiSettings['contain'];
+		//} else {
+		//	$findOptions['recursive'] = -1;
+		//}
+		if (empty($findOptions['contain'])) {
+			$findOptions['recursive'] = -1;
 		}
 		
 		$results = $targetModel->find('all', $findOptions);

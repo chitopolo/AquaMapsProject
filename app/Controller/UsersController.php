@@ -110,7 +110,7 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
 			}
 		}
-	}	
+	}
 	/**
 	* MT:
 	* Esta acción sirve para registrar/loggear a un usuario con su cuenta de Facebook
@@ -278,4 +278,24 @@ class UsersController extends AppController {
 	public function logout() {
 		$this->redirect($this->Auth->logout());
 	}
+
+	/**
+	* MT:
+	* Esta acción toma los datos por POST y autentifica los datos de loggeo mediante el componente Auth. Este componente se configura en el AppController
+	* 
+	*/
+	public function api_login() {
+		$response = array('status' => 0, 'message' => '');
+
+		if ($this->request->is('post')) {
+			if ($this->Auth->login()) {
+				$response['status'] = 1;
+				$response['message'] = $this->modelClass . ' ' . __('found.');
+			} else {
+				$response['message'] = $this->modelClass . ' ' . __('not found.');
+			}
+		}
+
+		$this->makeItJson($response);
+	}	
 }

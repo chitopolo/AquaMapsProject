@@ -42,6 +42,19 @@
 	Router::mapResources('pointTypes');
 	Router::parseExtensions('json');
 	
+	//if (!empty($_GET['a'])) {
+	//	Router::connect('/api/:controller?a=' . $_GET['a'], array('action' => $_GET['a'], 'prefix' => 'api', '[method]' => 'GET'));
+	//}
+	//
+	//App::uses('ApiRoute', 'Lib');
+	//
+	//Router::connectNamed(array('a' => '[a-z]+'));
+	//Router::connect('/api/:controller?a=1', array('prefix' => 'api', '[method]' => 'GET'), array('routeClass' => 'ApiRoute', 'action' => 'a'));
+	
+//	Router::connect('/api/:controller?a=*', array('action' => $_GET['a'], 'prefix' => 'api', '[method]' => 'GET'));
+
+	Router::connect('/api/users?a=login', array('controller' => 'users', 'action' => 'login', 'prefix' => 'api', '[method]' => 'GET'));
+
 	Router::connect('/api/:controller/:id', array('prefix' => 'api', 'action' => 'view', '[method]' => 'GET'), array('id' => '[0-9]+', 'pass' => array('id')));
 
 	Router::connect('/api/:controller/:id/:association', array('prefix' => 'api', 'action' => 'view', '[method]' => 'GET'), array('id' => '[0-9]+', 'association' => '[a-z]+', 'pass' => array('id', 'association')));
@@ -49,7 +62,7 @@
 	Router::connect('/api/:controller', array('prefix' => 'api', 'action' => 'index', '[method]' => 'GET'));
 	
 	Router::connect('/api/:controller', array('prefix' => 'api', 'action' => 'add', '[method]' => 'POST'));
-
+//pr(Router::$routes);
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 
  * how to customize the loading of plugin routes.

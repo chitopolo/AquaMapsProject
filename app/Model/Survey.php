@@ -58,7 +58,7 @@ class Survey extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		)	
 	);
 
 }
