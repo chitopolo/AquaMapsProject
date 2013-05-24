@@ -33,6 +33,9 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
     
 	Router::connect('/pages/example', array('controller' => 'pages', 'action' => 'example'));
+	Router::connect('/questionanswers', array('controller' => 'question_answers', 'action' => 'index'));
+
+
 /**
  * JSON API routing.
  */
