@@ -288,6 +288,16 @@ class UsersController extends AppController {
 		$response = array('status' => 0, 'message' => '');
 
 		if ($this->request->is('post')) {
+			if (!empty($this->request->data['email'])) {
+				$this->request->data['User']['email'] = $this->request->data['email'];
+				unset($this->request->data['email']);
+			}
+			
+			if (!empty($this->request->data['password'])) {
+				$this->request->data['User']['password'] = $this->request->data['password'];
+				unset($this->request->data['password']);
+			}
+			
 			if ($this->Auth->login()) {
 				$response['status'] = 1;
 				$response['message'] = $this->modelClass . ' ' . __('found.');
@@ -297,5 +307,15 @@ class UsersController extends AppController {
 		}
 
 		$this->makeItJson($response);
-	}	
+	}
+	
+	public function logMe() {
+		App::uses('HttpSocket', 'Network/Http');
+		Configure::write('debug', 2);
+		$HttpSocket = new HttpSocket();		
+		// array data
+		$data = array('email' => 'mauro.trigo@gmail.com', 'password' => '1234');
+		$results = $HttpSocket->post(Router::url('/api/users/login', true), $data);
+		pr($results);
+	}
 }

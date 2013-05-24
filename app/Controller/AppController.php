@@ -18,6 +18,9 @@ class AppController extends Controller {
 			'authenticate' => array(
 				'Form' => array(
 					'fields' => array('username' => 'email')
+				),
+				'Basic' => array(
+					'fields' => array('username' => 'email')
 				)
 			)
 		),
@@ -150,7 +153,6 @@ class AppController extends Controller {
 	public function api_index() {
 		$response = array('status' => 0, 'message' => '');
 		$conditions = array();
-		$conditions = array();
 		
 		if (!empty($this->request->query)) {
 			foreach ($this->request->query as $key => $value) {
@@ -162,7 +164,7 @@ class AppController extends Controller {
 		
 		if (!empty($this->apiSettings['findConditions'])) {
 			$conditions = Hash::merge($conditions, $this->apiSettings['findConditions']);
-		}		
+		}
 		
 		$this->logThis($this->request->query);
 
