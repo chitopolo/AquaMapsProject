@@ -209,7 +209,13 @@ class PointsController extends AppController {
 				}
 
 				if (!empty($this->request->data['image_field'])) {
-					if (move_uploaded_file($this->request->data['image_field']['tmp_name'], WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg')) {
+					$newImageFilename = WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg';
+					if (move_uploaded_file($this->request->data['image_field']['tmp_name'], $newImageFilename)) {
+						
+						//$newThumbnailFilename = WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '_mini.jpg';
+						
+						//$this->Point->createThumbnail($newImageFilename, $newThumbnailFilename);
+						
 						$response['point']['image'] = Router::url('/img/points/' . $response['point']['id'] . '.jpg');
 						$this->Point->id = $response['point']['id'];
 						$this->Point->set(array(

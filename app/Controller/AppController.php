@@ -111,7 +111,7 @@ class AppController extends Controller {
 			}
 		}
 
-		$requestUrl =  Router::url('/api/' . lcfirst($this->name) . ($param ? '/' . $param : '') . '.json', true);
+		$requestUrl =  Router::url('/api/' . lcfirst($this->name) . ($param ? '/' . $param : '') . '.json?test=1', true);
 
 		$request = curl_init($requestUrl); // initiate curl object
 		curl_setopt($request, CURLOPT_HEADER, 0); // set to 0 to eliminate header info from response

@@ -106,24 +106,13 @@ class Challenge extends AppModel {
 	
 	public function beforeSave() {
 		if (!empty($this->data[$this->alias]['image'])) {
-			if (is_array($this->data[$this->alias]['image']) && !empty($this->data[$this->alias]['image']['name'])) {
-				$imagePrefix = rand(33, 99) . '_';
-				$newImage = $this->getImagePath() . $imagePrefix . $this->data[$this->alias]['image']['name'];
-				if (move_uploaded_file($this->data[$this->alias]['image']['tmp_name'], $newImage)) {
-					$this->data[$this->alias]['image'] = $imagePrefix . $this->data[$this->alias]['image']['name'];
-				} else {
-					unset($this->data[$this->alias]['image']);
-				}
+			if (($newImage = $this->saveImage($this->data[$this->alias]['image'])) !== false) {
+				$this->data[$this->alias]['image'] = $newImage;
 			} else {
 				unset($this->data[$this->alias]['image']);
 			}
 		}
 	}
-	
-	public function getImagePath() {
-		return WWW_ROOT . 'img' . DS . strtolower(Inflector::pluralize($this->alias)) . DS;
-	}
-
 
 	public function getPopular(){
 		return $this->find('all');

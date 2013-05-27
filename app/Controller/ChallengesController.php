@@ -53,6 +53,7 @@ class ChallengesController extends AppController {
  * @return void
  */
 	public function add() {
+		//Configure::write('debug', 2);
 		if ($this->request->is('post')) {
 			unset($this->Challenge->Survey->validate['challenge_id']);
 			//var_dump($this->request->data);
@@ -60,7 +61,7 @@ class ChallengesController extends AppController {
 			$this->Challenge->create();
 			if ($this->Challenge->saveAssociated($this->request->data, array('deep'=>true))) {
 				$this->Session->setFlash(__('El reto ha sido creado! Ahora llena los datos de la encuesta, por favor.'));
-				//$this->redirect(array('action' => 'index'));
+				
 				$this->redirect(array('controller' => 'surveys', 'action' => 'manageQuestions', $this->Challenge->Survey->getInsertID()));
 			} else {
 				$this->Session->setFlash(__('Ocurrió un problema al guardar los datos. Por favor revisa los errores.'));
