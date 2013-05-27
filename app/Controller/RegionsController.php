@@ -96,4 +96,9 @@ class RegionsController extends AppController {
 		$this->Session->setFlash(__('Region was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+	
+	public function api_index() {
+		//pr($this->Region->find('list', array('fields' => null, 'conditions' => 'country_id=3', 'recursive' => -1)));
+		parent::api_index();
+	}
 }

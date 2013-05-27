@@ -76,7 +76,7 @@ class Question extends AppModel {
 		'QuestionOption' => array(
 			'className' => 'QuestionOption',
 			'foreignKey' => 'question_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -88,4 +88,13 @@ class Question extends AppModel {
 		)
 	);
 
+	public $apiSettings = array(
+		'contain' => array(
+			'QuestionType',
+		),
+		'virtualFields' => array(
+			'question_type' => 'QuestionType.code'
+		),
+		'fields' => array('id', 'survey_id', 'question_type', 'name'),		
+	);
 }
