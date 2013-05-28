@@ -234,7 +234,9 @@ class AppController extends Controller {
 			$findType = 'all';
 		}
 		
-		$results = $targetModel->find('list', $findOptions);
+		//pr($findOptions);
+		
+		$results = $targetModel->find($findType, $findOptions);
 		
 		if ($results) {
 			if ($findType == 'all') {
