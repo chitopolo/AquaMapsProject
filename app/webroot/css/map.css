@@ -13,27 +13,6 @@ ul.noStyle { margin-left: 0; padding-left: 0; list-style: none; }
 .mapLegend { margin: 0; }
 	.legendTitle { margin-bottom: 16px; font-weight: bold; }
 	.legendColor { display: inline-block; width: 10px; height: 10px; }
-        
-#phonescreens {
-    background: transparent url(../img/phone_frame.png) no-repeat;
-    height: 700px;
-}
-#phonescreens #slider {
-        margin: 56px 50px;
-        visibility:hidden;
-}
-
-#slider ul, #slider li {
-        margin:0;
-        padding:0;
-        list-style:none;
-        }
-
-#slider li { 
-        width:300px;
-        height: 800px;
-        margin-top: 50px;
-}
 
 .heading-icons {
 margin-top: 50px;
@@ -60,10 +39,3 @@ line-height: 1.25;
 color: #fff;
 margin-top: 50px;
 }
-
-ul.featurelist li {
-line-height: 35px;
-padding-left: 30px;
-background: transparent url(../img/marker.png) no-repeat;
-}
-

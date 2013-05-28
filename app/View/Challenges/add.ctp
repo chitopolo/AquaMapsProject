@@ -28,13 +28,18 @@
 		<legend><?php echo __('Nuevo reto'); ?></legend>
 	<?php
 		echo $this->Form->hidden('user_id', array('value' => $current['User']['id']));
-		echo $this->Form->input('title', array('label' => __('Título'), 'class' => 'input-xlarge'));
-		echo $this->Form->input('invitation', array('label' => __('Descripción corta'), 'class' => 'input-xlarge'));
-		echo $this->Form->input('description', array('label' => __('Descripción larga'), 'type' => 'textarea', 'class' => 'input-xlarge'));
+		echo $this->Form->input('title', array('label' => __('Título'), 'class' => 'input-xlarge tooltip-it', 'title' => 'Ponle un título al reto'));
+		echo $this->Form->input('invitation', array('label' => __('Descripción corta'), 'class' => 'input-xlarge tooltip-it', 'title' => 'Escribe una pequeña invitación al reto'));
+		echo $this->Form->input('description', array('label' => __('Descripción larga'), 'type' => 'textarea', 'class' => 'input-xlarge tooltip-it', 'title' => 'Describe completamente al reto'));
 		echo $this->Form->input('image', array('label' => __('Imagen'), 'type' => 'file'));
 	?>
 	</fieldset>
 	<script>
+		$('.tooltip-it').tooltip({
+			placement : "right",
+			trigger : "focus"
+		});
+		
 		$("#countries").change(function() {
 			fillSelect({
 				parentSelector: "#countries",
