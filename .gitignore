@@ -4,7 +4,6 @@
 /app/Config/database.php
 /app/tmp
 /app/webroot/files/tests
-/app/webroot/img/points
 /app/webroot/img/surveys
 /app/webroot/img/challenges
 /app/webroot/img/tmp
