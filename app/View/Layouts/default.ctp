@@ -39,7 +39,7 @@
 					<ul>
 						<li><?php echo $this->Html->link(__('Participa en un reto'), '/challenges'); ?></li>
 							<li><?php echo $this->Html->link(__('Inicia un reto'), '/challenges'); ?></li>
-						<li><?php echo $this->Html->link(__('Sube puntos de agua'), '/challenges'); ?></li>
+						<li><?php echo $this->Html->link(__('Sube puntos de agua'), '/pages/mobile'); ?></li>
 					</ul>
 				</div>
 				<div class="span4">
