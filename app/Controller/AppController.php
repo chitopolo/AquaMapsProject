@@ -54,8 +54,11 @@ class AppController extends Controller {
 			$this->current['User'] = null;
 		}
 //pr($this->request);
-		if ($this->request->params['prefix'] == 'api' && !empty($_GET['a'])) {
-			$this->setAction('api_' . $_GET['a']);
+		if (isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'api') {
+			if (isset($this->request->query['test'])) {
+				Configure::write('debug', 2);
+				unset($this->request->query['test']);
+			}
 		}
 	}
 
@@ -98,7 +101,7 @@ class AppController extends Controller {
 			);
 		}
 
-		//$this->layout = 'test';
+		$this->layout = 'test';
 		switch($test) {
 			case 'add': {
 			}
@@ -108,7 +111,7 @@ class AppController extends Controller {
 			}
 		}
 
-		$requestUrl =  Router::url('/api/' . lcfirst($this->name) . ($param ? '/' . $param : '') . '.json', true);
+		$requestUrl =  Router::url('/api/' . lcfirst($this->name) . ($param ? '/' . $param : '') . '.json?test=1', true);
 
 		$request = curl_init($requestUrl); // initiate curl object
 		curl_setopt($request, CURLOPT_HEADER, 0); // set to 0 to eliminate header info from response
@@ -150,15 +153,44 @@ class AppController extends Controller {
 	 *
 	*/
 	
+	protected function parseFields($fields) {
+		return explode(',', $fields);
+	}
+	
+	protected function parseOrder($order) {
+		return $order;
+	}
+	
+	protected function parseList($list) {
+		return $list;
+	}
+	
 	public function api_index() {
 		$response = array('status' => 0, 'message' => '');
+		
+		$findOptions = array(
+			'limit' => 20 //MT: arbitrary limit
+		);
 		$conditions = array();
 		
+		//MT: eval query options
 		if (!empty($this->request->query)) {
+			
+			$queryOptions = array(
+				'fields',
+				'order',
+				'list'
+			);
+			
 			foreach ($this->request->query as $key => $value) {
 				$key = Sanitize::paranoid($key, array('_'));
 				$value = Sanitize::paranoid($value, array('_'));
-				$conditions[] = $key . '=' . $value;
+
+				if (in_array($key, $queryOptions)) {
+					$findOptions[$key] = $this->{'parse' . ucfirst($key)}($value);
+				} else {
+					$conditions[] = $key . '=' . $value;
+				}
 			}			
 		}
 		
@@ -168,9 +200,7 @@ class AppController extends Controller {
 		
 		$this->logThis($this->request->query);
 
-		$findOptions = array(
-			'conditions' => $conditions,
-		);
+		$findOptions['conditions'] = $conditions;
 		
 		if (!empty($this->apiSettings['association'])) {
 			$targetClass = $this->apiSettings['association'];
@@ -196,11 +226,25 @@ class AppController extends Controller {
 		if (empty($findOptions['contain'])) {
 			$findOptions['recursive'] = -1;
 		}
+		if (isset($findOptions['list'])) {
+			$findType = 'list';
+			unset($findOptions['list']);
+			unset($findOptions['limit']);
+		} else {
+			$findType = 'all';
+		}
 		
-		$results = $targetModel->find('all', $findOptions);
+		//pr($findOptions);
+		
+		$results = $targetModel->find($findType, $findOptions);
 		
 		if ($results) {
-			$response['data'] = Set::extract('{n}.' . $targetClass, $results);
+			if ($findType == 'all') {
+				$response['data'] = Set::extract('{n}.' . $targetClass, $results);
+			} else {
+				$response['data'] = $results;
+			}
+			
 			$response['status'] = 1;
 			$response['message'] = Inflector::pluralize($targetClass) . ' ' . __('found.');
 		} else {

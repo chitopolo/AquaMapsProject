@@ -2,47 +2,16 @@
 <h2><?php  echo __('Encuesta:') . ' ' . $this->Html->link($survey['Challenge']['title'], array('controller' => 'challenges', 'action' => 'view', $survey['Challenge']['id'])); ?></h2>
 </div>
 <div class="row">
-	<div class="span7">
-		<h3><?php echo __('Preguntas'); ?></h3>
-		<?php //pr($survey); ?>
-		<?php if (!empty($survey['Question'])): ?>
-		<ul class="unstyled">
-		<?php foreach ($survey['Question'] as $question): ?>
-			<li>
-				<h4><?php echo $question['name']; ?></h4>
-				<?php if (!empty($question['QuestionOption'])): ?>
-					<ul>
-					<?php foreach ($question['QuestionOption'] as $questionOption): ?>
-						<li><?php echo $questionOption['description']; ?> - <?php echo $questionOption['value']; ?></li>
-					<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
-			</li>
-			<!--<tr>
-				<td><?php echo $question['id']; ?></td>
-				<td><?php echo $question['survey_id']; ?></td>
-				<td><?php echo $question['unit_id']; ?></td>
-				<td></td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('controller' => 'questions', 'action' => 'view', $question['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('controller' => 'questions', 'action' => 'edit', $question['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'questions', 'action' => 'delete', $question['id']), null, __('Are you sure you want to delete # %s?', $question['id'])); ?>
-				</td>
-			</tr>-->
-		<?php endforeach; ?>			
-		</ul>
-	<?php endif; ?>
-	</div>
 	<div class="span5">
-	<?php echo $this->Form->create('Question', array('id' => 'add_question_form', 'url' => array('controller' => 'questions', 'action' => 'add', $survey['Survey']['id']))); ?>
+	<?php echo $this->Form->create('Question', array('id' => 'add_question_form', 'class' => 'box-mod mt', 'url' => array('controller' => 'questions', 'action' => 'add', $survey['Survey']['id']))); ?>
 		<fieldset>
 			<legend><?php echo __('Agregar pregunta'); ?></legend>
 		<?php
 			echo $this->Form->hidden('survey_id', array('value' => $survey['Survey']['id']));
-			echo $this->Form->input('name', array('label' => __('Pregunta'), 'placeholder' => __('Escribe una pregunta aquí'), 'div' => 'input', 'id' => 'question_text', 'class' => 'span3 mr', 'after' => $this->Form->select('question_type', $questionTypes, array('empty' => false, 'id' => 'question_type', 'class' => 'span2'))));
+			echo $this->Form->input('name', array('label' => false, 'placeholder' => __('Escribe una pregunta aquí'), 'div' => 'input', 'id' => 'question_text', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => __('No olvides escribir la pregunta!'), 'class' => 'span3', 'after' => ' ' . $this->Form->select('question_type_id', $questionTypes, array('empty' => false, 'id' => 'question_type', 'class' => 'input-medium'))));
 		?>
 		<div id="question_options_container" style="display: none;">
-			<h4><?php echo __('Opciones'); ?></h4>
+			<h5><?php echo __('Opciones'); ?></h5>
 			<ol id="question_options" class="unstyled">
 				<!--<li>
 				<?php
@@ -53,7 +22,7 @@
 				<i class="icon-remove-sign clickable" onclick="removeOption(this);"></i>
 				</li>-->
 			</ol>
-			<p><button type="button" id="add_option_btn_0" class="btn btn-small mmb" onclick="addOption();">Agregar <i class="icon-plus-sign"></i></button></p>
+			<p><button type="button" id="add_option_btn_0" class="btn btn-small mmb" onclick="addOption();">Agregar opción <i class="icon-plus-sign"></i></button></p>
 			
 		</div>
 		</fieldset>
@@ -95,6 +64,7 @@
 				
 				if ($("#question_text").val() == "") {
 					$("#question_text").effect("highlight");
+					$('#question_text').tooltip('show');
 					errors++;
 				}
 				
@@ -121,7 +91,7 @@
 						addOption();
 					}
 				} else {
-					$("#question_options_container").hide();
+					$("#question_options_container").fadeOut("slow");
 				}
 			});
 			
@@ -129,7 +99,45 @@
 				return validateQuestionForm();
 			});
 		</script>
-	<?php echo $this->Form->submit(__('Agregar'), array('class' => 'btn btn-large btn-primary')); ?>
+	<?php echo $this->Form->submit(__('Agregar'), array('class' => 'btn btn-large btn-primary', 'div' => 'text-right')); ?>
 	<?php echo $this->Form->end(); ?>
+	</div>
+	<div class="span6 offset1">
+		<?php //pr($survey); ?>
+	<?php if (!empty($survey['Question'])): ?>
+		<h3><?php echo __('Preguntas'); ?></h3>
+		<table class="table">
+			<colgroup>
+				<col width="10%" />
+				<col width="50%" />
+				<col width="30%" />
+				<col width="10%" />
+			</colgroup>
+			<tbody>
+		<?php $i = 1; ?>
+		<?php foreach ($survey['Question'] as $question): ?>
+			<tr>
+				<td><?php echo $i; ?></td>
+				<td><?php echo $question['name']; ?></td>
+				<td>
+				<?php if (!empty($question['QuestionOption'])): ?>
+					<ul class="unstyled">
+					<?php foreach ($question['QuestionOption'] as $questionOption): ?>
+						<li><?php echo $questionOption['description']; ?> - <?php echo $questionOption['value']; ?></li>
+					<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+				</td>
+				<td class="actions">
+					<?php echo $this->Form->postLink(__('Quitar'), array('controller' => 'questions', 'action' => 'delete', $question['id']), null, __('Seguro que quieres esta pregunta?')); ?>
+				</td>
+				<?php $i++; ?>
+			</tr>
+		<?php endforeach; ?>
+			</tbody>
+		</table>
+	<?php else: ?>
+		<h3 class="text-center muted"><?php echo __('Esta encuesta no tiene preguntas todavía'); ?></h3>
+	<?php endif; ?>
 	</div>
 </div>

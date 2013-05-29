@@ -39,7 +39,7 @@
 			fillSelect({
 				parentSelector: "#countries",
 				childSelector: "#regions",
-				requestUrl: "api/regions.json?country_id=",
+				requestUrl: "api/regions?list=1&country_id=",
 				responseCollection: "regions"
 			});
 		});
@@ -48,7 +48,7 @@
 			fillSelect({
 				parentSelector: "#regions",
 				childSelector: "#cities",
-				requestUrl: "api/cities.json?region_id=",
+				requestUrl: "api/cities?list=1&region_id=",
 				responseCollection: "cities"
 			});
 		});
@@ -67,22 +67,14 @@
 				//data: $(event.target).closest("form").serialize(),
 				inline: true,
 				success: function (data, textStatus) {
-					if (data != "") {
-						try {
-							var isJSON = true;
-						} catch (e) {
-							var isJSON = false;
-						}
-	
-						if (isJSON && data.status == 1) {
-							child.find("option").remove();
-							child.append('<option value=""></option>');
-							var collection = data[options.responseCollection];
-							$.each(collection, function(index, value) {
-								child.append('<option value="' + index + '">' + value + '</option>');
-							});
-							child.trigger("liszt:updated");
-						}
+					if (data != "" && data.status == 1) {
+						child.find("option").remove();
+						child.append('<option value=""></option>');
+						var collection = data["data"];
+						$.each(collection, function(index, value) {
+							child.append('<option value="' + index + '">' + value + '</option>');
+						});
+						child.trigger("liszt:updated");
 					}
 				},
 				url: "<?php echo $this->Html->url('/'); ?>" + options.requestUrl + "" + $(options.parentSelector).val()

@@ -190,20 +190,9 @@ class PointsController extends AppController {
 **/
 	public function api_add() {
 		$response = array('status' => 0, 'message' => '');
-		//echo '-----POST';
-		//var_dump($_POST);
-		//echo '-----$this->request->data';
-		//var_dump($this->request->data);
-		//echo '-----FILES';
-		//var_dump($_FILES);
-		//
-		//echo '-----HEADERS';
-		//pr(apache_request_headers());
 		
 		if ($this->request->is('post') && !empty($this->request->data)) {
 			$this->Point->set($this->request->data);
-			//echo '-----REQUEST BODY';
-			//pr(http_get_request_body());
 			
 			$this->logThis($this->request->data);
 			
@@ -220,10 +209,20 @@ class PointsController extends AppController {
 				}
 
 				if (!empty($this->request->data['image_field'])) {
-					if (move_uploaded_file($this->request->data['image_field']['tmp_name'], WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg')) {
+					$newImageFilename = WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '.jpg';
+					if (move_uploaded_file($this->request->data['image_field']['tmp_name'], $newImageFilename)) {
+						
+						//$newThumbnailFilename = WWW_ROOT . 'img' . DS . 'points' . DS . $response['point']['id'] . '_mini.jpg';
+						
+						//$this->Point->createThumbnail($newImageFilename, $newThumbnailFilename);
+						
 						$response['point']['image'] = Router::url('/img/points/' . $response['point']['id'] . '.jpg');
 						$this->Point->id = $response['point']['id'];
-						$this->Point->saveField('image', 1);
+						$this->Point->set(array(
+							'photo' => 1,
+							'photo_size' => $this->request->data['image_field']['size']
+						));
+						$this->Point->save();
 					} else {
 						$response['message'] = __('Punto guardado. Problemas con el guardado de la imagen.');
 						$response['point']['image'] = 0;
@@ -241,13 +240,14 @@ class PointsController extends AppController {
 	}
 	
 	public function mobileSimulator() {
+		Configure::write('debug', 2);
 		$this->data = array(
 			'user_id' => rand(1, 4),
 			'point_type_id' => rand(1, 4),
 			'lat' => '-33.' . rand(391034, 434594),
 			'lng' => '-70.' . rand(587141, 753996),
 			'price' => rand(587141, 753996),
-			'image_file' => '@' . WWW_ROOT . 'img' . DS . 'placeholders' . DS . 'ch_ph_' . rand(1, 3) . '.jpg;type=image/jpeg',
+			'image_field' => '@' . WWW_ROOT . 'img' . DS . 'placeholders' . DS . 'ch_ph_' . rand(1, 2) . '.jpg;type=image/jpeg',
 		);
 		parent::mobileSimulator();
 	}

@@ -40,11 +40,18 @@ class QuestionsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Question->create();
+			
+			foreach($this->request->data['QuestionOption'] as $key => $questionOption) {
+				if (empty($questionOption['description']) || empty($questionOption['description'])) {
+					unset($this->request->data['QuestionOption'][$key]);
+				}
+			}
+			
 			if ($this->Question->saveAssociated($this->request->data, array('deep'=>true))) {
 				$this->Session->setFlash(__('La pregunta fue guardada.'));
 //				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('La pregunta no pudo ser guardad, por favor intente nuevamente.'));
+				$this->Session->setFlash(__('La pregunta no pudo ser guardada, por favor intente nuevamente.'));
 			}
 		}
 		$this->redirect($this->referer());
@@ -98,9 +105,10 @@ class QuestionsController extends AppController {
 		}
 		if ($this->Question->delete()) {
 			$this->Session->setFlash(__('Question deleted'));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect($this->referer());
 		}
 		$this->Session->setFlash(__('Question was not deleted'));
-		$this->redirect(array('action' => 'index'));
+	//	$this->redirect(array('action' => 'index'));
+		$this->redirect($this->referer());
 	}
 }
