@@ -40,11 +40,22 @@ class ChallengesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+
+		$this->loadModel('Question');
+		$this->loadModel('Survey');
 		$this->Challenge->id = $id;
+		$this->Challenge->recursive = 4;
+
+		$survey = $this->Survey->find('first', array('conditions'=>array("challenge_id"=>$id)));
+		$conditions = array("survey_id" => $survey["Survey"]["id"]);
+
+		$questions = $this->Question->find('all', array('conditions' => $conditions));
 		if (!$this->Challenge->exists()) {
 			throw new NotFoundException(__('Invalid challenge'));
 		}
 		$this->set('challenge', $this->Challenge->read(null, $id));
+		$this->set('report', $report);
+		$this->set('questions', $questions);
 	}
 
 /**

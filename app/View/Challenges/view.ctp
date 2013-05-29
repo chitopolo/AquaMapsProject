@@ -69,6 +69,18 @@
 		</script>
 	</div>
 </div>
+
+<div class="row">
+	<div class="span12">
+		<h2> Resultados </h2>
+	</div>
+</div>
+
+<?php 
+	if($challenge['Challenge']['id'] >= 13) {
+		echo $this->element('data_set'); 
+	}
+?>
 <legend><h4> Organizaciones </h4> </legend>
 <div class="row">
 	<div class="span2">
@@ -79,8 +91,10 @@
 			<img src="<?php echo $this->Html->url('/img/ALCALDIA COCHABAMBA.jpg') ?>" width="150px">
 		</div>
 	<?php } else { ?>
+		<!--
 		<div class="span2">
 			<img src="<?php echo $this->Html->url('/img/bancoMundial.jpg') ?>" width="150px">
 		</div>
+		-->
 	<?php }  ?>
 </div>

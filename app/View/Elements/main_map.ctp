@@ -232,24 +232,23 @@ $(document).ready(function () {
 </script>
 <div class="row-fluid">
 	<div class="span4">
-		<h3 id="el_mapa">Search the map</h3>
+		<h3 id="el_mapa">Busca el mapa</h3>
 		<label><input type="checkbox" id="dots_layer" checked="checked">
 		<!--<img src="http://www.gsshealth.com/communities/2/004/008/922/932/images/4544352476_35x35.png" width=24>-->
-		World Bank Projects</label>
+		Proyectos Banco Mundial</label>
 		<label><input type="checkbox" id="flow_layer" checked="checked">
-		Data WaterForPeople.org</label>
+		Datos WaterForPeople.org</label>
 		<br>
-		<label><input type="checkbox" id="area_layer" checked="checked">Water and sanitation indicators "Municipios:</label>
-		<small>Source: <a href="http://www.mmaya.gob.bo/" target="_blank">http://www.mmaya.gob.bo/</a></fuente>
-
+		<label><input type="checkbox" id="area_layer" checked="checked">Indicadores Municipios Bolivia:</label>
+		<small>Fuente: <a href="http://www.mmaya.gob.bo/" target="_blank">http://www.mmaya.gob.bo/</a></fuente>
 		
-		<h5>Water and sanitation indicators</h5>
+		<h5>Indicadores de agua y saneamiento</h5>
 		<label for="map_departamentos">Departamentos:</label>
 		<select name="map_departamentos" id="departamentos"></select>
 		<div id="municipios_params">
 			<label for="map_municipios_params">Indicators:</label>
 			<select name="map_municipios_params">
-				<option value="poblacion" selected="selected">Population</option>
+				<option value="poblacion" selected="selected">Poblacion</option>
 				<option value="cob_ap">Cobertura agua potable</option>
 				<option value="cob_san">Cobertura saneamiento</option>
 				<option value="calc_iaris">Calculo IARIS</option>
