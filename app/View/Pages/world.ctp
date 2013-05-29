@@ -63,11 +63,11 @@
 
 	<div class="row-fluid">
 		<div class="span4">
-		<h3 id="mundo">Global Data:</h3>
+		<h3 id="mundo">Datos globales:</h3>
 
 			<ul class="nav nav-pills nav-stacked">
 				<li class="nav-header">
-				  Sanitation
+				  Saneamiento
 				</li>
 				<li class="active"><a href="" name="SH.H2O.SAFE.RU.ZS" data-toggle="pill">Fuente de agua mejorada, RURAL</a></li>
 				<li><a href="" name="SH.H2O.SAFE.UR.ZS" data-toggle="pill">Fuente de agua mejorada, URBANA</a></li>

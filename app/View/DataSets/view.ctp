@@ -96,7 +96,6 @@
 
 	</div>
 	<div class="span4">
-		
 	</div>
 </div>
 <!-- Mapa -->

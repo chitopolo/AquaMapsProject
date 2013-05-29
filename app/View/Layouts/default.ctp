@@ -48,7 +48,7 @@
 						<li><?php echo $this->Html->link(__('Bajar la App'), '/pages/mobile'); ?></li>
 							<li><?php echo $this->Html->link(__('Fuentes de datos'), '/pages/data_sources'); ?></li>
 						<li><?php echo $this->Html->link(__('Nuesta API'), '/pages/api'); ?></li>
-					</ul>
+						<!--<li><?php echo $this->Html->link(__('Información Saneamiento'), '/pages/info'); ?></li>	-->				</ul>
 				</div>
 			</div>
 		</div>

@@ -86,6 +86,10 @@ class PagesController extends AppController {
 		$this->set('challenges', $challenges);
 		
 	}
+
+	public function info(){
+		
+	}
 	
 	
 
