@@ -65,7 +65,7 @@
 		 });
 
 		 	contentString = '<h3>Sanitario ecologico</h3>'+
-		 	'<img src="http://www.aquamapas.com/img/points/'+$survey_answer['Point']['id']+'.jpg" width="200px"> <br>';
+		 	'<img src="http://www.aquamapas.com/img/points/<?php echo $survey_answer["Point"]["id"]?>.jpg" width="200px"> <br>';
 		<?php foreach ($survey_answer['QuestionAnswer'] as $question_answer): ?>
 			contentString += '<b><?php echo isset($question_answer["Question"]["name"]) ? $question_answer["Question"]["name"] : ''  ?> </b><br>';
 			contentString += '<?php echo $question_answer["value"] ?> <br>';	
