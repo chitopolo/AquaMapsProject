@@ -77,7 +77,7 @@
 </div>
 
 <?php 
-	if($challenge['Challenge']['id'] == 3) {
+	if($challenge['Challenge']['id'] >= 13) {
 		echo $this->element('data_set'); 
 	}
 ?>
