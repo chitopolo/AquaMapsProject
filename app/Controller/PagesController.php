@@ -77,19 +77,20 @@ class PagesController extends AppController {
 	}
 	
 
-	public function index(){
+	public function index() {
 
 		Controller::loadModel('Challenge');
 		$this->Challenge->recursive = 0;
-		$challenges = $this->Challenge->getPopular();
+		$challenges = $this->Challenge->getPopular(3);
 		$this->set('challenges', $challenges);
 		
+		$this->set('title_for_layout', __('AquaMapas, herramienta colaborativa para resolver problemas de saneamiento'));
 	}
 
 	public function info(){
 
+		
 	}
-	
 	
 
 }

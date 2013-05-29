@@ -114,8 +114,8 @@ class Challenge extends AppModel {
 		}
 	}
 
-	public function getPopular(){
-		return $this->find('all');
+	public function getPopular($limit = 9) {
+		return $this->find('all', array('limit' => $limit, 'recursive' => -1));
 	}
 
 }

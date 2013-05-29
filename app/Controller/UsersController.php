@@ -39,6 +39,26 @@ class UsersController extends AppController {
 	* Si hay datos (en POST o GET), intenta guardar el usuario. El password se encodifica en el modelo (User.php) justo antes de guardarse en el callback beforeSave
 	* 
 	*/
+	public function preRegister() {
+		Configure::write('debug', 2);
+		if ($this->request->is('post')) {
+			if (!empty($this->data)) {
+				$this->User->create();
+				if ($this->User->save($this->data, array('fieldList' => array('email'), 'callbacks' => false))) {
+					$this->Session->write('userEmail', $this->data['User']['email']);
+				} else {
+					$this->Session->setFlash(__('Por favor, corrige los errores.'));
+					$this->redirect($this->referer());
+				}
+			}
+		}
+	}
+
+	/**
+	* MT:
+	* Si hay datos (en POST o GET), intenta guardar el usuario. El password se encodifica en el modelo (User.php) justo antes de guardarse en el callback beforeSave
+	* 
+	*/
 	public function edit() {
 		$this->User->id = $this->current['User']['id'];
 	

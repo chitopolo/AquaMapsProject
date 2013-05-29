@@ -122,6 +122,8 @@ h2 { color: #666; }
 .mmb { margin-bottom: 10px; }
 .mml { margin-left: 10px; }
 
+.input-full { width: 100%; }
+
 .clickable { cursor: pointer; }
 
 .box-mod {
@@ -240,6 +242,39 @@ h2 { color: #666; }
 .challenge-image h3 {
 	bottom: 20px;
 }
+
+/**** MOBILE PAGE ****/
+
+#phonescreens {
+    background: transparent url(../img/phone_frame.png) no-repeat;
+    height: 700px;
+}
+#phonescreens #slider {
+        margin: 56px 50px;
+        visibility:hidden;
+}
+
+#slider ul, #slider li {
+        margin:0;
+        padding:0;
+        list-style:none;
+        }
+
+#slider li { 
+        width:300px;
+        height: 800px;
+        margin-top: 50px;
+}
+
+ul.list-feature { margin-left: 0; padding-left: 0; list-style: none; font-size: 24px; color: #666; }
+ul.list-feature li {
+	margin-bottom: 20px;
+	padding-left: 30px;	
+	line-height: 125%;
+	vertical-align: text-top; 
+	background: transparent url(img/marker.png) no-repeat 0 5px;
+}
+
 
 .dial {
 	/*width: 104px;*/
